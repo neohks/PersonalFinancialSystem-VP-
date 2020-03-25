@@ -95,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
             chartData.setValue(400, "Amount", "Febraury");
             chartData.setValue(500, "Amount", "March");
         
-            JFreeChart barChart = ChartFactory.createBarChart("Overview", "Monthly", "Amount", chartData, PlotOrientation.HORIZONTAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+            JFreeChart barChart = ChartFactory.createBarChart("Overview", "Monthly", "Amount", chartData, PlotOrientation.HORIZONTAL, true, true, false);
             CategoryPlot plotBarChart = barChart.getCategoryPlot();
             plotBarChart.setRangeGridlinePaint(Color.BLUE);
 
@@ -989,11 +989,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChartActionPerformed
         // TODO add your handling code here:
-        
-        //Bar Chart
         int select = DisplayCharts(btnChart.getText());
         
-        if (select == 1)
+        if (select == 2)
             btnChart.setText("Pie Chart");
         else
             btnChart.setText("Bar Chart");
