@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
@@ -18,6 +19,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.jfree.chart.*;
+import org.jfree.chart.plot.*;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -146,6 +150,8 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         datePickerBudget = new org.jdesktop.swingx.JXDatePicker();
         chartPanel = new javax.swing.JPanel();
+        panelChart = new javax.swing.JPanel();
+        btnChart = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         bottomPanel = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -761,15 +767,38 @@ public class MainFrame extends javax.swing.JFrame {
 
         layeredPanel.add(budgetPanel, "card4");
 
+        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelChart.setLayout(new java.awt.BorderLayout());
+
+        btnChart.setText("Bar Chart");
+        btnChart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChartActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
         chartPanel.setLayout(chartPanelLayout);
         chartPanelLayout.setHorizontalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGroup(chartPanelLayout.createSequentialGroup()
+                .addGroup(chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(chartPanelLayout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(btnChart))
+                    .addGroup(chartPanelLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(panelChart, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         chartPanelLayout.setVerticalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(chartPanelLayout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(panelChart, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnChart)
+                .addGap(37, 37, 37))
         );
 
         layeredPanel.add(chartPanel, "card2");
@@ -910,6 +939,25 @@ public class MainFrame extends javax.swing.JFrame {
         settingsPanel.setVisible(true);
     }//GEN-LAST:event_settingsSelectMousePressed
 
+    private void btnChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChartActionPerformed
+        // TODO add your handling code here:
+        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+        barChartData.setValue(200, "Amount", "January");
+        barChartData.setValue(400, "Amount", "Febraury");
+        barChartData.setValue(500, "Amount", "March");
+        
+        JFreeChart barChart = ChartFactory.createBarChart("Temple Contribution", "Monthly", "Amount", barChartData, PlotOrientation.HORIZONTAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+        CategoryPlot plotBarChart = barChart.getCategoryPlot();
+        plotBarChart.setRangeGridlinePaint(Color.BLUE);
+        
+        ChartPanel barPanel = new ChartPanel(barChart);
+        panelChart.removeAll();
+        panelChart.add(barPanel, BorderLayout.CENTER);
+        panelChart.validate();
+        
+        
+    }//GEN-LAST:event_btnChartActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -950,6 +998,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel addBudgetPanel;
     private javax.swing.JPanel addExpenditurePanel;
     private javax.swing.JPanel bottomPanel;
+    private javax.swing.JButton btnChart;
     private javax.swing.JPanel budgetPanel;
     private javax.swing.JPanel budgetSelect;
     private javax.swing.ButtonGroup buttonGrpCategory;
@@ -996,6 +1045,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel overviewSelect;
     private javax.swing.JPanel panelBalance;
     private javax.swing.JPanel panelBillsUtilities;
+    private javax.swing.JPanel panelChart;
     private javax.swing.JPanel panelFoodDrinks;
     private javax.swing.JPanel panelOthers;
     private javax.swing.JPanel panelShopping;
