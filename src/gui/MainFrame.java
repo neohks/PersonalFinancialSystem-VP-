@@ -815,6 +815,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         layeredPanel.add(budgetPanel, "card4");
 
+        chartPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelChart.setBackground(new java.awt.Color(204, 255, 255));
         panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelChart.setLayout(new java.awt.BorderLayout());
 
