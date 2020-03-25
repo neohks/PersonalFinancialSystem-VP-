@@ -14,6 +14,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,6 +23,9 @@ import javax.swing.JPanel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.*;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
 
 /**
  *
@@ -78,6 +82,50 @@ public class MainFrame extends javax.swing.JFrame {
             chartPanel.setVisible(true);
         if (settingsSelect.getBackground() == selectedColor)
             settingsPanel.setVisible(true);
+        
+    }
+    
+    int DisplayCharts(String btnText) {
+        
+        if (btnText.equals("Bar Chart")) {
+            
+            DefaultCategoryDataset chartData = new DefaultCategoryDataset();
+        
+            chartData.setValue(200, "Amount", "January");
+            chartData.setValue(400, "Amount", "Febraury");
+            chartData.setValue(500, "Amount", "March");
+        
+            JFreeChart barChart = ChartFactory.createBarChart("Overview", "Monthly", "Amount", chartData, PlotOrientation.HORIZONTAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+            CategoryPlot plotBarChart = barChart.getCategoryPlot();
+            plotBarChart.setRangeGridlinePaint(Color.BLUE);
+
+            ChartPanel barPanel = new ChartPanel(barChart);
+            panelChart.removeAll();
+            panelChart.add(barPanel, BorderLayout.CENTER);
+            panelChart.validate();
+            return 2;
+        }
+        else {
+            DefaultPieDataset pieDataset = new DefaultPieDataset();
+            
+            pieDataset.setValue("January", 200);
+            pieDataset.setValue("Febraury", 400);
+            pieDataset.setValue("March", 500);
+            
+            JFreeChart pieChart = ChartFactory.createPieChart("Overview", pieDataset, true, true, Locale.ENGLISH);
+            PiePlot plotPie = (PiePlot) pieChart.getPlot();
+            plotPie.setStartAngle(0);
+            plotPie.setDirection(Rotation.CLOCKWISE);
+            plotPie.setForegroundAlpha(0.5f);
+            
+            ChartPanel piePanel = new ChartPanel(pieChart);
+            panelChart.removeAll();
+            panelChart.add(piePanel, BorderLayout.CENTER);
+            panelChart.validate();
+
+            return 1;
+        }
+        
         
     }
     
@@ -941,20 +989,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChartActionPerformed
         // TODO add your handling code here:
-        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
-        barChartData.setValue(200, "Amount", "January");
-        barChartData.setValue(400, "Amount", "Febraury");
-        barChartData.setValue(500, "Amount", "March");
         
-        JFreeChart barChart = ChartFactory.createBarChart("Temple Contribution", "Monthly", "Amount", barChartData, PlotOrientation.HORIZONTAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
-        CategoryPlot plotBarChart = barChart.getCategoryPlot();
-        plotBarChart.setRangeGridlinePaint(Color.BLUE);
+        //Bar Chart
+        int select = DisplayCharts(btnChart.getText());
         
-        ChartPanel barPanel = new ChartPanel(barChart);
-        panelChart.removeAll();
-        panelChart.add(barPanel, BorderLayout.CENTER);
-        panelChart.validate();
-        
+        if (select == 1)
+            btnChart.setText("Pie Chart");
+        else
+            btnChart.setText("Bar Chart");
         
     }//GEN-LAST:event_btnChartActionPerformed
 
