@@ -13,7 +13,6 @@ Reference : https://www.youtube.com/watch?v=aBONSQ44cnk Skip to 2:08 to start th
 
 - Things to add for GUI purpose
 1. Add datepicker
-
 Reference : https://davidwburns.wordpress.com/2012/06/19/add-jxdatepicker-to-the-netbeans-swing-controls-palette/
 
 Using Git in Netbeans:
