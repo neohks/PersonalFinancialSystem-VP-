@@ -201,6 +201,16 @@ public class MainFrame extends javax.swing.JFrame {
         panelChart = new javax.swing.JPanel();
         btnChart = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
+        panelEditPass = new javax.swing.JPanel();
+        lblOldPassword = new javax.swing.JLabel();
+        passFOldPass = new javax.swing.JPasswordField();
+        passFNewPass = new javax.swing.JPasswordField();
+        lblNewPassword = new javax.swing.JLabel();
+        btnSubmitPass = new javax.swing.JButton();
+        panelChangeCurr = new javax.swing.JPanel();
+        lblCurrency = new javax.swing.JLabel();
+        comboBoxCurrency = new javax.swing.JComboBox<>();
+        btnLogout = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
 
@@ -856,15 +866,112 @@ public class MainFrame extends javax.swing.JFrame {
 
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        panelEditPass.setBackground(new java.awt.Color(204, 255, 255));
+        panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+
+        lblOldPassword.setText("Old Password :");
+
+        passFNewPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFNewPassActionPerformed(evt);
+            }
+        });
+
+        lblNewPassword.setText("New Password :");
+
+        btnSubmitPass.setText("Submit");
+
+        javax.swing.GroupLayout panelEditPassLayout = new javax.swing.GroupLayout(panelEditPass);
+        panelEditPass.setLayout(panelEditPassLayout);
+        panelEditPassLayout.setHorizontalGroup(
+            panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditPassLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblOldPassword)
+                    .addComponent(lblNewPassword))
+                .addGap(29, 29, 29)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
+            .addGroup(panelEditPassLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(btnSubmitPass)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelEditPassLayout.setVerticalGroup(
+            panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditPassLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOldPassword))
+                .addGap(49, 49, 49)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewPassword)
+                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addComponent(btnSubmitPass)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        panelChangeCurr.setBackground(new java.awt.Color(204, 255, 255));
+        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        lblCurrency.setText("Currency :");
+
+        comboBoxCurrency.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MYR", "USD", "SGD" }));
+
+        javax.swing.GroupLayout panelChangeCurrLayout = new javax.swing.GroupLayout(panelChangeCurr);
+        panelChangeCurr.setLayout(panelChangeCurrLayout);
+        panelChangeCurrLayout.setHorizontalGroup(
+            panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelChangeCurrLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblCurrency)
+                .addGap(36, 36, 36)
+                .addComponent(comboBoxCurrency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
+        );
+        panelChangeCurrLayout.setVerticalGroup(
+            panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelChangeCurrLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCurrency)
+                    .addComponent(comboBoxCurrency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        btnLogout.setText("Logout");
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(366, 366, 366)
+                        .addComponent(btnLogout)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(22, 22, 22))
         );
 
         layeredPanel.add(settingsPanel, "card5");
@@ -1001,6 +1108,10 @@ public class MainFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnChartActionPerformed
 
+    private void passFNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFNewPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passFNewPassActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1042,11 +1153,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel addExpenditurePanel;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton btnChart;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSubmitPass;
     private javax.swing.JPanel budgetPanel;
     private javax.swing.JPanel budgetSelect;
     private javax.swing.ButtonGroup buttonGrpCategory;
     private javax.swing.JPanel chartPanel;
     private javax.swing.JPanel chartSelect;
+    private javax.swing.JComboBox<String> comboBoxCurrency;
     private org.jdesktop.swingx.JXDatePicker datePickerBudget;
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
     private javax.swing.JButton jButton1;
@@ -1079,6 +1193,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotalCost;
     private javax.swing.JLabel labelTotalCostCurrency;
     private javax.swing.JLayeredPane layeredPanel;
+    private javax.swing.JLabel lblCurrency;
+    private javax.swing.JLabel lblNewPassword;
+    private javax.swing.JLabel lblOldPassword;
     private javax.swing.JLabel logoBudget;
     private javax.swing.JLabel logoChart;
     private javax.swing.JLabel logoOverview;
@@ -1088,10 +1205,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel overviewSelect;
     private javax.swing.JPanel panelBalance;
     private javax.swing.JPanel panelBillsUtilities;
+    private javax.swing.JPanel panelChangeCurr;
     private javax.swing.JPanel panelChart;
+    private javax.swing.JPanel panelEditPass;
     private javax.swing.JPanel panelFoodDrinks;
     private javax.swing.JPanel panelOthers;
     private javax.swing.JPanel panelShopping;
+    private javax.swing.JPasswordField passFNewPass;
+    private javax.swing.JPasswordField passFOldPass;
     private javax.swing.JRadioButton radioBtnShopping;
     private javax.swing.JScrollPane scrollBudgetTable;
     private javax.swing.JLabel settingsLabel;
