@@ -211,6 +211,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblCurrency = new javax.swing.JLabel();
         comboBoxCurrency = new javax.swing.JComboBox<>();
         btnLogout = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
 
@@ -946,6 +947,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnLogout.setText("Logout");
 
+        jButton3.setText("Help");
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
@@ -955,8 +958,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addGap(121, 121, 121))))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(366, 366, 366)
                         .addComponent(btnLogout)))
@@ -966,8 +975,11 @@ public class MainFrame extends javax.swing.JFrame {
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
                     .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(btnLogout)
@@ -1165,6 +1177,7 @@ public class MainFrame extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JProgressBar jProgressBar1;
