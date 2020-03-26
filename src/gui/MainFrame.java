@@ -947,7 +947,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         btnLogout.setText("Logout");
 
-        jButton3.setText("Help");
+        jButton3.setText("wuiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
@@ -1123,6 +1128,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void passFNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFNewPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passFNewPassActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
