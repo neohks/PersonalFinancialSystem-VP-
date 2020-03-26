@@ -7,4 +7,8 @@ It is still in progress.
 1. Go to :http://www.jfree.org/jfreechart/download.html to download Jcommon and Jfreechart jar files
 Reference : https://www.youtube.com/watch?v=aBONSQ44cnk Skip to 2:08 to start the installation part.
 
-2. Connect mysql-connect
+2. Add derby.jar, derbyclient.jar, derbynet.jar
+
+
+Using Git in Netbeans:
+https://netbeans.org/kb/docs/ide/git.html#push
