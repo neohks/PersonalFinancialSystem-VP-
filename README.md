@@ -10,5 +10,9 @@ Reference : https://www.youtube.com/watch?v=aBONSQ44cnk Skip to 2:08 to start th
 2. Add derby.jar, derbyclient.jar, derbynet.jar
 
 
+# Things to add for GUI purpose
+1. Add datepicker
+Reference : https://davidwburns.wordpress.com/2012/06/19/add-jxdatepicker-to-the-netbeans-swing-controls-palette/
+
 Using Git in Netbeans:
 https://netbeans.org/kb/docs/ide/git.html
