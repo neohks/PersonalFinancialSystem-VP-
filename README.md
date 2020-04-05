@@ -9,7 +9,7 @@ Include everything in NetbeansAssignment library (Create one if needed)
 1. Go to :http://www.jfree.org/jfreechart/download.html to download Jcommon and Jfreechart jar files
 Reference : https://www.youtube.com/watch?v=aBONSQ44cnk Skip to 2:08 to start the installation part.
 
-2. Add derby.jar, derbyclient.jar, derbynet.jar
+2. Add derby.jar, derbyclient.jar, derbynet.jar. Download from: https://db.apache.org/derby/releases/release-10.14.2.0.cgi
 
 
 - Things to add for GUI purpose
