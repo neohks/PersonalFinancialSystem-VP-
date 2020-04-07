@@ -23,7 +23,8 @@ public class DBConnection {
             String url = "jdbc:derby://localhost:1527/personalFinanceDB";
 
             try {
-                Class.forName ("org.apache.derby.jdbc.EmbeddedDriver");                          
+                Class.forName ("org.apache.derby.jdbc.EmbeddedDriver");
+                
                 System.out.println("*****Driver is ready!");
             } catch (Exception e) {
                 System.out.println("*****Failed to load JDBC/ODBC driver.");
@@ -31,9 +32,14 @@ public class DBConnection {
             }
 
             try {
+                  
+                 System.out.println("*****haha!");
                 conn = DriverManager.getConnection(url, username, password );
                 conn.setAutoCommit(false);
                 statement  = conn.createStatement();  
+                System.out.println(statement);
+                   
+                System.out.println(conn);
                 
             } catch (SQLException exception ) {
                 System.out.println ("\n*** SQLException caught ***\n");
@@ -49,38 +55,38 @@ public class DBConnection {
             } catch (java.lang.Exception exception) {                                  
                 exception.printStackTrace();                                      
             }
-            }
-            //Get connection
-            static Connection getConnection() {
-                    return conn;
-            }
-            //Get Statement
-            static Statement getStmt() {
-                    return statement;
-            }
-            //Get Result set
-            static ResultSet getRS() {
-                    return rs;
+        }
+        //Get connection
+        static Connection getConnection() {
+            return conn;
+        }
+        //Get Statement
+        static Statement getStmt() {
+            return statement;
+        }
+        //Get Result set
+        static ResultSet getRS() {
+            return rs;
 	}
 	//Close connection if close the program
 	public static void close() {
-		try {
-		
-			if (rs != null) {
-				rs.close();
-			}
-		
-			if (statement != null) {
-				statement.close();
-			}
-		
-			if (conn != null) {
-				conn.close();
-			}
-			} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            try {
+
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         
         /*public void IUquery(String username, String pw, String query){

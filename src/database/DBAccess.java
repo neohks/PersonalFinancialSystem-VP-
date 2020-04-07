@@ -18,6 +18,10 @@ public class DBAccess {
     private static Statement stmt;
     private static ResultSet rs;
     private static PreparedStatement prepstatement;
+
+    private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public DBAccess(){
         conn = DBConnection.getConnection();
@@ -34,7 +38,7 @@ public class DBAccess {
             
             while(rs.next()){
                 String name = rs.getString("username");
-                uid = rs.getString("uid");
+                uid = rs.getString("userid");
                 usernameLists.add(name);
             }
         } catch(Exception e){
@@ -58,30 +62,50 @@ public class DBAccess {
         
         int userid = Integer.parseInt(uid.substring(1,5));
         userid++;
-        String strID= Integer.toString(userid);
-        String newNum = String.format("%04d", strID);
-        String newUserID = "U" + newNum;
-        
-        System.out.println(newUserID);
-        
-        
 //        String strID= Integer.toString(userid);
-//        int lengthID = strID.length();
-//        int requiredZeros = 4-lengthID;
-//        
-//        String zeropads="";
-//        for(int i=0 ; i<requiredZeros ; i++){
-//            zeropads += "0";
-//        }
-//        
-//        strID = zeropads + strID;
+//        String newNum = String.format("%04d", strID);
+//        String newUserID = "U" + newNum;
         
+//        System.out.println(newUserID);
         
-        String query = "INSERT INTO userinfo(`u`, `Module_ID`, `Mark`, `Grade`, `Points`, `Credit_earned`, `Remarks`, `Semester`) VALUES "
-                + "(?,?,?,?,?,?,?,?)";
-			
+        System.out.println("register");
+        String strID= Integer.toString(userid);
+        int lengthID = strID.length();
+        int requiredZeros = 4-lengthID;
+        
+        String zeropads="";
+        for(int i=0 ; i<requiredZeros ; i++){
+            zeropads += "0";
+        }
+        
+        strID = zeropads + strID;
+        
+        boolean isadmin = false;
+        
         try{
-            stmt.executeQuery(query);
+            //stmt.executeQuery(query);
+//            String query = "INSERT INTO userinfo(`userid`, `username`, `password`, `isAdmin`) VALUES (?,?,?,?)";
+//            prepstatement = conn.prepareStatement(query);
+//            prepstatement.setString(1, strID);
+//            prepstatement.setString(2, uname);
+//            prepstatement.setString(3, pw);
+//            prepstatement.setBoolean(4,false);
+            
+//            int rowAffected = stmt.executeUpdate("insert into userinfo(userid,username,password,isadmin) values ('U0002', 'aaa', 'aaa', 'false')");
+//            System.out.println("*****Insert One Result Table Success!");
+//            System.out.println(String.format("Row affected %d", rowAffected));
+
+            String insertSQL = "INSERT INTO userinfo (userID, username, password, isadmin) values ('U" + strID + "', '" + uname + "', '" + pw + "', " + isadmin + ")";
+            System.out.println(insertSQL);
+            stmt.executeQuery(insertSQL);
+//            System.out.println(row);
+            conn.commit();
+            //prepstatement.close();
+            
+//            INSERT INTO userinfo (userID, username, password, isadmin) values ('U0002','aaa','sss',false)
+
+            
+            
         }catch (Exception e){
             
         }
