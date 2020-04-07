@@ -24,9 +24,9 @@ public class DBConnection {
 
             try {
                 Class.forName ("org.apache.derby.jdbc.EmbeddedDriver");                          
-                //System.out.println("*****Driver is ready!");
+                System.out.println("*****Driver is ready!");
             } catch (Exception e) {
-                //System.out.println("*****Failed to load JDBC/ODBC driver.");
+                System.out.println("*****Failed to load JDBC/ODBC driver.");
                 return;               
             }
 
@@ -34,16 +34,7 @@ public class DBConnection {
                 conn = DriverManager.getConnection(url, username, password );
                 conn.setAutoCommit(false);
                 statement  = conn.createStatement();  
-                rs = statement.executeQuery("select username, password from app.userinfo");
-                while(rs.next()){
-                    String id, uname, pw;
-                    
-                    uname = rs.getString("username");
-                    pw = rs.getString("password");
-                    
-                    //display username and pw from db
-                    System.out.println(uname + " " + pw);
-                }
+                
             } catch (SQLException exception ) {
                 System.out.println ("\n*** SQLException caught ***\n");
 

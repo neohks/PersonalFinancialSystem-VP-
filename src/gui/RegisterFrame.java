@@ -5,6 +5,8 @@
  */
 package gui;
 import database.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -97,14 +99,23 @@ public class RegisterFrame extends javax.swing.JFrame {
         String username = userNameTxtfield.getText();
         String pw = new String(pwTxtfield.getPassword());
         
-        DBConnection dbconnect = new DBConnection("root"," ");
+        try {
+            DBAccess.checkAvailableUsername(username, pw);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_registerBtnActionPerformed
 
     public static void main(String args[]) {
+        
         /* Create and display the form */
+        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                DBConnection dbconnect;
+                dbconnect = new DBConnection("root","password");
                 new RegisterFrame().setVisible(true);
             }
         });
