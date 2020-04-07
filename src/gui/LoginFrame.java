@@ -8,6 +8,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -184,6 +185,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        
+        //Check password
         if (txtFUsername.getText().equals("Username") || txtFUsername.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please do not leave blank on your Username!", "Username Null", JOptionPane.WARNING_MESSAGE);
             return;
@@ -192,9 +195,36 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please do not leave blank on your Password!", "Password Null", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        //if correct password
+        if (txtFUsername.getText() == "test" && isPasswordCorrect(pwFPass.getPassword())) {
+            
+            //Got dialog 
+            //Return back to Login frame
+        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    
+    private static boolean isPasswordCorrect(char[] input) {
+    boolean isCorrect = true;
+    
+    //Get the correct pass from db that equalivent with userid
+    char[] correctPassword = { 't', 'e', 's', 't' };
+
+    if (input.length != correctPassword.length) {
+        isCorrect = false;
+    } else {
+        isCorrect = Arrays.equals(input, correctPassword);
+    }
+
+    //Zero out the password.
+    Arrays.fill(correctPassword,'0');
+
+    return isCorrect;
+}
+
+    
     /**
      * @param args the command line arguments
      */
