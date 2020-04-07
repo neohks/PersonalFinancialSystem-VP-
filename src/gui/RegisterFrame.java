@@ -97,13 +97,18 @@ public class RegisterFrame extends javax.swing.JFrame {
         String username = userNameTxtfield.getText();
         String pw = new String(pwTxtfield.getPassword());
         
-        
-        DBConnection a = new DBConnection();
-        a.DBConnection("root","");
-        //DBconnection connect = new DBconnection("root","");
+        DBConnection dbconnect = new DBConnection("root"," ");
         
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    public static void main(String args[]) {
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RegisterFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel passwordLbl;
