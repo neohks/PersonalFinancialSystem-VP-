@@ -20,9 +20,11 @@ public class DBConnection {
 	
 	public DBConnection (String username, String password) {
 		 
-        String url = "jdbc:mysql://localhost:3306/personalfinancedb?useUnicode=true"
-	    		+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false"
-	    		+ "&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/financedb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        
+        
+        //String url = "jdbc:mysql://localhost:3306/financedb";
+        
         try {
             Class.forName ("com.mysql.cj.jdbc.Driver");                          
             System.out.println("*****Driver is ready!");

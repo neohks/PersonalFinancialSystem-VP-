@@ -20,5 +20,4 @@ public class DBAccess {
     private static PreparedStatement prepstatement;
     
     
-    
 }

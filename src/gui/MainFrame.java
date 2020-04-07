@@ -216,7 +216,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(995, 590));
         setResizable(false);
 
         mainPanel.setPreferredSize(new java.awt.Dimension(930, 560));
