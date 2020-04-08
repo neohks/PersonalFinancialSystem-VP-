@@ -847,14 +847,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSubmitExpen" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="labelPurpose" min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Component id="lblPurpose" min="-2" pref="93" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="txtFPurpose" min="-2" pref="200" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -862,7 +862,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="labelSumExpenditure" min="-2" pref="94" max="-2" attributes="0"/>
+                                              <Component id="lblSumExpenditure" min="-2" pref="94" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="txtFSumExpenditure" min="-2" pref="200" max="-2" attributes="0"/>
                                           </Group>
@@ -870,7 +870,7 @@
                                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="labelCategory" min="-2" pref="85" max="-2" attributes="0"/>
+                                                      <Component id="lblCategory" min="-2" pref="85" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                           <Component id="radioBtnFD" max="32767" attributes="0"/>
@@ -883,7 +883,7 @@
                                                       </Group>
                                                   </Group>
                                                   <Group type="102" attributes="0">
-                                                      <Component id="labelDateExpenditure" min="-2" pref="85" max="-2" attributes="0"/>
+                                                      <Component id="lblDateExpenditure" min="-2" pref="85" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                                       <Component id="datePickerExpenditure" min="-2" pref="200" max="-2" attributes="0"/>
                                                   </Group>
@@ -902,21 +902,21 @@
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtFPurpose" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="labelPurpose" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblPurpose" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtFSumExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="labelSumExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblSumExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="labelDateExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblDateExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="datePickerExpenditure" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelCategory" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblCategory" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="radioBtnShopping" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -930,14 +930,14 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSubmitExpen" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="labelPurpose">
+                    <Component class="javax.swing.JLabel" name="lblPurpose">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -950,7 +950,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtFSumExpenditure">
                     </Component>
-                    <Component class="javax.swing.JLabel" name="labelSumExpenditure">
+                    <Component class="javax.swing.JLabel" name="lblSumExpenditure">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -959,7 +959,7 @@
                         <Property name="text" type="java.lang.String" value="Sum : "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="labelDateExpenditure">
+                    <Component class="javax.swing.JLabel" name="lblDateExpenditure">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -1018,15 +1018,15 @@
                         <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
+                    <Component class="javax.swing.JButton" name="btnSubmitExpen">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Submit"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmitExpenActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="labelCategory">
+                    <Component class="javax.swing.JLabel" name="lblCategory">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -1062,21 +1062,21 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel2" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="lblSource" min="-2" pref="85" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Component id="txtFSource" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelSumBudget" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="lblSumBudget" min="-2" pref="85" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Component id="txtFSumBudget" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel4" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="lblDateBudget" min="-2" pref="85" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnSubmitBudget" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Component id="datePickerBudget" pref="165" max="32767" attributes="0"/>
@@ -1092,28 +1092,28 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="59" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblSource" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="txtFSource" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="labelSumBudget" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblSumBudget" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="txtFSumBudget" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblDateBudget" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="datePickerBudget" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSubmitBudget" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLabel2">
+                    <Component class="javax.swing.JLabel" name="lblSource">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -1122,7 +1122,7 @@
                         <Property name="text" type="java.lang.String" value="Source : "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="labelSumBudget">
+                    <Component class="javax.swing.JLabel" name="lblSumBudget">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -1131,7 +1131,7 @@
                         <Property name="text" type="java.lang.String" value="Sum : "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel4">
+                    <Component class="javax.swing.JLabel" name="lblDateBudget">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
@@ -1144,12 +1144,12 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtFSumBudget">
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="btnSubmitBudget">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Submit"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubmitBudgetActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="org.jdesktop.swingx.JXDatePicker" name="datePickerBudget">
