@@ -204,4 +204,32 @@ public class DBAccess {
         return balance;
     }
     
+    public static double getExpenditure(){
+        String userid= getUserID(DBAccess.currentUser);
+        double expenses = 0.00;
+        try{
+            rs = stmt.executeQuery("SELECT COSTINCOME FROM ROOT.USER_CATEGORY WHERE USERID='" + userid + "' AND COSTINCOME < 0");
+            while(rs.next()){
+                expenses -= rs.getDouble("costincome");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return expenses;
+    }
+    
+    public static double getExpensesCat(String category){
+        String userid= getUserID(DBAccess.currentUser);
+        double expenses = 0.00;
+        try{
+            rs = stmt.executeQuery("SELECT COSTINCOME FROM ROOT.USER_CATEGORY WHERE USERID='" + userid + "' AND CATID='" + category + "'");
+            while(rs.next()){
+                expenses -= rs.getDouble("costincome");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return expenses;
+    }
+    
 }

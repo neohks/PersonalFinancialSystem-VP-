@@ -555,6 +555,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        labelShoppingCurrency.setText("RM"+getExpensesCat("C0002"));
+
         overviewPanel.add(panelShopping, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 14, 180, -1));
 
         panelFoodDrinks.setBackground(new java.awt.Color(233, 251, 255));
@@ -584,6 +586,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(labelFoodDrinksCurrency, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
+
+        labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
 
         overviewPanel.add(panelFoodDrinks, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 132, 180, -1));
 
@@ -615,6 +619,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
+
         overviewPanel.add(panelBillsUtilities, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 180, -1));
 
         panelOthers.setBackground(new java.awt.Color(233, 251, 255));
@@ -645,6 +651,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
+
         overviewPanel.add(panelOthers, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 368, 180, 102));
 
         labelTotalCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -654,6 +662,7 @@ public class MainFrame extends javax.swing.JFrame {
         labelTotalCostCurrency.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelTotalCostCurrency.setText("$$$");
         overviewPanel.add(labelTotalCostCurrency, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 481, 86, 26));
+        labelTotalCostCurrency.setText("RM"+getExpenditure());
 
         layeredPanel.add(overviewPanel, "card3");
 
@@ -1119,10 +1128,17 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         switchNav(overviewSelect);
-        overviewPanel.revalidate();
-        overviewPanel.repaint();
+
         overviewPanel.setVisible(true);
         currStatus = 1;
+        labelBalanceCurrency.setText("RM"+getBalance());
+        labelShoppingCurrency.setText("RM"+getExpensesCat("C0002"));
+        labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
+        labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
+        labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
+        overviewPanel.revalidate();
+        overviewPanel.repaint();
+        
     }//GEN-LAST:event_overviewSelectMousePressed
 
     private void chartSelectMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chartSelectMousePressed

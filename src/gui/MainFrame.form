@@ -571,6 +571,9 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="$$$"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="labelShoppingCurrency.setText(&quot;RM&quot;+getExpensesCat(&quot;C0002&quot;));"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -626,6 +629,9 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="$$$"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="labelFoodDrinksCurrency.setText(&quot;RM&quot;+getExpensesCat(&quot;C0003&quot;));"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -681,6 +687,9 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="$$$"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="labelBillsUtitlitiesCurrency.setText(&quot;RM&quot;+getExpensesCat(&quot;C0004&quot;));"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -736,6 +745,9 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="$$$"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="labelOthersCurrency.setText(&quot;RM&quot;+getExpensesCat(&quot;C0005&quot;));"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -759,6 +771,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="$$$"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="labelTotalCostCurrency.setText(&quot;RM&quot;+getExpenditure());"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="448" y="481" width="86" height="26"/>
