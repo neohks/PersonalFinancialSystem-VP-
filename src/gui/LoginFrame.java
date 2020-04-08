@@ -199,6 +199,7 @@ public class LoginFrame extends javax.swing.JFrame {
         }else{
             if(DBAccess.login(username, pw) == true){
                 MainFrame mainmenu = new MainFrame(username);
+                this.setVisible(false);
                 mainmenu.setVisible(true);
             }
         }
