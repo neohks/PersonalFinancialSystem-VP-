@@ -204,7 +204,7 @@ public class LoginFrame extends javax.swing.JFrame {
         }else{
             if(DBAccess.login(username, pw) == true){
                 MainFrame mainmenu = new MainFrame(username);
-                this.setVisible(false);
+                this.dispose();
                 mainmenu.setVisible(true);
             }
         }

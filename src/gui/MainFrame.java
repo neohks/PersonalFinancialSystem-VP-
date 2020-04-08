@@ -37,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame(String username) {
         initComponents();
-        LblUsername.setText("Welcome! " + username);
+        LblUsername.setText("Welcome! \n" + username);
     }
     
     //Switch color of side nav bar
