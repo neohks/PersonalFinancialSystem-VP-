@@ -47,7 +47,6 @@ public class DBAccess {
         }
         
         for(int i=0; i<usernameLists.size();i++){
-            System.out.println(usernameLists.get(i));
             if(uname.equals(usernameLists.get(i))){
                 isAvailable=false;
                 System.out.println("Username is used");
