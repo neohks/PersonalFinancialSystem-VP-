@@ -45,7 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
         DBAccess.displayOverviewTable();
+        tableBudget.setModel(DBAccess.overviewTableModel);
         tableBudget = new JTable(DBAccess.overviewTableModel);
+        
     }
     
     //Switch color of side nav bar
@@ -487,6 +489,7 @@ public class MainFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tableBudget.setEnabled(false);
         scrollBudgetTable.setViewportView(tableBudget);
 
         overviewPanel.add(scrollBudgetTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 570, 340));

@@ -236,17 +236,28 @@ public class DBAccess {
    
     public static void displayOverviewTable(){
         
-        
+        String purpose, catid, date;
+        double costincome;
+        final Object[][] rowData = {};
+        final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
+        overviewTableModel = new DefaultTableModel(rowData, columnNames);
         try{
             rs = stmt.executeQuery("SELECT PURPOSE, CATID, COSTINCOME, DATE FROM ROOT.USER_CATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
             while(rs.next()){
-                final Object[][] rowData = {};
-		final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
-                overviewTableModel = new DefaultTableModel(rowData, columnNames);
-                overviewTableModel.addRow(new Object[] { rs.getString("PURPOSE"), rs.getString("CATID"),rs.getDouble("COSTINCOME"), rs.getString("DATE") });
-                //overviewTableModel.addRow(new Object[] { "1","2","3","4" });
+                
+                
+                purpose = rs.getString("PURPOSE");
+                catid = rs.getString("CATID");
+                costincome = rs.getDouble("COSTINCOME"); 
+                date = rs.getString("DATE");
+               
+                //System.out.println(purpose + " " + catid + " " + costincome+ " " + date );
+                overviewTableModel.addRow(new Object[] { purpose, catid, costincome, date });
                 
             }
+            System.out.println();
+            System.out.println("done");
+            //overviewPanel.tableBudget.setModel(overviewTableModel);
         }catch(Exception e){
             e.printStackTrace();
         }
