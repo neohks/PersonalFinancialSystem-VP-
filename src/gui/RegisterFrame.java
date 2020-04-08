@@ -5,6 +5,8 @@
  */
 package gui;
 import database.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -162,11 +164,29 @@ public class RegisterFrame extends javax.swing.JFrame {
         String username = txtFEmail.getText();
         String pw = new String(pwFPass.getPassword());
         
-        
 
+        try {
+            DBAccess.checkAvailableUsername(username, pw);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    public static void main(String args[]) {
+        
+        /* Create and display the form */
+        
+        DBConnection dbconnect;
+        dbconnect = new DBConnection("root","password");
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                DBAccess dbaccess = new DBAccess();
+
+                new RegisterFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

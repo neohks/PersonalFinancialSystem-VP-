@@ -20,69 +20,76 @@ public class DBConnection {
 	
 	public DBConnection (String username, String password) {
 		 
-        String url = "jdbc:mysql://localhost:3306/financedb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        
-        
-        //String url = "jdbc:mysql://localhost:3306/financedb";
-        
-        try {
-            Class.forName ("com.mysql.cj.jdbc.Driver");                          
-            System.out.println("*****Driver is ready!");
-        } catch (Exception e) {
-            System.out.println("*****Failed to load JDBC/ODBC driver.");
-            return;               
-        }
+            String url = "jdbc:derby://localhost:1527/personalFinanceDB";
 
-        try {                                                                    
-        	conn = DriverManager.getConnection(url, username, password );
-            conn.setAutoCommit(false);
-            statement  = conn.createStatement();  
-            
-        } catch (SQLException exception ) {
-            System.out.println ("\n*** SQLException caught ***\n");
-            
-            while (exception != null){                                                                     
-                System.out.println ("SQLState:   " + exception.getSQLState()  );
-                System.out.println ("Message:    " + exception.getMessage()   );
-                System.out.println ("Error code: " + exception.getErrorCode() );
-                JOptionPane.showMessageDialog(new JFrame(), exception.getMessage() + "\n Please check your connection or contact to server admin!");
-                exception = exception.getNextException ();
-                System.out.println ("");
+            try {
+                Class.forName ("org.apache.derby.jdbc.EmbeddedDriver");
+                
+                System.out.println("*****Driver is ready!");
+            } catch (Exception e) {
+                System.out.println("*****Failed to load JDBC/ODBC driver.");
+                return;               
             }
-        } catch (java.lang.Exception exception) {                                  
-            exception.printStackTrace();                                      
+
+            try {
+                  
+                 System.out.println("*****haha!");
+                conn = DriverManager.getConnection(url, username, password );
+                conn.setAutoCommit(false);
+                statement  = conn.createStatement();  
+                System.out.println(statement);
+                   
+                System.out.println(conn);
+                
+            } catch (SQLException exception ) {
+                System.out.println ("\n*** SQLException caught ***\n");
+
+                while (exception != null){                                                                     
+                    System.out.println ("SQLState:   " + exception.getSQLState()  );
+                    System.out.println ("Message:    " + exception.getMessage()   );
+                    System.out.println ("Error code: " + exception.getErrorCode() );
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage() + "\n Please check your connection or contact to server admin!");
+                    exception = exception.getNextException ();
+                    System.out.println ("");
+                }
+            } catch (java.lang.Exception exception) {                                  
+                exception.printStackTrace();                                      
+            }
         }
-    }
-	//Get connection
-	static Connection getConnection() {
-		return conn;
-	}
-	//Get Statement
-	static Statement getStmt() {
-		return statement;
-	}
-	//Get Result set
-	static ResultSet getRS() {
-		return rs;
+        //Get connection
+        static Connection getConnection() {
+            return conn;
+        }
+        //Get Statement
+        static Statement getStmt() {
+            return statement;
+        }
+        //Get Result set
+        static ResultSet getRS() {
+            return rs;
 	}
 	//Close connection if close the program
 	public static void close() {
-		try {
-		
-			if (rs != null) {
-				rs.close();
-			}
-		
-			if (statement != null) {
-				statement.close();
-			}
-		
-			if (conn != null) {
-				conn.close();
-			}
-			} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            try {
 
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        
+        /*public void IUquery(String username, String pw, String query){
+           //thinking to make all the queries to functions to be more neat 
+        }*/
 }
