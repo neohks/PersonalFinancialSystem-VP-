@@ -19,6 +19,8 @@ public class DBAccess {
     private static ResultSet rs;
     private static PreparedStatement prepstatement;
     private static int rowAffected = 0;
+    public static String currentUser;
+    
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -110,6 +112,7 @@ public class DBAccess {
                 
                 if(username.equals(uname) && password.equals(pw)){
                     System.out.println("logged in");
+                    currentUser = uname;
                     return true;
                 }
             }
@@ -123,7 +126,9 @@ public class DBAccess {
         return false;
     }
     
-    
+    public static void insertBudget(String source, double budget, String date, String username){
+        
+    }
     
     
 }

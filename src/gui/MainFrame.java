@@ -5,6 +5,7 @@
  */
 package gui;
 
+import database.DBAccess;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +15,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -35,9 +38,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     int currStatus = 1; //1 - Overview, 2 - Budget, 3 - Chart, 4 - Settings
     
-    public MainFrame(String username) {
+    public MainFrame() {
         initComponents();
-        LblUsername.setText("Welcome! \n" + username);
+        LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
     }
     
     //Switch color of side nav bar
@@ -196,8 +199,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         labelSumBudget = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtFieldSource = new javax.swing.JTextField();
-        txtFieldSumBudget = new javax.swing.JTextField();
+        txtFSource = new javax.swing.JTextField();
+        txtFSumBudget = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         datePickerBudget = new org.jdesktop.swingx.JXDatePicker();
         chartPanel = new javax.swing.JPanel();
@@ -781,6 +784,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setText("Date : ");
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addBudgetPanelLayout = new javax.swing.GroupLayout(addBudgetPanel);
         addBudgetPanel.setLayout(addBudgetPanelLayout);
@@ -792,11 +800,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(addBudgetPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
-                        .addComponent(txtFieldSource))
+                        .addComponent(txtFSource))
                     .addGroup(addBudgetPanelLayout.createSequentialGroup()
                         .addComponent(labelSumBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
-                        .addComponent(txtFieldSumBudget))
+                        .addComponent(txtFSumBudget))
                     .addGroup(addBudgetPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
@@ -813,11 +821,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE)
                 .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFieldSource, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFSource, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSumBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFieldSumBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFSumBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1137,6 +1145,36 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passFNewPassActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String source;
+        double budget=0.00;
+        Date date;
+        source = txtFSource.getText();
+        try{
+            budget = Double.parseDouble(txtFSumBudget.getText());
+            try{
+                date = datePickerBudget.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = sdf.format(date);
+                
+                System.out.println(source);
+                System.out.println(budget);
+                System.out.println(dateStr);
+                
+                DBAccess.insertBudget(source, budget, dateStr, DBAccess.currentUser);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please enter numerical value only!", "Invalid Budget", JOptionPane.WARNING_MESSAGE);
+            //e.printStackTrace();
+        }catch(Exception exceptions){
+            
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1246,9 +1284,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel settingsSelect;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTable tableBudget;
+    private javax.swing.JTextField txtFSource;
+    private javax.swing.JTextField txtFSumBudget;
     private javax.swing.JTextField txtFieldPurpose;
-    private javax.swing.JTextField txtFieldSource;
-    private javax.swing.JTextField txtFieldSumBudget;
     private javax.swing.JTextField txtFieldSumExpenditure;
     private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
