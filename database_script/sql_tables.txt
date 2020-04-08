@@ -1,0 +1,23 @@
+create table category (
+catID varchar(5) not null primary key,
+catname varchar(100) not null
+);
+
+create table userinfo (
+userid varchar(5) not null primary key,
+username varchar(20) not null,
+password varchar(40) not null,
+email varchar(50),
+isadmin boolean not null
+);
+
+create table user_category (
+
+purpose varchar(100) not null,
+costincome double precision not null,
+date date not null,
+
+userid varchar(5) not null, foreign key(userid) references userinfo(userid),
+catid varchar(5) not null, foreign key(catid) references category(catid)
+
+);
