@@ -188,20 +188,20 @@ public class LoginFrame extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         
-        //Check password
-        if (txtFUsername.getText().equals("Username") || txtFUsername.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please do not leave blank on your Username!", "Username Null", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (pwFPass.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Please do not leave blank on your Password!", "Password Null", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        txtFUsername.getText();
-        pwFPass.getPassword();
-        
+        String username = txtFUsername.getText();
+        String pw = new String(pwFPass.getPassword());
 
+        
+        if(username.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please do not leave blank on your Username!", "Username Empty", JOptionPane.WARNING_MESSAGE);
+        }else if(pw.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please do not leave blank on your Password!", "Password Empty", JOptionPane.WARNING_MESSAGE);
+        }else{
+            if(DBAccess.login(username, pw) == true){
+                MainFrame mainmenu = new MainFrame(username);
+                mainmenu.setVisible(true);
+            }
+        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

@@ -97,10 +97,9 @@ public class DBAccess {
         
     }
     
-    public static String login(String uname, String pw){
+    public static boolean login(String uname, String pw){
         String username, password;
         boolean loginSuccess = false;
-        
         
         try{
             rs = stmt.executeQuery("select username, password from root.userinfo");
@@ -110,18 +109,17 @@ public class DBAccess {
                 password = rs.getString("password");
                 
                 if(username.equals(uname) && password.equals(pw)){
-                    loginSuccess = true;
-                    return username;
+                    System.out.println("logged in");
+                    return true;
                 }
             }
             if(!loginSuccess){
                 System.out.println("invalid login");
-                String message = "invalid";
-                return message;
+                return false;
             }
         } catch(Exception e){
             e.printStackTrace();
         }
-        
+        return false;
     }
 }

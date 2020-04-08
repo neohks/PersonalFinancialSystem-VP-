@@ -186,20 +186,20 @@ public class RegisterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pwFRePassActionPerformed
 
-    public static void main(String args[]) {
-        
-        /* Create and display the form */
-        
-        DBConnection dbconnect;
-        dbconnect = new DBConnection("root","password");
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DBAccess dbaccess = new DBAccess();
-
-                new RegisterFrame().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        
+//        /* Create and display the form */
+//        
+//        DBConnection dbconnect;
+//        dbconnect = new DBConnection("root","password");
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                DBAccess dbaccess = new DBAccess();
+//
+//                new RegisterFrame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
