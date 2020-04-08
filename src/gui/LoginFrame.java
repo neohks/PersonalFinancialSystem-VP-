@@ -79,6 +79,11 @@ public class LoginFrame extends javax.swing.JFrame {
         outerPanel.setBackground(new java.awt.Color(118, 255, 240));
 
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         lblNewUser.setText("New user?");
 
@@ -205,6 +210,15 @@ public class LoginFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        this.dispose();
+        RegisterFrame registerPage = new RegisterFrame();
+        registerPage.setVisible(true);
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     
     /**

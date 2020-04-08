@@ -134,6 +134,11 @@ public class RegisterFrame extends javax.swing.JFrame {
         );
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout outerPanelLayout = new javax.swing.GroupLayout(outerPanel);
         outerPanel.setLayout(outerPanelLayout);
@@ -185,6 +190,13 @@ public class RegisterFrame extends javax.swing.JFrame {
     private void pwFRePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwFRePassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pwFRePassActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginFrame loginPage = new LoginFrame();
+        loginPage.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 //    public static void main(String args[]) {
 //        
