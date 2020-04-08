@@ -30,6 +30,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import static database.DBAccess.*;
 
 /**
  *
@@ -521,6 +522,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(labelBalanceCurrency)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        labelBalanceCurrency.setText("RM"+getBalance());
 
         overviewPanel.add(panelBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 14, 570, 100));
 
@@ -1116,6 +1119,8 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         switchNav(overviewSelect);
+        overviewPanel.revalidate();
+        overviewPanel.repaint();
         overviewPanel.setVisible(true);
         currStatus = 1;
     }//GEN-LAST:event_overviewSelectMousePressed

@@ -189,4 +189,19 @@ public class DBAccess {
         }
     };
     
+    
+    public static double getBalance(){
+        String userid= getUserID(DBAccess.currentUser);
+        double balance = 0.00;
+        try{
+            rs = stmt.executeQuery("SELECT COSTINCOME FROM ROOT.USER_CATEGORY WHERE USERID='" + userid + "'");
+            while(rs.next()){
+                balance += rs.getDouble("costincome");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return balance;
+    }
+    
 }
