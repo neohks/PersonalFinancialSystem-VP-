@@ -196,33 +196,9 @@ public class LoginFrame extends javax.swing.JFrame {
             return;
         }
         
-        //if correct password
-        if (txtFUsername.getText() == "test" && isPasswordCorrect(pwFPass.getPassword())) {
-            
-            //Got dialog 
-            //Return back to Login frame
-        }
+
 
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    
-    private static boolean isPasswordCorrect(char[] input) {
-    boolean isCorrect = true;
-    
-    //Get the correct pass from db that equalivent with userid
-    char[] correctPassword = { 't', 'e', 's', 't' };
-
-    if (input.length != correctPassword.length) {
-        isCorrect = false;
-    } else {
-        isCorrect = Arrays.equals(input, correctPassword);
-    }
-
-    //Zero out the password.
-    Arrays.fill(correctPassword,'0');
-
-    return isCorrect;
-}
 
     
     /**

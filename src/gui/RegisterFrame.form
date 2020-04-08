@@ -92,10 +92,7 @@
                               <Component id="lblRePass" min="-2" pref="109" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
                                   <Component id="pwfRePass" max="32767" attributes="0"/>
                               </Group>
                           </Group>

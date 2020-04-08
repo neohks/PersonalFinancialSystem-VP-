@@ -163,9 +163,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         String pw = new String(pwFPass.getPassword());
         
         
-//        DBConnection a = new DBConnection();
-//        a.DBConnection("root","");
-        //DBconnection connect = new DBconnection("root","");
+
         
     }//GEN-LAST:event_btnRegisterActionPerformed
 
