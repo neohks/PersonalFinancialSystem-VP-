@@ -5,6 +5,8 @@
  */
 package gui;
 
+import database.DBAccess;
+import database.DBConnection;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -196,6 +198,9 @@ public class LoginFrame extends javax.swing.JFrame {
             return;
         }
         
+        txtFUsername.getText();
+        pwFPass.getPassword();
+        
 
 
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -204,14 +209,17 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new LoginFrame().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Create and display the form */
+        DBConnection dbconnect;
+        dbconnect = new DBConnection("root","password");
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                DBAccess dbaccess = new DBAccess();
+                new LoginFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

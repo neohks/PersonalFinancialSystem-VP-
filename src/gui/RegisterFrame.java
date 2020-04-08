@@ -40,7 +40,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         txtFUsername = new javax.swing.JTextField();
         pwFPass = new javax.swing.JPasswordField();
-        pwfRePass = new javax.swing.JPasswordField();
+        pwFRePass = new javax.swing.JPasswordField();
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +73,12 @@ public class RegisterFrame extends javax.swing.JFrame {
         lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEmail.setText("Email :");
 
+        pwFRePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwFRePassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout innerPanelLayout = new javax.swing.GroupLayout(innerPanel);
         innerPanel.setLayout(innerPanelLayout);
         innerPanelLayout.setHorizontalGroup(
@@ -84,10 +90,8 @@ public class RegisterFrame extends javax.swing.JFrame {
                         .addComponent(lblRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(innerPanelLayout.createSequentialGroup()
-                                .addComponent(btnRegister)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(pwfRePass)))
+                            .addComponent(btnRegister)
+                            .addComponent(pwFRePass)))
                     .addGroup(innerPanelLayout.createSequentialGroup()
                         .addContainerGap(102, Short.MAX_VALUE)
                         .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -123,7 +127,7 @@ public class RegisterFrame extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pwfRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwFRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(btnRegister)
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -161,17 +165,26 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        String username = txtFEmail.getText();
+        String username = txtFUsername.getText();
         String pw = new String(pwFPass.getPassword());
+        String pw2 = new String(pwFRePass.getPassword());
+        String email = txtFEmail.getText();
         
-
-        try {
-            DBAccess.checkAvailableUsername(username, pw);
-        } catch (Exception ex) {
-            Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        if(!pw.equals(pw2)){
+            System.out.println("Incorrect Password!");
+            
+        }else{
+            try {
+                DBAccess.checkAvailableUsername(username, pw, email);
+            } catch (Exception ex) {
+                Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void pwFRePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwFRePassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwFRePassActionPerformed
 
     public static void main(String args[]) {
         
@@ -198,7 +211,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel outerPanel;
     private javax.swing.JPasswordField pwFPass;
-    private javax.swing.JPasswordField pwfRePass;
+    private javax.swing.JPasswordField pwFRePass;
     private javax.swing.JTextField txtFEmail;
     private javax.swing.JTextField txtFUsername;
     // End of variables declaration//GEN-END:variables

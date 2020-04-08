@@ -30,7 +30,7 @@ public class DBAccess {
         
     }
     
-    public static void checkAvailableUsername(String uname, String pw) throws Exception {
+    public static void checkAvailableUsername(String uname, String pw, String email) throws Exception {
         ArrayList<String> usernameLists = new ArrayList<String>();
         String uid = "U0000";
         boolean isAvailable = true;
@@ -54,12 +54,12 @@ public class DBAccess {
             }
         }
         if(isAvailable){
-            registerUser(uid,uname,pw);
+            registerUser(uid,uname,pw,email);
         }
         
     }
     
-    public static void registerUser(String uid, String uname, String pw) throws Exception{
+    public static void registerUser(String uid, String uname, String pw, String email) throws Exception{
         boolean isadmin = false;
         int userid = Integer.parseInt(uid.substring(1,5));
 
@@ -77,12 +77,13 @@ public class DBAccess {
         strID = "U" + strID;
         
         try{
-            String query = "INSERT INTO root.userinfo(USERID, USERNAME, PASSWORD, ISADMIN) VALUES (?,?,?,?)";
+            String query = "INSERT INTO root.userinfo(USERID, USERNAME, PASSWORD, EMAIL, ISADMIN) VALUES (?,?,?,?,?)";
             prepstatement = conn.prepareStatement(query);
             prepstatement.setString(1, strID);
             prepstatement.setString(2, uname);
             prepstatement.setString(3, pw);
-            prepstatement.setBoolean(4, isadmin);
+            prepstatement.setString(4, email);
+            prepstatement.setBoolean(5, isadmin);
             
             rowAffected = prepstatement.executeUpdate();
             System.out.println("Row inserted: " + rowAffected);
@@ -96,5 +97,31 @@ public class DBAccess {
         
     }
     
-    
+    public static String login(String uname, String pw){
+        String username, password;
+        boolean loginSuccess = false;
+        
+        
+        try{
+            rs = stmt.executeQuery("select username, password from root.userinfo");
+            
+            while(rs.next()){
+                username = rs.getString("username");
+                password = rs.getString("password");
+                
+                if(username.equals(uname) && password.equals(pw)){
+                    loginSuccess = true;
+                    return username;
+                }
+            }
+            if(!loginSuccess){
+                System.out.println("invalid login");
+                String message = "invalid";
+                return message;
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
 }
