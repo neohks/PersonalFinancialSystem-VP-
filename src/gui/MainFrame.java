@@ -15,6 +15,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -184,15 +185,15 @@ public class MainFrame extends javax.swing.JFrame {
         budgetPanel = new javax.swing.JPanel();
         addExpenditurePanel = new javax.swing.JPanel();
         labelPurpose = new javax.swing.JLabel();
-        txtFieldPurpose = new javax.swing.JTextField();
-        txtFieldSumExpenditure = new javax.swing.JTextField();
+        txtFPurpose = new javax.swing.JTextField();
+        txtFSumExpenditure = new javax.swing.JTextField();
         labelSumExpenditure = new javax.swing.JLabel();
         labelDateExpenditure = new javax.swing.JLabel();
         datePickerExpenditure = new org.jdesktop.swingx.JXDatePicker();
         radioBtnShopping = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        radioBtnFD = new javax.swing.JRadioButton();
+        radioBtnBU = new javax.swing.JRadioButton();
+        radioBtnOthers = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
         labelCategory = new javax.swing.JLabel();
         addBudgetPanel = new javax.swing.JPanel();
@@ -675,22 +676,27 @@ public class MainFrame extends javax.swing.JFrame {
         radioBtnShopping.setText("Shopping");
         radioBtnShopping.setOpaque(false);
 
-        jRadioButton2.setBackground(new java.awt.Color(233, 251, 255));
-        buttonGrpCategory.add(jRadioButton2);
-        jRadioButton2.setText("Food & Drinks");
-        jRadioButton2.setOpaque(false);
+        radioBtnFD.setBackground(new java.awt.Color(233, 251, 255));
+        buttonGrpCategory.add(radioBtnFD);
+        radioBtnFD.setText("Food & Drinks");
+        radioBtnFD.setOpaque(false);
 
-        jRadioButton3.setBackground(new java.awt.Color(233, 251, 255));
-        buttonGrpCategory.add(jRadioButton3);
-        jRadioButton3.setText("Bills & Utilities");
-        jRadioButton3.setOpaque(false);
+        radioBtnBU.setBackground(new java.awt.Color(233, 251, 255));
+        buttonGrpCategory.add(radioBtnBU);
+        radioBtnBU.setText("Bills & Utilities");
+        radioBtnBU.setOpaque(false);
 
-        jRadioButton4.setBackground(new java.awt.Color(233, 251, 255));
-        buttonGrpCategory.add(jRadioButton4);
-        jRadioButton4.setText("Others");
-        jRadioButton4.setOpaque(false);
+        radioBtnOthers.setBackground(new java.awt.Color(233, 251, 255));
+        buttonGrpCategory.add(radioBtnOthers);
+        radioBtnOthers.setText("Others");
+        radioBtnOthers.setOpaque(false);
 
         jButton2.setText("Submit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         labelCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labelCategory.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -710,14 +716,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(addExpenditurePanelLayout.createSequentialGroup()
                         .addComponent(labelPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtFieldPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(addExpenditurePanelLayout.createSequentialGroup()
                         .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addExpenditurePanelLayout.createSequentialGroup()
                                 .addComponent(labelSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtFieldSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addExpenditurePanelLayout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -725,12 +731,12 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(labelCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(radioBtnFD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(radioBtnShopping, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(radioBtnBU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(radioBtnOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(addExpenditurePanelLayout.createSequentialGroup()
                                         .addComponent(labelDateExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(19, 19, 19)
@@ -742,11 +748,11 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(addExpenditurePanelLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFieldPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelPurpose, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFieldSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelSumExpenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -758,11 +764,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(addExpenditurePanelLayout.createSequentialGroup()
                         .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioBtnShopping)
-                            .addComponent(jRadioButton3))
+                            .addComponent(radioBtnBU))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(addExpenditurePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton4))))
+                            .addComponent(radioBtnFD)
+                            .addComponent(radioBtnOthers))))
                 .addGap(30, 30, 30)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1144,7 +1150,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void passFNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFNewPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passFNewPassActionPerformed
-
+    //now no use dao ady
+    public static Timestamp getCurrentTime(){
+        Date date;
+        date = new Date();
+        //getTime() returns current time in milliseconds
+        long time = date.getTime();
+         //Passed the milliseconds to constructor of Timestamp class 
+        Timestamp ts = new Timestamp(time);
+        System.out.println("Current Time Stamp: "+ts);
+        return ts;
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String source;
@@ -1155,14 +1173,15 @@ public class MainFrame extends javax.swing.JFrame {
             budget = Double.parseDouble(txtFSumBudget.getText());
             try{
                 date = datePickerBudget.getDate();
+                System.out.println(getCurrentTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateStr = sdf.format(date);
+//                System.out.println(dateStr);
+//                System.out.println(source);
+//                System.out.println(budget);
+//                System.out.println(dateStr);
                 
-                System.out.println(source);
-                System.out.println(budget);
-                System.out.println(dateStr);
-                
-                DBAccess.insertBudget(source, budget, dateStr, DBAccess.currentUser);
+                DBAccess.insertBudget(source, budget, dateStr);
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
             }
@@ -1174,6 +1193,54 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String purpose, category;
+        double expenses;
+        Date date;
+        
+        purpose = txtFPurpose.getText();
+        try{
+            expenses = Double.parseDouble(txtFSumExpenditure.getText());
+            try{
+                date = datePickerExpenditure.getDate();
+                System.out.println(getCurrentTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = sdf.format(date);
+                
+                if(radioBtnShopping.isSelected()){
+                    category = "C0002";
+                }else if(radioBtnFD.isSelected()){
+                    category = "C0003";
+                }else if(radioBtnBU.isSelected()){
+                    category = "C0004";
+                }else{
+                    category = "C0005";
+                }
+                
+                
+                
+                
+//                System.out.println(dateStr);
+//                System.out.println(purpose);
+//                System.out.println(expenses);
+//                System.out.println(dateStr);
+                
+                
+                DBAccess.insertExpenditure(purpose, expenses, dateStr, category);
+
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please enter numerical value only!", "Invalid Budget", JOptionPane.WARNING_MESSAGE);
+            //e.printStackTrace();
+        }catch(Exception exceptions){
+            
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1232,9 +1299,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelBalance;
     private javax.swing.JLabel labelBalanceCurrency;
@@ -1277,6 +1341,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelShopping;
     private javax.swing.JPasswordField passFNewPass;
     private javax.swing.JPasswordField passFOldPass;
+    private javax.swing.JRadioButton radioBtnBU;
+    private javax.swing.JRadioButton radioBtnFD;
+    private javax.swing.JRadioButton radioBtnOthers;
     private javax.swing.JRadioButton radioBtnShopping;
     private javax.swing.JScrollPane scrollBudgetTable;
     private javax.swing.JLabel settingsLabel;
@@ -1284,10 +1351,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel settingsSelect;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTable tableBudget;
+    private javax.swing.JTextField txtFPurpose;
     private javax.swing.JTextField txtFSource;
     private javax.swing.JTextField txtFSumBudget;
-    private javax.swing.JTextField txtFieldPurpose;
-    private javax.swing.JTextField txtFieldSumExpenditure;
+    private javax.swing.JTextField txtFSumExpenditure;
     private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }

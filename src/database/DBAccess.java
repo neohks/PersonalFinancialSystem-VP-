@@ -6,7 +6,8 @@
 package database;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.sql.Timestamp;
 
 /**
  *
@@ -126,9 +127,66 @@ public class DBAccess {
         return false;
     }
     
-    public static void insertBudget(String source, double budget, String date, String username){
-        
+    
+    public static String getUserID(String username){
+        String userid="U0001";
+        try{
+            rs = stmt.executeQuery("SELECT USERID FROM ROOT.USERINFO WHERE USERNAME='" + username + "'");
+            while(rs.next()){
+            
+                userid = rs.getString("userid");
+                System.out.println(userid);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return userid;
     }
     
+
+    public static void insertBudget(String source, double budget, String date){
+        String categoryID = "C0001";
+        try{
+            String query = "INSERT INTO ROOT.USER_CATEGORY (USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?)";
+            prepstatement = conn.prepareStatement(query);
+            prepstatement.setString(1, getUserID(DBAccess.currentUser));
+            prepstatement.setString(2, categoryID);
+            prepstatement.setString(3, source);
+            prepstatement.setDouble(4, budget);
+            prepstatement.setString(5, date);
+            
+            rowAffected = prepstatement.executeUpdate();
+            System.out.println("Row inserted: " + rowAffected);
+            
+            conn.commit();
+            prepstatement.close();
+        }catch(Exception e){
+            e.printStackTrace();
+            
+        }
+    }
+    
+    
+    public static void insertExpenditure(String purpose, double cost, String date, String category){
+        //make it negative indicating expenditure/expenses
+        cost *= -1;
+        try{
+            String query = "INSERT INTO ROOT.USER_CATEGORY (USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?)";
+            prepstatement = conn.prepareStatement(query);
+            prepstatement.setString(1, getUserID(DBAccess.currentUser));
+            prepstatement.setString(2, category);
+            prepstatement.setString(3, purpose);
+            prepstatement.setDouble(4, cost);
+            prepstatement.setString(5, date);
+            
+            rowAffected = prepstatement.executeUpdate();
+            System.out.println("Row inserted: " + rowAffected);
+            
+            conn.commit();
+            prepstatement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    };
     
 }
