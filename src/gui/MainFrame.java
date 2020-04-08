@@ -31,6 +31,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
+import javax.swing.JTable;
 
 /**
  *
@@ -43,6 +44,8 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
+        DBAccess.displayOverviewTable();
+        tableBudget = new JTable(DBAccess.overviewTableModel);
     }
     
     //Switch color of side nav bar

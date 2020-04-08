@@ -8,6 +8,7 @@ package database;
 import java.sql.*;
 import java.util.*;
 import java.sql.Timestamp;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +22,7 @@ public class DBAccess {
     private static PreparedStatement prepstatement;
     private static int rowAffected = 0;
     public static String currentUser;
+    public static DefaultTableModel overviewTableModel;
     
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -230,6 +232,24 @@ public class DBAccess {
             e.printStackTrace();
         }
         return expenses;
+    }
+   
+    public static void displayOverviewTable(){
+        
+        
+        try{
+            rs = stmt.executeQuery("SELECT PURPOSE, CATID, COSTINCOME, DATE FROM ROOT.USER_CATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
+            while(rs.next()){
+                final Object[][] rowData = {};
+		final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
+                overviewTableModel = new DefaultTableModel(rowData, columnNames);
+                overviewTableModel.addRow(new Object[] { rs.getString("PURPOSE"), rs.getString("CATID"),rs.getDouble("COSTINCOME"), rs.getString("DATE") });
+                //overviewTableModel.addRow(new Object[] { "1","2","3","4" });
+                
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
 }
