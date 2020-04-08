@@ -18,7 +18,7 @@ public class DBAccess {
     private static Statement stmt;
     private static ResultSet rs;
     private static PreparedStatement prepstatement;
-
+    private static int rowAffected = 0;
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -27,14 +27,15 @@ public class DBAccess {
         conn = DBConnection.getConnection();
         stmt = DBConnection.getStmt();
         rs = DBConnection.getRS();
+        
     }
     
     public static void checkAvailableUsername(String uname, String pw) throws Exception {
         ArrayList<String> usernameLists = new ArrayList<String>();
-        String uid = "U0001";
+        String uid = "U0000";
         boolean isAvailable = true;
         try{
-            rs = stmt.executeQuery("select * from app.userinfo");
+            rs = stmt.executeQuery("select * from root.userinfo");
             
             while(rs.next()){
                 String name = rs.getString("username");
@@ -46,7 +47,8 @@ public class DBAccess {
         }
         
         for(int i=0; i<usernameLists.size();i++){
-            if(uname.equals(usernameLists.get(0))){
+            System.out.println(usernameLists.get(i));
+            if(uname.equals(usernameLists.get(i))){
                 isAvailable=false;
                 System.out.println("Username is used");
                 break;
@@ -59,16 +61,10 @@ public class DBAccess {
     }
     
     public static void registerUser(String uid, String uname, String pw) throws Exception{
-        
+        boolean isadmin = false;
         int userid = Integer.parseInt(uid.substring(1,5));
+
         userid++;
-//        String strID= Integer.toString(userid);
-//        String newNum = String.format("%04d", strID);
-//        String newUserID = "U" + newNum;
-        
-//        System.out.println(newUserID);
-        
-        System.out.println("register");
         String strID= Integer.toString(userid);
         int lengthID = strID.length();
         int requiredZeros = 4-lengthID;
@@ -79,35 +75,24 @@ public class DBAccess {
         }
         
         strID = zeropads + strID;
-        
-        boolean isadmin = false;
+        strID = "U" + strID;
         
         try{
-            //stmt.executeQuery(query);
-//            String query = "INSERT INTO userinfo(`userid`, `username`, `password`, `isAdmin`) VALUES (?,?,?,?)";
-//            prepstatement = conn.prepareStatement(query);
-//            prepstatement.setString(1, strID);
-//            prepstatement.setString(2, uname);
-//            prepstatement.setString(3, pw);
-//            prepstatement.setBoolean(4,false);
+            String query = "INSERT INTO root.userinfo(USERID, USERNAME, PASSWORD, ISADMIN) VALUES (?,?,?,?)";
+            prepstatement = conn.prepareStatement(query);
+            prepstatement.setString(1, strID);
+            prepstatement.setString(2, uname);
+            prepstatement.setString(3, pw);
+            prepstatement.setBoolean(4, isadmin);
             
-//            int rowAffected = stmt.executeUpdate("insert into userinfo(userid,username,password,isadmin) values ('U0002', 'aaa', 'aaa', 'false')");
-//            System.out.println("*****Insert One Result Table Success!");
-//            System.out.println(String.format("Row affected %d", rowAffected));
-
-            String insertSQL = "INSERT INTO userinfo (userID, username, password, isadmin) values ('U" + strID + "', '" + uname + "', '" + pw + "', " + isadmin + ")";
-            System.out.println(insertSQL);
-            stmt.executeQuery(insertSQL);
-//            System.out.println(row);
+            rowAffected = prepstatement.executeUpdate();
+            System.out.println("Row inserted: " + rowAffected);
+            
             conn.commit();
-            //prepstatement.close();
-            
-//            INSERT INTO userinfo (userID, username, password, isadmin) values ('U0002','aaa','sss',false)
-
-            
+            prepstatement.close();
             
         }catch (Exception e){
-            
+            e.printStackTrace();
         }
         
     }

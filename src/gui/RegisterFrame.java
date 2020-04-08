@@ -100,8 +100,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         String pw = new String(pwTxtfield.getPassword());
         
         try {
-            DBAccess a = new DBAccess();
-            a.checkAvailableUsername(username, pw);
+            DBAccess.checkAvailableUsername(username, pw);
         } catch (Exception ex) {
             Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +115,8 @@ public class RegisterFrame extends javax.swing.JFrame {
         dbconnect = new DBConnection("root","password");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                DBAccess dbaccess = new DBAccess();
+
                 new RegisterFrame().setVisible(true);
             }
         });
