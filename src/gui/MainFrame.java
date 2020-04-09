@@ -32,6 +32,7 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
-        DBAccess.displayOverviewTable();
+        DBAccess.fetchOverviewTable();
         tableBudget.setModel(DBAccess.overviewTableModel);
         tableBudget = new JTable(DBAccess.overviewTableModel);
         
@@ -1142,6 +1143,17 @@ public class MainFrame extends javax.swing.JFrame {
         labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
         labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
         labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
+//        DBAccess a = new DBAccess();
+        
+
+        DBAccess.fetchOverviewTable();
+        tableBudget.setModel(overviewTableModel);
+        tableBudget = new JTable(overviewTableModel);
+        
+        
+        tableBudget.repaint();
+
+        
         overviewPanel.revalidate();
         overviewPanel.repaint();
         

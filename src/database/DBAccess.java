@@ -5,6 +5,7 @@
  */
 package database;
 
+import gui.MainFrame;
 import java.sql.*;
 import java.util.*;
 import java.sql.Timestamp;
@@ -234,7 +235,7 @@ public class DBAccess {
         return expenses;
     }
    
-    public static void displayOverviewTable(){
+    public static void fetchOverviewTable(){
         
         String purpose, catid, date;
         double costincome;
@@ -250,14 +251,13 @@ public class DBAccess {
                 catid = rs.getString("CATID");
                 costincome = rs.getDouble("COSTINCOME"); 
                 date = rs.getString("DATE");
-               
-                //System.out.println(purpose + " " + catid + " " + costincome+ " " + date );
-                overviewTableModel.addRow(new Object[] { purpose, catid, costincome, date });
                 
+                System.out.println(purpose + " " + catid + " " + costincome+ " " + date );
+                overviewTableModel.addRow(new Object[] { purpose, catid, costincome, date });
+                //overviewTableModel.addRow(new Object[] { ",", ",", ",","," });
             }
-            System.out.println();
-            System.out.println("done");
-            //overviewPanel.tableBudget.setModel(overviewTableModel);
+            
+            //MainFrame.tableBudget.setModel(overviewTableModel);
         }catch(Exception e){
             e.printStackTrace();
         }
