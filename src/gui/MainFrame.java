@@ -938,6 +938,11 @@ public class MainFrame extends javax.swing.JFrame {
         lblNewPassword.setText("New Password :");
 
         btnSubmitPass.setText("Submit");
+        btnSubmitPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitPassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEditPassLayout = new javax.swing.GroupLayout(panelEditPass);
         panelEditPass.setLayout(panelEditPassLayout);
@@ -1271,6 +1276,20 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSubmitExpenActionPerformed
+
+    private void btnSubmitPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitPassActionPerformed
+        // TODO add your handling code here:
+        
+        String pwOld = new String(passFOldPass.getPassword());
+        String pwNew = new String (passFNewPass.getPassword());
+        
+        if(pwOld.equals(pwNew)){
+            System.out.println("New password cannot be same as old password!");
+        }else{
+            DBAccess.changePW(pwNew, pwOld);
+        }
+        
+    }//GEN-LAST:event_btnSubmitPassActionPerformed
 
     /**
      * @param args the command line arguments

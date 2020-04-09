@@ -263,4 +263,33 @@ public class DBAccess {
         }
     }
     
+    
+    public static String getUserPW(){
+        String pw = "";
+        try{
+            String query = "SELECT PASSWORD FROM ROOT.USERINFO WHERE USERNAME='" + DBAccess.currentUser + "'";
+            rs = stmt.executeQuery(query);
+            while(rs.next())
+                pw = rs.getString("PASSWORD");
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return pw;
+    }
+    
+        public static void changePW(String newpw, String oldpw){
+        String userid = getUserID(DBAccess.currentUser);
+        try{
+            if(getUserPW().equals(oldpw))
+                stmt.executeUpdate("UPDATE ROOT.USERINFO SET PASSWORD='" + newpw + "' WHERE USERNAME='" + DBAccess.currentUser + "'");
+            else
+                System.out.println("Wrong password");
+            
+            conn.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
 }
