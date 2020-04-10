@@ -45,9 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
-        DBAccess.fetchOverviewTable();
-        tableBudget.setModel(DBAccess.overviewTableModel);
-        tableBudget = new JTable(DBAccess.overviewTableModel);
+//        DBAccess.fetchOverviewTable();
+//        tableBudget.setModel(DBAccess.overviewTableModel);
+//        tableBudget = new JTable(DBAccess.overviewTableModel);
         
     }
     
@@ -409,7 +409,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
@@ -676,7 +676,7 @@ public class MainFrame extends javax.swing.JFrame {
         budgetPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         addExpenditurePanel.setBackground(new java.awt.Color(233, 251, 255));
-        addExpenditurePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Expenditure", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
+        addExpenditurePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Expenditure", 2, 0, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
 
         lblPurpose.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPurpose.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -794,7 +794,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         addBudgetPanel.setBackground(new java.awt.Color(233, 251, 255));
-        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Budget", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
+        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Budget", 2, 0, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
 
         lblSource.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSource.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -886,7 +886,7 @@ public class MainFrame extends javax.swing.JFrame {
         chartPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         panelChart.setBackground(new java.awt.Color(204, 255, 255));
-        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         panelChart.setLayout(new java.awt.BorderLayout());
 
         btnChart.setText("Bar Chart");
@@ -925,7 +925,7 @@ public class MainFrame extends javax.swing.JFrame {
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         panelEditPass.setBackground(new java.awt.Color(204, 255, 255));
-        panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         lblOldPassword.setText("Old Password :");
 
@@ -980,7 +980,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         panelChangeCurr.setBackground(new java.awt.Color(204, 255, 255));
-        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", 2, 0));
 
         lblCurrency.setText("Currency :");
 
@@ -1008,6 +1008,11 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
@@ -1151,12 +1156,7 @@ public class MainFrame extends javax.swing.JFrame {
 //        DBAccess a = new DBAccess();
         
 
-        DBAccess.fetchOverviewTable();
-        tableBudget.setModel(overviewTableModel);
-        tableBudget = new JTable(overviewTableModel);
         
-        
-        tableBudget.repaint();
 
         
         overviewPanel.revalidate();
@@ -1226,7 +1226,16 @@ public class MainFrame extends javax.swing.JFrame {
 //                System.out.println(dateStr);
                 
                 DBAccess.insertBudget(source, budget, dateStr);
+//                overviewTableModel.setRowCount(0);
+                
+                DBAccess.fetchOverviewTable();
+                tableBudget.setModel(overviewTableModel);
+                tableBudget = new JTable(overviewTableModel);
+        
+        
+                tableBudget.repaint();
             }catch(Exception e){
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
             }
         }catch(NumberFormatException e){
@@ -1290,6 +1299,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSubmitPassActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginFrame lf = new LoginFrame();
+        lf.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
