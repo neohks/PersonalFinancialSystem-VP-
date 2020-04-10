@@ -142,6 +142,18 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
+       //now no use dao ady
+    public static Timestamp getCurrentTime(){
+        Date date;
+        date = new Date();
+        //getTime() returns current time in milliseconds
+        long time = date.getTime();
+         //Passed the milliseconds to constructor of Timestamp class 
+        Timestamp ts = new Timestamp(time);
+        System.out.println("Current Time Stamp: "+ts);
+        return ts;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1154,14 +1166,8 @@ public class MainFrame extends javax.swing.JFrame {
         labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
         labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
         labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
-//        DBAccess a = new DBAccess();
-        
 
-        
-
-        
-        overviewPanel.revalidate();
-        overviewPanel.repaint();
+        labelTotalCostCurrency.setText("RM"+getExpenditure());
         
     }//GEN-LAST:event_overviewSelectMousePressed
 
@@ -1195,18 +1201,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void passFNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFNewPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passFNewPassActionPerformed
-    //now no use dao ady
-    public static Timestamp getCurrentTime(){
-        Date date;
-        date = new Date();
-        //getTime() returns current time in milliseconds
-        long time = date.getTime();
-         //Passed the milliseconds to constructor of Timestamp class 
-        Timestamp ts = new Timestamp(time);
-        System.out.println("Current Time Stamp: "+ts);
-        return ts;
-    }
-    
     
     private void btnSubmitBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitBudgetActionPerformed
         // TODO add your handling code here:
@@ -1221,20 +1215,12 @@ public class MainFrame extends javax.swing.JFrame {
                 System.out.println(getCurrentTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateStr = sdf.format(date);
-//                System.out.println(dateStr);
-//                System.out.println(source);
-//                System.out.println(budget);
-//                System.out.println(dateStr);
                 
                 DBAccess.insertBudget(source, budget, dateStr);
-//                overviewTableModel.setRowCount(0);
-                
-                //Update Budget Table Row
+
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
-                tableBudget = new JTable(overviewTableModel);
-                //
-                tableBudget.repaint();
+
             }catch(Exception e){
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
@@ -1243,7 +1229,7 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please enter numerical value only!", "Invalid Budget", JOptionPane.WARNING_MESSAGE);
             //e.printStackTrace();
         }catch(Exception exceptions){
-            
+            exceptions.printStackTrace();
         }
         
     }//GEN-LAST:event_btnSubmitBudgetActionPerformed
