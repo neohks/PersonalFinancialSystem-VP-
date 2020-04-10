@@ -20,6 +20,6 @@ Using Git in Netbeans:
 https://netbeans.org/kb/docs/ide/git.html
 
 
-Groupmates:
+# Groupmates:
 - https://github.com/HanYangXD
 - https://github.com/hongyiptang
