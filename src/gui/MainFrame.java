@@ -1296,6 +1296,7 @@ public class MainFrame extends javax.swing.JFrame {
             System.out.println("New password cannot be same as old password!");
         }else{
             DBAccess.changePW(pwNew, pwOld);
+            //boop
         }
         
     }//GEN-LAST:event_btnSubmitPassActionPerformed
