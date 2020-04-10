@@ -1232,8 +1232,8 @@ public class MainFrame extends javax.swing.JFrame {
                 //Update Budget Table Row
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
-        
-        
+                tableBudget = new JTable(overviewTableModel);
+                //
                 tableBudget.repaint();
             }catch(Exception e){
                 e.printStackTrace();
