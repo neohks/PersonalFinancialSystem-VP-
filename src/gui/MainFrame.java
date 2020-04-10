@@ -45,10 +45,11 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
-//        DBAccess.fetchOverviewTable();
-//        tableBudget.setModel(DBAccess.overviewTableModel);
-//        tableBudget = new JTable(DBAccess.overviewTableModel);
         
+        //Update and Initialise Budget Table Row 
+        DBAccess.fetchOverviewTable();
+        tableBudget.setModel(overviewTableModel);
+                
     }
     
     //Switch color of side nav bar
@@ -1228,9 +1229,9 @@ public class MainFrame extends javax.swing.JFrame {
                 DBAccess.insertBudget(source, budget, dateStr);
 //                overviewTableModel.setRowCount(0);
                 
+                //Update Budget Table Row
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
-                tableBudget = new JTable(overviewTableModel);
         
         
                 tableBudget.repaint();
@@ -1273,6 +1274,10 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                
                 DBAccess.insertExpenditure(purpose, expenses, dateStr, category);
+                
+                //Update Budget Table Row
+                DBAccess.fetchOverviewTable();
+                tableBudget.setModel(overviewTableModel);
 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
