@@ -148,26 +148,6 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-       //now no use dao ady
-    public static Timestamp getCurrentTime(){
-        Date date;
-        date = new Date();
-        //getTime() returns current time in milliseconds
-        long time = date.getTime();
-         //Passed the milliseconds to constructor of Timestamp class 
-        Timestamp ts = new Timestamp(time);
-        System.out.println("Current Time Stamp: "+ts);
-        return ts;
-    }
-    
-//    public static Date getCurrentDate(){
-//        DateFormat df = new SimpleDateFormat("MM/dd/yy");
-//        Date date;
-//        date = new Date();
-//        
-//        return (Date(df.format(date));
-//    }
-
     public void resetFields(){
         txtFSource.setText("");
         txtFSumBudget.setText("");
