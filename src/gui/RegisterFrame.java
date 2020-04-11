@@ -19,6 +19,7 @@ public class RegisterFrame extends javax.swing.JFrame {
      */
     public RegisterFrame() {
         initComponents();
+        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
     }
 
     /**

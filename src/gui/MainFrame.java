@@ -56,7 +56,8 @@ public class MainFrame extends javax.swing.JFrame {
         datePickerBudget.setFormats("yyyy-MM-dd");
         datePickerExpenditure.setDate(date);
         datePickerExpenditure.setFormats("yyyy-MM-dd");
-
+        
+        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
     }
     
     //Switch color of side nav bar

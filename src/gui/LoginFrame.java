@@ -25,7 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         textFieldFocus();
-        
+        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
     }
     
     private void textFieldFocus(){
