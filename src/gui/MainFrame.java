@@ -50,11 +50,12 @@ public class MainFrame extends javax.swing.JFrame {
         //Update and Initialise Budget Table Row 
         DBAccess.fetchOverviewTable();
         tableBudget.setModel(overviewTableModel);
+        
         Date date = new Date();
         datePickerBudget.setDate(date);
-        datePickerBudget.setFormats("MM-dd-yy");
+        datePickerBudget.setFormats("yyyy-MM-dd");
         datePickerExpenditure.setDate(date);
-        datePickerExpenditure.setFormats("MM-dd-yy");
+        datePickerExpenditure.setFormats("yyyy-MM-dd");
 
     }
     
@@ -151,11 +152,13 @@ public class MainFrame extends javax.swing.JFrame {
     public void resetFields(){
         txtFSource.setText("");
         txtFSumBudget.setText("");
+        
         Date date = new Date();
         datePickerBudget.setDate(date);
-        datePickerBudget.setFormats("MM-dd-yy");
+        datePickerBudget.setFormats("yyyy-MM-dd");
         datePickerExpenditure.setDate(date);
-        datePickerExpenditure.setFormats("MM-dd-yy");
+        datePickerExpenditure.setFormats("yyyy-MM-dd");
+        
         txtFPurpose.setText("");
         txtFSumExpenditure.setText("");
         buttonGrpCategory.clearSelection();
@@ -1220,7 +1223,7 @@ public class MainFrame extends javax.swing.JFrame {
             budget = Double.parseDouble(txtFSumBudget.getText());
             try{
                 date = datePickerBudget.getDate();
-//                System.out.println(getCurrentTime());
+
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateStr = sdf.format(date);
                 
@@ -1253,7 +1256,7 @@ public class MainFrame extends javax.swing.JFrame {
             expenses = Double.parseDouble(txtFSumExpenditure.getText());
             try{
                 date = datePickerExpenditure.getDate();
-                System.out.println(getCurrentTime());
+
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateStr = sdf.format(date);
                 
