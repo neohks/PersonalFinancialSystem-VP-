@@ -1220,7 +1220,7 @@ public class MainFrame extends javax.swing.JFrame {
             budget = Double.parseDouble(txtFSumBudget.getText());
             try{
                 date = datePickerBudget.getDate();
-                System.out.println(getCurrentTime());
+//                System.out.println(getCurrentTime());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String dateStr = sdf.format(date);
                 
