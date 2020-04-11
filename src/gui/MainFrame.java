@@ -253,6 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Personal Finanace System");
         setName("mainFrame"); // NOI18N
         setResizable(false);
 
@@ -433,7 +434,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
@@ -700,7 +701,7 @@ public class MainFrame extends javax.swing.JFrame {
         budgetPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         addExpenditurePanel.setBackground(new java.awt.Color(233, 251, 255));
-        addExpenditurePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Expenditure", 2, 0, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
+        addExpenditurePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Expenditure", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
 
         lblPurpose.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPurpose.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -818,7 +819,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         addBudgetPanel.setBackground(new java.awt.Color(233, 251, 255));
-        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Budget", 2, 0, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
+        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Budget", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
 
         lblSource.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSource.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -910,7 +911,7 @@ public class MainFrame extends javax.swing.JFrame {
         chartPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         panelChart.setBackground(new java.awt.Color(204, 255, 255));
-        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelChart.setLayout(new java.awt.BorderLayout());
 
         btnChart.setText("Bar Chart");
@@ -949,7 +950,7 @@ public class MainFrame extends javax.swing.JFrame {
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         panelEditPass.setBackground(new java.awt.Color(204, 255, 255));
-        panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", 2, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         lblOldPassword.setText("Old Password :");
 
@@ -1004,7 +1005,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         panelChangeCurr.setBackground(new java.awt.Color(204, 255, 255));
-        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", 2, 0));
+        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         lblCurrency.setText("Currency :");
 

@@ -73,6 +73,7 @@ public class LoginFrame extends javax.swing.JFrame {
         imageLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Personal Finance System - Login");
         setBackground(new java.awt.Color(240, 218, 221));
         setSize(new java.awt.Dimension(550, 385));
 
