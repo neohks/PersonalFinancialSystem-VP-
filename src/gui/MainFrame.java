@@ -31,6 +31,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
+import java.text.DateFormat;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,7 +50,12 @@ public class MainFrame extends javax.swing.JFrame {
         //Update and Initialise Budget Table Row 
         DBAccess.fetchOverviewTable();
         tableBudget.setModel(overviewTableModel);
-                
+        Date date = new Date();
+        datePickerBudget.setDate(date);
+        datePickerBudget.setFormats("MM-dd-yy");
+        datePickerExpenditure.setDate(date);
+        datePickerExpenditure.setFormats("MM-dd-yy");
+
     }
     
     //Switch color of side nav bar
@@ -153,6 +159,28 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("Current Time Stamp: "+ts);
         return ts;
     }
+    
+//    public static Date getCurrentDate(){
+//        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+//        Date date;
+//        date = new Date();
+//        
+//        return (Date(df.format(date));
+//    }
+
+    public void resetFields(){
+        txtFSource.setText("");
+        txtFSumBudget.setText("");
+        Date date = new Date();
+        datePickerBudget.setDate(date);
+        datePickerBudget.setFormats("MM-dd-yy");
+        datePickerExpenditure.setDate(date);
+        datePickerExpenditure.setFormats("MM-dd-yy");
+        txtFPurpose.setText("");
+        txtFSumExpenditure.setText("");
+        buttonGrpCategory.clearSelection();
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1220,7 +1248,7 @@ public class MainFrame extends javax.swing.JFrame {
 
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
-
+                resetFields();
             }catch(Exception e){
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
@@ -1264,7 +1292,7 @@ public class MainFrame extends javax.swing.JFrame {
                 //Update Budget Table Row
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
-
+                resetFields();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
             }
