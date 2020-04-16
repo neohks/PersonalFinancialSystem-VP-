@@ -38,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.*;
@@ -173,7 +174,7 @@ public class MainFrame extends javax.swing.JFrame {
         buttonGrpCategory.clearSelection();
     }
 
-    void editTablePanel(String[] rowData) throws ParseException {
+    void editTablePanel(String[] rowData, String userCatID) throws ParseException {
         
         JTextField txtFSourcePurpose = new JTextField();
         JTextField txtFCategory = new JTextField() {
@@ -181,10 +182,8 @@ public class MainFrame extends javax.swing.JFrame {
             public boolean isEditable() {
                 return false;
             }
-            
         };
-        JTextField txtFIncomeCost = new JTextField();
-        JTextField txtFDate = new JTextField();
+        JSpinner spinIncomeCost = new JSpinner();
         JXDatePicker datePicker = new JXDatePicker();
                 
         JFrame editFrame = new JFrame();
@@ -201,8 +200,9 @@ public class MainFrame extends javax.swing.JFrame {
         txtFCategory.setText(rowData[1]);
         
         editTablePanel.add(new JLabel("Income/Cost : "));
-        editTablePanel.add(txtFIncomeCost);
-        txtFIncomeCost.setText(rowData[2]);
+        editTablePanel.add(spinIncomeCost);
+        spinIncomeCost.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        spinIncomeCost.setValue(Double.parseDouble(rowData[2]));
         
         editTablePanel.add(new JLabel("txtFDate : "));
         editTablePanel.add(datePicker);
@@ -224,15 +224,23 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (result == JOptionPane.YES_OPTION) {
             //Delete
-           System.out.println("Check value: " + txtFSourcePurpose.getText());
-           System.out.println("y value: " + txtFCategory.getText());
-           System.out.println("y value: " + txtFIncomeCost.getText());
-           System.out.println("y value: " + txtFDate.getText());
+            
+            DBAccess.deleteBudgetTableRowValue(userCatID);
+            
         }
         else if (result == JOptionPane.NO_OPTION) {
-            //Update
+            //Update data
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = sdf.format(datePicker.getDate());
+            
+            DBAccess.updateBudgetTableRowValue(userCatID, txtFSourcePurpose.getText(),
+                    Double.parseDouble(spinIncomeCost.getValue().toString()), dateStr);
+            
         }
         
+        //Update JTable
+        DBAccess.fetchOverviewTable();
+        tableBudget.setModel(overviewTableModel);
       
     }
     
@@ -1327,6 +1335,7 @@ public class MainFrame extends javax.swing.JFrame {
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
                 resetFields();
+                
             }catch(Exception e){
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
@@ -1371,6 +1380,7 @@ public class MainFrame extends javax.swing.JFrame {
                 DBAccess.fetchOverviewTable();
                 tableBudget.setModel(overviewTableModel);
                 resetFields();
+                
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
             }
@@ -1407,28 +1417,29 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void tableBudgetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBudgetMouseClicked
        
+        int row = tableBudget.rowAtPoint(evt.getPoint());
+        
+        System.out.println(DBAccess.listUserCatID.get(row));
+        
+        String dataV = tableBudget.getModel().getValueAt(row, 0).toString();
+        
+        System.out.println(dataV);
+        
         String[] dataRow = new String[4];
         
         if (evt.getClickCount() == 2) {
-            
-            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
-        
-            System.out.println("Row Selected :");
-            System.out.println(row);
-            System.out.println("------------------------------");   
-            
+//            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
+
             //get each column data/value
             for(int x = 0; x < 4; x++) {
                 
-                System.out.println(tableBudget.getSelectedRow());
-                
                 String value = tableBudget.getModel().getValueAt(row, x).toString();
-                System.out.println(value);
                 dataRow[x] = value;
             }
             
             try {
-                editTablePanel(dataRow);
+                editTablePanel(dataRow, DBAccess.listUserCatID.get(row));
+                
             } catch (ParseException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
