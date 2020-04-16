@@ -131,7 +131,6 @@ public class DBAccess {
         return false;
     }
     
-    
     public static String getUserID(String username){
         String userid="U0001";
         try{
@@ -147,7 +146,8 @@ public class DBAccess {
         return userid;
     }
     
-
+    
+    //Insert Methods
     public static void insertBudget(String source, double budget, String date){
         String categoryID = "C0001";
         try{
@@ -171,7 +171,6 @@ public class DBAccess {
         }
     }
     
-    
     public static void insertExpenditure(String purpose, double cost, String date, String category){
         //make it negative indicating expenditure/expenses
         cost *= -1;
@@ -194,6 +193,7 @@ public class DBAccess {
             e.printStackTrace();
         }
     };
+    
     
     //Get Methods
     public static double getBalance(){
@@ -273,7 +273,6 @@ public class DBAccess {
         }
     }
     
-    
     public static String getUserPW(){
         String pw = "";
         try{
@@ -338,7 +337,7 @@ public class DBAccess {
     }
     
     
-    //Update
+    //Update Methods
     public static void updateBudgetTableRowValue(String usercatID, String purpose, double costIncome, String date){
 
         try{
@@ -367,7 +366,7 @@ public class DBAccess {
     }
     
     
-    //Delete
+    //Delete Methods
     public static void deleteBudgetTableRowValue(String usercatID){
 
         try{
