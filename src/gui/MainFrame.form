@@ -449,7 +449,11 @@
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableBudgetMouseClicked"/>
+                      </Events>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable() {&#xa;&#xa;    @Override&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    }&#xa;&#xa;    @Override&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;&#xa;        if (isCellSelected(row, column)) {&#xa;            System.out.println(row);&#xa;&#xa;        }&#xa;        return c;&#xa;    }&#xa;&#xa;}"/>
                         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MainFrame_tableBudget"/>
                       </AuxValues>
                     </Component>

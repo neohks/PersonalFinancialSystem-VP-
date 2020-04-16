@@ -31,9 +31,17 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
+import java.awt.GridLayout;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import javax.swing.table.*;
+import org.jdesktop.swingx.JXDatePicker;
 
 /**
  *
@@ -57,7 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         datePickerExpenditure.setDate(date);
         datePickerExpenditure.setFormats("yyyy-MM-dd");
         
-        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
+        this.setLocationRelativeTo(null); //Locate your app in the middle of screen
     }
     
     //Switch color of side nav bar
@@ -164,7 +172,69 @@ public class MainFrame extends javax.swing.JFrame {
         txtFSumExpenditure.setText("");
         buttonGrpCategory.clearSelection();
     }
-    
+
+    void editTablePanel(String[] rowData) throws ParseException {
+        
+        JTextField txtFSourcePurpose = new JTextField();
+        JTextField txtFCategory = new JTextField() {
+            @Override
+            public boolean isEditable() {
+                return false;
+            }
+            
+        };
+        JTextField txtFIncomeCost = new JTextField();
+        JTextField txtFDate = new JTextField();
+        JXDatePicker datePicker = new JXDatePicker();
+                
+        JFrame editFrame = new JFrame();
+        editFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel editTablePanel = new JPanel(new GridLayout(5, 1));
+        
+        editTablePanel.add(new JLabel("Source/Purpose : "));
+        editTablePanel.add(txtFSourcePurpose);
+        txtFSourcePurpose.setText(rowData[0]);
+        
+        editTablePanel.add(new JLabel("Category : "));
+        editTablePanel.add(txtFCategory);
+        txtFCategory.setText(rowData[1]);
+        
+        editTablePanel.add(new JLabel("Income/Cost : "));
+        editTablePanel.add(txtFIncomeCost);
+        txtFIncomeCost.setText(rowData[2]);
+        
+        editTablePanel.add(new JLabel("txtFDate : "));
+        editTablePanel.add(datePicker);
+        Date dataDate = new SimpleDateFormat("yyyy-MM-dd").parse(rowData[3]);
+        datePicker.setDate(dataDate);
+        
+        Object[] options = {"Delete", "Update", "Cancel"};
+
+        int result = JOptionPane.showOptionDialog(
+            editFrame, // use your JFrame here
+            editTablePanel,
+            "Edit Your Value",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            options,
+            null
+        );
+
+        if (result == JOptionPane.YES_OPTION) {
+            //Delete
+           System.out.println("Check value: " + txtFSourcePurpose.getText());
+           System.out.println("y value: " + txtFCategory.getText());
+           System.out.println("y value: " + txtFIncomeCost.getText());
+           System.out.println("y value: " + txtFDate.getText());
+        }
+        else if (result == JOptionPane.NO_OPTION) {
+            //Update
+        }
+        
+      
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,7 +266,25 @@ public class MainFrame extends javax.swing.JFrame {
         layeredPanel = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
         scrollBudgetTable = new javax.swing.JScrollPane();
-        tableBudget = new javax.swing.JTable();
+        tableBudget = new javax.swing.JTable() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+
+                if (isCellSelected(row, column)) {
+                    System.out.println(row);
+
+                }
+                return c;
+            }
+
+        };
         panelBalance = new javax.swing.JPanel();
         labelBalance = new javax.swing.JLabel();
         labelBalanceCurrency = new javax.swing.JLabel();
@@ -517,6 +605,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         tableBudget.setEnabled(false);
+        tableBudget.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBudgetMouseClicked(evt);
+            }
+        });
         scrollBudgetTable.setViewportView(tableBudget);
 
         overviewPanel.add(scrollBudgetTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 570, 340));
@@ -1312,6 +1405,41 @@ public class MainFrame extends javax.swing.JFrame {
         lf.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void tableBudgetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBudgetMouseClicked
+       
+        String[] dataRow = new String[4];
+        
+        if (evt.getClickCount() == 2) {
+            
+            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
+        
+            System.out.println("Row Selected :");
+            System.out.println(row);
+            System.out.println("------------------------------");   
+            
+            //get each column data/value
+            for(int x = 0; x < 4; x++) {
+                
+                System.out.println(tableBudget.getSelectedRow());
+                
+                String value = tableBudget.getModel().getValueAt(row, x).toString();
+                System.out.println(value);
+                dataRow[x] = value;
+            }
+            
+            try {
+                editTablePanel(dataRow);
+            } catch (ParseException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+            
+    }//GEN-LAST:event_tableBudgetMouseClicked
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
