@@ -24,6 +24,7 @@ public class DBAccess {
     private static int rowAffected = 0;
     public static String currentUser;
     public static DefaultTableModel overviewTableModel;
+    public static ArrayList<String> listUserCatID = new ArrayList<>();
     
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -150,13 +151,14 @@ public class DBAccess {
     public static void insertBudget(String source, double budget, String date){
         String categoryID = "C0001";
         try{
-            String query = "INSERT INTO ROOT.USER_CATEGORY (USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO ROOT.USER_CATEGORY (USERCATID, USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?,?)";
             prepstatement = conn.prepareStatement(query);
-            prepstatement.setString(1, getUserID(DBAccess.currentUser));
-            prepstatement.setString(2, categoryID);
-            prepstatement.setString(3, source);
-            prepstatement.setDouble(4, budget);
-            prepstatement.setString(5, date);
+            prepstatement.setString(1, getUserCatID());
+            prepstatement.setString(2, getUserID(DBAccess.currentUser));
+            prepstatement.setString(3, categoryID);
+            prepstatement.setString(4, source);
+            prepstatement.setDouble(5, budget);
+            prepstatement.setString(6, date);
             
             rowAffected = prepstatement.executeUpdate();
             System.out.println("Row inserted: " + rowAffected);
@@ -174,13 +176,14 @@ public class DBAccess {
         //make it negative indicating expenditure/expenses
         cost *= -1;
         try{
-            String query = "INSERT INTO ROOT.USER_CATEGORY (USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO ROOT.USER_CATEGORY (USERCATID, USERID, CATID, PURPOSE, COSTINCOME, DATE) VALUES (?,?,?,?,?,?)";
             prepstatement = conn.prepareStatement(query);
-            prepstatement.setString(1, getUserID(DBAccess.currentUser));
-            prepstatement.setString(2, category);
-            prepstatement.setString(3, purpose);
-            prepstatement.setDouble(4, cost);
-            prepstatement.setString(5, date);
+            prepstatement.setString(1, getUserCatID());
+            prepstatement.setString(2, getUserID(DBAccess.currentUser));
+            prepstatement.setString(3, category);
+            prepstatement.setString(4, purpose);
+            prepstatement.setDouble(5, cost);
+            prepstatement.setString(6, date);
             
             rowAffected = prepstatement.executeUpdate();
             System.out.println("Row inserted: " + rowAffected);
@@ -192,7 +195,7 @@ public class DBAccess {
         }
     };
     
-    
+    //Get Methods
     public static double getBalance(){
         String userid= getUserID(DBAccess.currentUser);
         double balance = 0.00;
@@ -237,25 +240,32 @@ public class DBAccess {
    
     public static void fetchOverviewTable(){
         
-        String purpose, catid, date;
+        listUserCatID.clear();
+        String usercatid, purpose, catid, date;
         double costincome;
         final Object[][] rowData = {};
         final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
         overviewTableModel = new DefaultTableModel(rowData, columnNames);
         try{
-            rs = stmt.executeQuery("SELECT PURPOSE, CATID, COSTINCOME, DATE FROM ROOT.USER_CATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
+            rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATID, COSTINCOME, DATE FROM ROOT.USER_CATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
             while(rs.next()){
                 
-                
+                usercatid = rs.getString("USERCATID");
                 purpose = rs.getString("PURPOSE");
                 catid = rs.getString("CATID");
                 costincome = rs.getDouble("COSTINCOME"); 
                 date = rs.getString("DATE");
                 
-                System.out.println(purpose + " " + catid + " " + costincome+ " " + date );
+                System.out.println(usercatid + " " + purpose + " " + catid + " " + costincome+ " " + date );
+                
+                //Add to ArrayList for Delete/Update purpose
+                listUserCatID.add(usercatid);
+                //Add to JTable
                 overviewTableModel.addRow(new Object[] { purpose, catid, costincome, date });
-                //overviewTableModel.addRow(new Object[] { ",", ",", ",","," });
+
             }
+            
+//            System.out.println( "CATEGORY ROW COUNT : !!!!!!!! " + listUserCatID.size());
             
             //MainFrame.tableBudget.setModel(overviewTableModel);
         }catch(Exception e){
@@ -278,17 +288,106 @@ public class DBAccess {
         return pw;
     }
     
-        public static void changePW(String newpw, String oldpw){
-        String userid = getUserID(DBAccess.currentUser);
+    public static void changePW(String newpw, String oldpw){
+//    String userid = getUserID(DBAccess.currentUser);
         try{
             if(getUserPW().equals(oldpw))
                 stmt.executeUpdate("UPDATE ROOT.USERINFO SET PASSWORD='" + newpw + "' WHERE USERNAME='" + DBAccess.currentUser + "'");
             else
                 System.out.println("Wrong password");
-            
+
             conn.commit();
-        }catch(Exception e){
+            } catch(Exception e){
             e.printStackTrace();
+        }
+    }
+    
+    private static String getUserCatID() {
+        
+        String userCatID = "UC0000";
+        
+        try{
+            rs = stmt.executeQuery("SELECT * FROM ROOT.USER_CATEGORY ORDER BY USERCATID DESC FETCH FIRST ROW ONLY");
+            
+            while(rs.next()){
+                userCatID = rs.getString("USERCATID");
+            }
+            
+        } catch(Exception e){
+            e.printStackTrace();
+
+        }
+        
+        int usercatCount = Integer.parseInt(userCatID.substring(2,6));
+
+        usercatCount++;
+        String strID= Integer.toString(usercatCount);
+        int lengthID = strID.length();
+        int requiredZeros = 4 - lengthID;
+
+        String zeropads = "";
+        for(int i=0 ; i< requiredZeros ; i++){
+            zeropads += "0";
+        }
+
+        strID = zeropads + strID;
+        strID = "UC" + strID;
+
+        return strID;
+        
+    }
+    
+    
+    //Update
+    public static void updateBudgetTableRowValue(String usercatID, String purpose, double costIncome, String date){
+
+        try{
+
+            String query = ("UPDATE ROOT.USER_CATEGORY SET PURPOSE= ?, COSTINCOME = ?, DATE = ?" 
+                    + " WHERE USERCATID = ?");
+
+            //Using this prepare statement would be safer as it prevent SQL injection
+            prepstatement = conn.prepareStatement(query);
+
+            prepstatement.setString(1, purpose);
+            prepstatement.setDouble(2, costIncome);
+            prepstatement.setString(3, date);
+            prepstatement.setString(4, usercatID);
+
+            int rowAffected = prepstatement.executeUpdate();
+
+            conn.commit();
+            prepstatement.close();
+
+            System.out.println("*****Update Budget Table Row (" + rowAffected + ") Success!");
+
+            } catch(Exception e){
+                e.printStackTrace();
+        }
+    }
+    
+    
+    //Delete
+    public static void deleteBudgetTableRowValue(String usercatID){
+
+        try{
+
+            String query = ("DELETE FROM ROOT.USER_CATEGORY WHERE USERCATID = ?");
+
+            //Using this prepare statement would be safer as it prevent SQL injection
+            prepstatement = conn.prepareStatement(query);
+
+            prepstatement.setString(1, usercatID);
+
+            int rowAffected = prepstatement.executeUpdate();
+
+            conn.commit();
+            prepstatement.close();
+
+            System.out.println("*****Delete Budget Table Row (" + rowAffected + ") Success!");
+
+            } catch(Exception e){
+                e.printStackTrace();
         }
     }
     
