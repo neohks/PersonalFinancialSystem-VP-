@@ -390,4 +390,71 @@ public class DBAccess {
         }
     }
     
+    //overloading for chart
+    public static double getExpensesCat(String category,  String month, String year){
+        String userid= getUserID(DBAccess.currentUser);
+        double expenses = 0.00;
+        String monthid = "0";
+        
+        if(month == "January")
+        {
+            monthid = "1";
+        }
+        if(month == "February")
+        {
+            monthid = "2";
+        }
+        if(month == "March")
+        {
+            monthid = "3";
+        }
+        if(month == "April")
+        {
+            monthid = "4";
+        }
+        if(month == "May")
+        {
+            monthid = "5";
+        }
+        if(month == "June")
+        {
+            monthid = "6";
+        }
+        if(month == "July")
+        {
+            monthid = "7";
+        }
+        if(month == "August")
+        {
+            monthid = "8";
+        }
+        if(month == "September")
+        {
+            monthid = "9";
+        }
+        if(month == "October")
+        {
+            monthid = "10";
+        }
+        if(month == "November")
+        {
+            monthid = "11";
+        }
+        if(month == "December")
+        {
+            monthid = "12";
+        }
+        
+        
+        System.out.println(month+year+monthid);
+        try{
+            rs = stmt.executeQuery("SELECT COSTINCOME FROM ROOT.USER_CATEGORY WHERE USERID='" + userid + "' AND CATID='" + category + "' AND month(Date)= " + monthid + "AND year(Date)= "+year+"");
+            while(rs.next()){
+                expenses -= rs.getDouble("costincome");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return expenses;
+    }
 }
