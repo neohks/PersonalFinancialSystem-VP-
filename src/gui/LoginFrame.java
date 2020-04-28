@@ -76,6 +76,11 @@ public class LoginFrame extends javax.swing.JFrame {
         setTitle("Personal Finance System - Login");
         setBackground(new java.awt.Color(240, 218, 221));
         setSize(new java.awt.Dimension(550, 385));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         outerPanel.setBackground(new java.awt.Color(118, 255, 240));
 
@@ -220,6 +225,14 @@ public class LoginFrame extends javax.swing.JFrame {
         RegisterFrame registerPage = new RegisterFrame();
         registerPage.setVisible(true);
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        
+        DBConnection.close();
+        System.out.println("Closing database connections");
+        
+    }//GEN-LAST:event_formWindowClosing
 
     
     /**

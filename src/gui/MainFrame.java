@@ -31,6 +31,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
+import database.DBConnection;
 import java.awt.GridLayout;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -335,6 +336,11 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Personal Finanace System");
         setName("mainFrame"); // NOI18N
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         mainPanel.setPreferredSize(new java.awt.Dimension(930, 560));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1501,6 +1507,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        
+        DBConnection.close();
+        System.out.println("Closing database connections");
+        
+    }//GEN-LAST:event_formWindowClosing
     
     
     

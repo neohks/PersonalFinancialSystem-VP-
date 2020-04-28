@@ -50,6 +50,11 @@ public class RegisterFrame extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         setSize(new java.awt.Dimension(550, 384));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         outerPanel.setBackground(new java.awt.Color(118, 255, 240));
@@ -199,6 +204,14 @@ public class RegisterFrame extends javax.swing.JFrame {
         LoginFrame loginPage = new LoginFrame();
         loginPage.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        
+        DBConnection.close();
+        System.out.println("Closing database connections");
+        
+    }//GEN-LAST:event_formWindowClosing
 
 //    public static void main(String args[]) {
 //        
