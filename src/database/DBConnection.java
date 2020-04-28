@@ -72,6 +72,10 @@ public class DBConnection {
 	public static void close() {
             try {
 
+                //Need to commit in order to close connection
+                //Refer: https://stackoverflow.com/questions/36666686/cannot-close-a-connection-while-a-transaction-is-still-alive-exception-on-connec
+                conn.commit();
+                
                 if (rs != null) {
                     rs.close();
                 }
