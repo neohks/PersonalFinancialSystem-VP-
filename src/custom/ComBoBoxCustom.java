@@ -55,7 +55,7 @@ public class ComBoBoxCustom {
 
                             @Override
                             public Dimension getPreferredSize(JComponent c) {
-                                return new Dimension(10, 5);
+                                return new Dimension(10, super.getPreferredSize(c).height);
                             }
 
                             private JButton createZeroButton() {
