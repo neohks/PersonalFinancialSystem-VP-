@@ -6,7 +6,13 @@
 package gui;
 
 import database.DBAccess;
+import database.DBConnection;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -19,6 +25,18 @@ public class AdminMainFrame extends javax.swing.JFrame {
     
     public AdminMainFrame() {
         initComponents();
+        textFieldFocus();
+        
+        refreshUserTable();
+        
+        this.setLocationRelativeTo(null); //Locate your app in the middle of screen
+    }
+    
+    void refreshUserTable() {
+        
+        DBAccess.fetchUserOverviewTable();
+        tblUserList.setModel(DBAccess.overviewUserTableModel);
+        
     }
     
     void switchNav(JPanel nextSelect) {
@@ -41,6 +59,30 @@ public class AdminMainFrame extends javax.swing.JFrame {
             
     }
 
+    private void textFieldFocus(){
+        
+        txtFSearch.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                
+                if (txtFSearch.getText().equals("Username")) {
+                    txtFSearch.setText("");
+                    txtFSearch.setForeground(Color.black);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtFSearch.getText().isEmpty()) {
+                    txtFSearch.setText("Username");
+                    txtFSearch.setForeground(Color.gray);
+                }
+            }
+        });
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +92,19 @@ public class AdminMainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogUserDetails = new javax.swing.JDialog();
+        panelDialog = new javax.swing.JPanel();
+        lblUserID = new javax.swing.JLabel();
+        txtFUserID = new javax.swing.JTextField();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtFUsername = new javax.swing.JTextField();
+        txtFPassword = new javax.swing.JTextField();
+        txtFEmail = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         sidePanel = new javax.swing.JPanel();
         overviewSelect = new javax.swing.JPanel();
         logoOverview = new javax.swing.JLabel();
@@ -69,6 +124,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         lblSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         lblUserInfo = new javax.swing.JLabel();
+        btnShowAll = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         panelEditPass = new javax.swing.JPanel();
         lblOldPassword = new javax.swing.JLabel();
@@ -78,7 +134,149 @@ public class AdminMainFrame extends javax.swing.JFrame {
         btnSubmitPass = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
+        dialogUserDetails.setMinimumSize(new java.awt.Dimension(410, 390));
+        dialogUserDetails.setPreferredSize(new java.awt.Dimension(410, 390));
+        dialogUserDetails.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                dialogUserDetailsWindowLostFocus(evt);
+            }
+        });
+        dialogUserDetails.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                dialogUserDetailsWindowClosing(evt);
+            }
+        });
+
+        lblUserID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUserID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUserID.setText("User ID :");
+
+        txtFUserID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFUserID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFUserID.setEnabled(false);
+
+        lblUsername.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setText("Username : ");
+
+        lblPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPassword.setText("Password : ");
+
+        lblEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEmail.setText("Email : ");
+
+        txtFUsername.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        txtFPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        txtFEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDialogLayout = new javax.swing.GroupLayout(panelDialog);
+        panelDialog.setLayout(panelDialogLayout);
+        panelDialogLayout.setHorizontalGroup(
+            panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelDialogLayout.createSequentialGroup()
+                        .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDialogLayout.createSequentialGroup()
+                        .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDialogLayout.createSequentialGroup()
+                        .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDialogLayout.createSequentialGroup()
+                        .addComponent(lblUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(66, 66, 66))
+            .addGroup(panelDialogLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelDialogLayout.setVerticalGroup(
+            panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnCancel))
+                .addGap(61, 61, 61))
+        );
+
+        javax.swing.GroupLayout dialogUserDetailsLayout = new javax.swing.GroupLayout(dialogUserDetails.getContentPane());
+        dialogUserDetails.getContentPane().setLayout(dialogUserDetailsLayout);
+        dialogUserDetailsLayout.setHorizontalGroup(
+            dialogUserDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDialog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogUserDetailsLayout.setVerticalGroup(
+            dialogUserDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogUserDetailsLayout.createSequentialGroup()
+                .addComponent(panelDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        dialogUserDetails.setLocationRelativeTo(null); //Locate your app in the middle of screen
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidePanel.setBackground(new java.awt.Color(83, 154, 231));
@@ -241,55 +439,81 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         tblUserList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "User ID", "Username", "Email"
+                "User ID", "Username", "Email", "Password"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblUserList.setEnabled(false);
+        tblUserList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserListMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblUserList);
 
         lblSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSearch.setText("User : ");
+        lblSearch.setText("Username : ");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         lblUserInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblUserInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUserInfo.setText("Users Info");
 
+        btnShowAll.setText("Show All");
+        btnShowAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout overviewPanelLayout = new javax.swing.GroupLayout(overviewPanel);
         overviewPanel.setLayout(overviewPanelLayout);
         overviewPanelLayout.setHorizontalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(overviewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(overviewPanelLayout.createSequentialGroup()
-                .addGap(318, 318, 318)
-                .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, overviewPanelLayout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(overviewPanelLayout.createSequentialGroup()
+                .addGap(202, 202, 202)
                 .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch)
-                .addGap(205, 205, 205))
+                .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(overviewPanelLayout.createSequentialGroup()
+                        .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnShowAll)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         overviewPanelLayout.setVerticalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,12 +522,13 @@ public class AdminMainFrame extends javax.swing.JFrame {
                 .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
 
         jLayeredPane1.add(overviewPanel, "card2");
@@ -314,12 +539,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         lblOldPassword.setText("Old Password :");
-
-        passFNewPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passFNewPassActionPerformed(evt);
-            }
-        });
 
         lblNewPassword.setText("New Password :");
 
@@ -443,10 +662,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         settingsSelect.setBackground(new Color(0,242,252));
     }//GEN-LAST:event_settingsSelectMouseEntered
 
-    private void passFNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFNewPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passFNewPassActionPerformed
-
     private void btnSubmitPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitPassActionPerformed
         // TODO add your handling code here:
 
@@ -457,7 +672,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
             System.out.println("New password cannot be same as old password!");
         }else{
             DBAccess.changePW(pwNew, pwOld);
-            //boop
         }
 
     }//GEN-LAST:event_btnSubmitPassActionPerformed
@@ -469,59 +683,136 @@ public class AdminMainFrame extends javax.swing.JFrame {
         lf.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        
+        DBAccess.getSpecificUsername(txtFSearch.getText());
+        tblUserList.setModel(DBAccess.overviewUserTableModel);
+        
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminMainFrame().setVisible(true);
+    private void tblUserListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserListMouseClicked
+        // TODO add your handling code here:
+        
+        int row = tblUserList.rowAtPoint(evt.getPoint());
+        
+        String dataV = tblUserList.getModel().getValueAt(row, 0).toString();
+        
+        System.out.println(dataV);
+        
+        String[] dataRow = new String[4];
+        
+        if (evt.getClickCount() == 2) {
+//            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
+
+            //get each column data/value
+            for(int x = 0; x < 4; x++) {
+                
+                String value = tblUserList.getModel().getValueAt(row, x).toString();
+                dataRow[x] = value;
             }
-        });
-    }
+            
+            txtFUserID.setText(dataRow[0]);
+            txtFUsername.setText(dataRow[1]);
+            txtFEmail.setText(dataRow[3]);
+            txtFPassword.setText(dataRow[2]);
+            
+            this.setEnabled(false);
+            dialogUserDetails.setVisible(true);
+            
+            
+        }
+    }//GEN-LAST:event_tblUserListMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        DBAccess.updateUserListTableRowValue(
+                txtFUserID.getText(), 
+                txtFUsername.getText(), 
+                txtFEmail.getText(), 
+                txtFPassword.getText()
+        );
+        
+        this.setEnabled(true);
+        refreshUserTable();
+        dialogUserDetails.dispose();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        
+        DBAccess.deleteUserListTableRowValue(txtFUserID.getText());
+        
+        this.setEnabled(true);
+        refreshUserTable();
+        dialogUserDetails.dispose();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        
+        this.setEnabled(true);
+        dialogUserDetails.dispose();
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void dialogUserDetailsWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogUserDetailsWindowLostFocus
+        // TODO add your handling code here:
+        
+        System.out.println("*******oiLOST FOCUS");
+        dialogUserDetails.requestFocus();
+        
+        
+    }//GEN-LAST:event_dialogUserDetailsWindowLostFocus
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        DBConnection.close();
+        System.out.println("Closing database connections");
+    }//GEN-LAST:event_formWindowClosing
+
+    private void dialogUserDetailsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogUserDetailsWindowClosing
+        // TODO add your handling code here:
+        this.setEnabled(true);
+    }//GEN-LAST:event_dialogUserDetailsWindowClosing
+
+    private void btnShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAllActionPerformed
+        // TODO add your handling code here:
+        
+        refreshUserTable();
+    }//GEN-LAST:event_btnShowAllActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblUsername;
     private javax.swing.JPanel bottomPanel;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShowAll;
     private javax.swing.JButton btnSubmitPass;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JDialog dialogUserDetails;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelOverview;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
+    private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblSearch;
+    private javax.swing.JLabel lblUserID;
     private javax.swing.JLabel lblUserInfo;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel logoOverview;
     private javax.swing.JLabel logoSettings;
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JPanel overviewSelect;
+    private javax.swing.JPanel panelDialog;
     private javax.swing.JPanel panelEditPass;
     private javax.swing.JPasswordField passFNewPass;
     private javax.swing.JPasswordField passFOldPass;
@@ -530,7 +821,11 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel settingsSelect;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTable tblUserList;
+    private javax.swing.JTextField txtFEmail;
+    private javax.swing.JTextField txtFPassword;
     private javax.swing.JTextField txtFSearch;
+    private javax.swing.JTextField txtFUserID;
+    private javax.swing.JTextField txtFUsername;
     private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }
