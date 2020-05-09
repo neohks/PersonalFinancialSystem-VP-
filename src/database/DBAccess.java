@@ -131,6 +131,28 @@ public class DBAccess {
         return false;
     }
     
+    public static boolean checkAdmin(String uname) {
+        
+        boolean isAdmin = false;
+        
+        try{
+            rs = stmt.executeQuery("SELECT isadmin FROM root.userinfo WHERE username='" + uname + "'");
+            
+            while(rs.next()){
+
+                isAdmin = rs.getBoolean("isadmin");
+                return isAdmin;
+            }
+            
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return isAdmin;
+
+    }
+    
     public static String getUserID(String username){
         String userid="U0001";
         try{
