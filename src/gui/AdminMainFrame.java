@@ -25,6 +25,8 @@ public class AdminMainFrame extends javax.swing.JFrame {
     
     public AdminMainFrame() {
         initComponents();
+        lblCurrUser.setText("Welcome! \n" + DBAccess.currentUser);
+        
         textFieldFocus();
         
         refreshUserTable();
@@ -114,7 +116,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         settingsLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userPanel = new javax.swing.JPanel();
-        LblUsername = new javax.swing.JLabel();
+        lblCurrUser = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
@@ -369,20 +371,22 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        lblCurrUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCurrUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addComponent(lblCurrUser, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -786,7 +790,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LblUsername;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
@@ -800,6 +803,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelOverview;
+    private javax.swing.JLabel lblCurrUser;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
