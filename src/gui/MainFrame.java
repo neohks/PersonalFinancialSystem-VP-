@@ -5,6 +5,7 @@
  */
 package gui;
 
+import custom.ComBoBoxCustom;
 import database.DBAccess;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -56,7 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
-        LblUsername.setText("Welcome! \n" + DBAccess.currentUser);
+        lblUsername.setText("Welcome! \n" + DBAccess.currentUser);
+        cboxMonth.setModel(ComBoBoxCustom.comboBox.getModel());
         
         //Update and Initialise Budget Table Row 
         DBAccess.fetchOverviewTable();
@@ -249,7 +251,7 @@ public class MainFrame extends javax.swing.JFrame {
         settingsLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userPanel = new javax.swing.JPanel();
-        LblUsername = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         layeredPanel = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
         scrollBudgetTable = new javax.swing.JScrollPane();
@@ -315,10 +317,10 @@ public class MainFrame extends javax.swing.JFrame {
         panelChart = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnShow = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboxMonth = new javax.swing.JComboBox<>();
+        lblMonth = new javax.swing.JLabel();
+        lblYear = new javax.swing.JLabel();
+        cboxYear = new javax.swing.JComboBox<>();
         settingsPanel = new javax.swing.JPanel();
         panelEditPass = new javax.swing.JPanel();
         lblOldPassword = new javax.swing.JLabel();
@@ -518,20 +520,22 @@ public class MainFrame extends javax.swing.JFrame {
 
         userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1010,23 +1014,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April" }));
+        cboxMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cboxMonthActionPerformed(evt);
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Month : ");
+        lblMonth.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblMonth.setText("Month : ");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Year : ");
+        lblYear.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblYear.setText("Year : ");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cboxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022" }));
+        cboxYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cboxYearActionPerformed(evt);
             }
         });
 
@@ -1036,13 +1040,13 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(btnShow)
                 .addGap(98, 98, 98))
@@ -1053,12 +1057,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(jComboBox2)
-                        .addComponent(jLabel2)
+                        .addComponent(cboxYear)
+                        .addComponent(lblYear)
                         .addComponent(btnShow))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -1303,8 +1307,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
-        String month = (String)jComboBox1.getSelectedItem();
-        String year = (String)jComboBox2.getSelectedItem();
+        String month = (String)cboxMonth.getSelectedItem();
+        String year = (String)cboxYear.getSelectedItem();
         
             pieDataset.setValue("Deposit", getExpensesCat("C0001",month,year));
             pieDataset.setValue("Shop", getExpensesCat("C0002",month,year));
@@ -1465,13 +1469,13 @@ public class MainFrame extends javax.swing.JFrame {
             
     }//GEN-LAST:event_tableBudgetMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cboxMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cboxMonthActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void cboxYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxYearActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_cboxYearActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -1521,7 +1525,6 @@ public class MainFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LblUsername;
     private javax.swing.JPanel addBudgetPanel;
     private javax.swing.JPanel addExpenditurePanel;
     private javax.swing.JPanel bottomPanel;
@@ -1533,14 +1536,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel budgetPanel;
     private javax.swing.JPanel budgetSelect;
     private javax.swing.ButtonGroup buttonGrpCategory;
+    private javax.swing.JComboBox<String> cboxMonth;
+    private javax.swing.JComboBox<String> cboxYear;
     private javax.swing.JPanel chartPanel;
     private javax.swing.JPanel chartSelect;
     private org.jdesktop.swingx.JXDatePicker datePickerBudget;
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelBalance;
@@ -1562,12 +1563,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDateBudget;
     private javax.swing.JLabel lblDateExpenditure;
+    private javax.swing.JLabel lblMonth;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
     private javax.swing.JLabel lblPurpose;
     private javax.swing.JLabel lblSource;
     private javax.swing.JLabel lblSumBudget;
     private javax.swing.JLabel lblSumExpenditure;
+    private javax.swing.JLabel lblUsername;
+    private javax.swing.JLabel lblYear;
     private javax.swing.JLabel logoBudget;
     private javax.swing.JLabel logoChart;
     private javax.swing.JLabel logoOverview;
