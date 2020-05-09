@@ -5,6 +5,7 @@
  */
 package gui;
 
+import custom.ComBoBoxCustom;
 import database.DBAccess;
 import database.DBConnection;
 import java.awt.Color;
@@ -252,12 +253,19 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Create and display the form */
-        DBConnection dbconnect;
-        dbconnect = new DBConnection("root","password");
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DBAccess dbaccess = new DBAccess();
+                //Initialize connections
+                new DBConnection("root","password");
+                new DBAccess();
+                
+                //Initialize custom combobox
+                new ComBoBoxCustom();
+                
+                //Show Frame
                 new LoginFrame().setVisible(true);
+                
             }
         });
     }
