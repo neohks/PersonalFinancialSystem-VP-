@@ -326,9 +326,6 @@ public class MainFrame extends javax.swing.JFrame {
         passFNewPass = new javax.swing.JPasswordField();
         lblNewPassword = new javax.swing.JLabel();
         btnSubmitPass = new javax.swing.JButton();
-        panelChangeCurr = new javax.swing.JPanel();
-        lblCurrency = new javax.swing.JLabel();
-        comboBoxCurrency = new javax.swing.JComboBox<>();
         btnLogout = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
@@ -1145,34 +1142,6 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        panelChangeCurr.setBackground(new java.awt.Color(204, 255, 255));
-        panelChangeCurr.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Currency", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        lblCurrency.setText("Currency :");
-
-        comboBoxCurrency.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MYR", "USD", "SGD" }));
-
-        javax.swing.GroupLayout panelChangeCurrLayout = new javax.swing.GroupLayout(panelChangeCurr);
-        panelChangeCurr.setLayout(panelChangeCurrLayout);
-        panelChangeCurrLayout.setHorizontalGroup(
-            panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelChangeCurrLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(lblCurrency)
-                .addGap(36, 36, 36)
-                .addComponent(comboBoxCurrency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
-        );
-        panelChangeCurrLayout.setVerticalGroup(
-            panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelChangeCurrLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(panelChangeCurrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCurrency)
-                    .addComponent(comboBoxCurrency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1187,23 +1156,19 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(366, 366, 366)
-                        .addComponent(btnLogout)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addComponent(btnLogout))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelChangeCurr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addGap(92, 92, 92)
+                .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(22, 22, 22))
         );
@@ -1570,7 +1535,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGrpCategory;
     private javax.swing.JPanel chartPanel;
     private javax.swing.JPanel chartSelect;
-    private javax.swing.JComboBox<String> comboBoxCurrency;
     private org.jdesktop.swingx.JXDatePicker datePickerBudget;
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -1596,7 +1560,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotalCostCurrency;
     private javax.swing.JLayeredPane layeredPanel;
     private javax.swing.JLabel lblCategory;
-    private javax.swing.JLabel lblCurrency;
     private javax.swing.JLabel lblDateBudget;
     private javax.swing.JLabel lblDateExpenditure;
     private javax.swing.JLabel lblNewPassword;
@@ -1614,7 +1577,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel overviewSelect;
     private javax.swing.JPanel panelBalance;
     private javax.swing.JPanel panelBillsUtilities;
-    private javax.swing.JPanel panelChangeCurr;
     private javax.swing.JPanel panelChart;
     private javax.swing.JPanel panelEditPass;
     private javax.swing.JPanel panelFoodDrinks;
