@@ -183,7 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
         spinIncomeCost.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         spinIncomeCost.setValue(Double.parseDouble(rowData[2]));
         
-        editTablePanel.add(new JLabel("txtFDate : "));
+        editTablePanel.add(new JLabel("Date : "));
         editTablePanel.add(datePicker);
         Date dataDate = new SimpleDateFormat("yyyy-MM-dd").parse(rowData[3]);
         datePicker.setDate(dataDate);
