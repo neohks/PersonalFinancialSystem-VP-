@@ -9,6 +9,8 @@ import gui.MainFrame;
 import java.sql.*;
 import java.util.*;
 import java.sql.Timestamp;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +26,7 @@ public class DBAccess {
     private static int rowAffected = 0;
     public static String currentUser;
     public static DefaultTableModel overviewTableModel;
+    public static DefaultTableModel overviewUserTableModel;
     public static ArrayList<String> listUserCatID = new ArrayList<>();
     
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
@@ -37,6 +40,7 @@ public class DBAccess {
         
     }
     
+    //Get UserInfo
     public static void checkAvailableUsername(String uname, String pw, String email) throws Exception {
         ArrayList<String> usernameLists = new ArrayList<String>();
         String uid = "U0000";
@@ -168,6 +172,33 @@ public class DBAccess {
         return userid;
     }
     
+    public static void getSpecificUsername(String searchName){
+        
+        String userid, username, email, password;
+        final Object[][] rowData = {};
+        final Object[] columnNames = { "UserID", "Username", "Email", "Password" };
+        overviewUserTableModel = new DefaultTableModel(rowData, columnNames);
+        try{
+            rs = stmt.executeQuery("SELECT * FROM USERINFO WHERE USERNAME LIKE '%"+ searchName +"%'");
+            while(rs.next()){
+                
+                userid = rs.getString("USERID");
+                username = rs.getString("USERNAME");
+                email = rs.getString("EMAIL");
+                password = rs.getString("PASSWORD");
+                
+                System.out.println(userid + " " + username + " " + email + " " + password);
+                
+                //Add to JTable
+                overviewUserTableModel.addRow(new Object[] { userid, username, email, password });
+
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     
     //Insert Methods
     public static void insertBudget(String source, double budget, String date){
@@ -295,6 +326,33 @@ public class DBAccess {
         }
     }
     
+    public static void fetchUserOverviewTable(){
+        
+        String userid, username, email, password;
+        final Object[][] rowData = {};
+        final Object[] columnNames = { "UserID", "Username", "Email", "Password" };
+        overviewUserTableModel = new DefaultTableModel(rowData, columnNames);
+        try{
+            rs = stmt.executeQuery("SELECT USERID, USERNAME, EMAIL, Password FROM ROOT.USERINFO WHERE ISADMIN = false");
+            while(rs.next()){
+                
+                userid = rs.getString("USERID");
+                username = rs.getString("USERNAME");
+                email = rs.getString("EMAIL");
+                password = rs.getString("PASSWORD");
+                
+                System.out.println(userid + " " + username + " " + email + " " + password);
+                
+                //Add to JTable
+                overviewUserTableModel.addRow(new Object[] { userid, username, email, password });
+
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public static String getUserPW(){
         String pw = "";
         try{
@@ -387,6 +445,37 @@ public class DBAccess {
         }
     }
     
+    public static void updateUserListTableRowValue(String userID, String username, String email, String password){
+
+        try{
+
+            String query = ("UPDATE ROOT.USERINFO SET USERNAME= ?, PASSWORD = ?, EMAIL = ?" 
+                    + " WHERE USERID = ?");
+
+            //Using this prepare statement would be safer as it prevent SQL injection
+            prepstatement = conn.prepareStatement(query);
+
+            prepstatement.setString(1, username);
+            prepstatement.setString(2, password);
+            prepstatement.setString(3, email);
+            prepstatement.setString(4, userID);
+
+            int rowAffected = prepstatement.executeUpdate();
+
+            conn.commit();
+            prepstatement.close();
+
+            JOptionPane.showMessageDialog(new JFrame(), userID + " has been updated successfully!");
+            
+            System.out.println("*****Update User Table Row (" + rowAffected + ") Success!");
+
+            } catch(Exception e){
+                
+                JOptionPane.showMessageDialog(new JFrame(), userID + " has NOT been updated!");
+                e.printStackTrace();
+            }
+    }
+    
     
     //Delete Methods
     public static void deleteBudgetTableRowValue(String usercatID){
@@ -411,6 +500,30 @@ public class DBAccess {
                 e.printStackTrace();
         }
     }
+    
+    public static void deleteUserListTableRowValue(String userID){
+
+        try{
+
+            String query = ("DELETE FROM ROOT.USERINFO WHERE USERID = ?");
+
+            //Using this prepare statement would be safer as it prevent SQL injection
+            prepstatement = conn.prepareStatement(query);
+
+            prepstatement.setString(1, userID);
+
+            int rowAffected = prepstatement.executeUpdate();
+
+            conn.commit();
+            prepstatement.close();
+
+            System.out.println("*****Delete User Table Row (" + rowAffected + ") Success!");
+
+            } catch(Exception e){
+                e.printStackTrace();
+        }
+    }
+
     
     //overloading for chart
     public static double getExpensesCat(String category,  String month, String year){
@@ -479,4 +592,5 @@ public class DBAccess {
         }
         return expenses;
     }
+
 }
