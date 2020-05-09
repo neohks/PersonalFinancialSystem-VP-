@@ -209,9 +209,21 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please do not leave blank on your Password!", "Password Empty", JOptionPane.WARNING_MESSAGE);
         }else{
             if(DBAccess.login(username, pw) == true){
-                MainFrame mainmenu = new MainFrame();
-                this.dispose();
-                mainmenu.setVisible(true);
+                
+                if (DBAccess.checkAdmin(username)) {
+                    
+                    AdminMainFrame admMainMenu = new AdminMainFrame();
+                    this.dispose();
+                    admMainMenu.setVisible(true);
+                    
+                }
+                else {
+                    
+                    MainFrame mainmenu = new MainFrame();
+                    this.dispose();
+                    mainmenu.setVisible(true);
+                    
+                }
             }
         }
 
