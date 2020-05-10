@@ -11,7 +11,6 @@ import database.DBConnection;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         textFieldFocus();
-        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
+        setLocationRelativeTo(null); //Locate you app in the middle of screen
     }
     
     private void textFieldFocus(){
@@ -112,38 +111,36 @@ public class LoginFrame extends javax.swing.JFrame {
 
         imageLogo.setBackground(new java.awt.Color(0, 102, 204));
         imageLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imageLogo.setText("Image Logo");
+        imageLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vectors/iconPFS.png"))); // NOI18N
         imageLogo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout innerPanelLayout = new javax.swing.GroupLayout(innerPanel);
         innerPanel.setLayout(innerPanelLayout);
         innerPanelLayout.setHorizontalGroup(
             innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
+            .addGroup(innerPanelLayout.createSequentialGroup()
                 .addContainerGap(130, Short.MAX_VALUE)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(innerPanelLayout.createSequentialGroup()
-                            .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(innerPanelLayout.createSequentialGroup()
-                            .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnLogin)
-                                .addComponent(pwFPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
-                        .addComponent(imageLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)))
+                    .addGroup(innerPanelLayout.createSequentialGroup()
+                        .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogin)
+                            .addComponent(pwFPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(innerPanelLayout.createSequentialGroup()
+                        .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imageLogo)
+                            .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(98, 98, 98))
         );
         innerPanelLayout.setVerticalGroup(
             innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(imageLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(41, 41, 41)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
