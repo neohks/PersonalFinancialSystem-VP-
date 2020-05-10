@@ -296,27 +296,27 @@ public class DBAccess {
     public static void fetchOverviewTable(){
         
         listUserCatID.clear();
-        String usercatid, purpose, catid, date;
+        String usercatid, purpose, catname, date;
         double costincome;
         final Object[][] rowData = {};
         final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
         overviewTableModel = new DefaultTableModel(rowData, columnNames);
         try{
-            rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATID, COSTINCOME, DATE FROM ROOT.USER_CATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
+            rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATNAME, COSTINCOME, DATE FROM ROOT.V_USERCATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
             while(rs.next()){
                 
                 usercatid = rs.getString("USERCATID");
                 purpose = rs.getString("PURPOSE");
-                catid = rs.getString("CATID");
+                catname = rs.getString("CATNAME");
                 costincome = rs.getDouble("COSTINCOME"); 
                 date = rs.getString("DATE");
                 
-                System.out.println(usercatid + " " + purpose + " " + catid + " " + costincome+ " " + date );
+                System.out.println(usercatid + " " + purpose + " " + catname + " " + costincome+ " " + date );
                 
                 //Add to ArrayList for Delete/Update purpose
                 listUserCatID.add(usercatid);
                 //Add to JTable
-                overviewTableModel.addRow(new Object[] { purpose, catid, costincome, date });
+                overviewTableModel.addRow(new Object[] { purpose, catname, costincome, date });
 
             }
             
