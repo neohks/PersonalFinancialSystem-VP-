@@ -36,7 +36,7 @@ Insert into category values ('C0003', 'Food Drinks');
 Insert into category values ('C0004', 'Bills Utilities');
 Insert into category values ('C0005', 'Others');
 
-/* Insert Category */
+/* Insert UserInfo */
 Insert into userinfo values ('U0001','user','user',user@mail.com'',false);
 Insert into userinfo values ('A0001','admin','admin','admin@mail.com',true);
 
