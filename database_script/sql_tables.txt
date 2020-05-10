@@ -1,3 +1,4 @@
+/* Create Tables */
 create table category (
 catID varchar(5) not null primary key,
 catname varchar(100) not null
@@ -21,6 +22,12 @@ userid varchar(5) not null, foreign key(userid) references userinfo(userid),
 catid varchar(5) not null, foreign key(catid) references category(catid)
 
 );
+
+/* Create View */
+CREATE VIEW V_USERCATEGORY
+AS SELECT c.CATNAME, uc.PURPOSE, uc.COSTINCOME, uc."DATE", uc.USERID
+FROM USER_CATEGORY uc, CATEGORY c
+WHERE uc.CATID=c.CATID;
 
 /* Insert Category */
 Insert into category values ('C0001', 'Deposit');
