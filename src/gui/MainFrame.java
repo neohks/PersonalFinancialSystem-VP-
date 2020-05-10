@@ -1310,24 +1310,45 @@ public class MainFrame extends javax.swing.JFrame {
         String month = (String)cboxMonth.getSelectedItem();
         String year = (String)cboxYear.getSelectedItem();
         
-        pieDataset.setValue("Deposit", getExpensesCat("C0001",month,year));
-        pieDataset.setValue("Shop", getExpensesCat("C0002",month,year));
-        pieDataset.setValue("Food Drinks", getExpensesCat("C0003",month,year));
-        pieDataset.setValue("Bills Utilities", getExpensesCat("C0004",month,year));
-        pieDataset.setValue("Others", getExpensesCat("C0005",month,year));
+        if(getExpensesCat("C0001",month,year)!=0)
+        {
+            pieDataset.setValue("Deposit", getExpensesCat("C0001",month,year));
+        }
+            
+        if(getExpensesCat("C0002",month,year)!=0)  
+        {
+            pieDataset.setValue("Shop", getExpensesCat("C0002",month,year));
+        }
 
+        if(getExpensesCat("C0003",month,year)!=0)  
+        {
+            pieDataset.setValue("Food Drinks", getExpensesCat("C0003",month,year));
+        }
+
+        if(getExpensesCat("C0004",month,year)!=0)  
+        {
+            pieDataset.setValue("Bills Utilities", getExpensesCat("C0004",month,year));
+        }
+
+        if(getExpensesCat("C0005",month,year)!=0)  
+        {
+            pieDataset.setValue("Others", getExpensesCat("C0005",month,year));
+        }
+        
         double sum = 0;
-        for (int i = 0; i < 5; i++) {
-            sum += (double)pieDataset.getValue(0);
+        for (int i = 0; i < pieDataset.getItemCount(); i++) {
+            sum += (double)pieDataset.getValue(i);
         
         }
         
+        //If all data is 0.0, this msg will prompt out
         if (sum == 0.0) {
             
             JOptionPane.showMessageDialog(new JFrame(), "No data found. Please reselect the month and year!");
-            return;
-            
+            return; 
         }
+        
+        
         
         JFreeChart pieChart = ChartFactory.createPieChart("Overview", pieDataset, true, true, Locale.ENGLISH);
         PiePlot plotPie = (PiePlot) pieChart.getPlot();
