@@ -118,7 +118,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         userPanel = new javax.swing.JPanel();
         lblCurrUser = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        layerPanelAdmin = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUserList = new javax.swing.JTable();
@@ -137,12 +137,11 @@ public class AdminMainFrame extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
 
         dialogUserDetails.setMinimumSize(new java.awt.Dimension(410, 390));
-        dialogUserDetails.setPreferredSize(new java.awt.Dimension(410, 390));
         dialogUserDetails.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
                 dialogUserDetailsWindowLostFocus(evt);
+            }
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
         });
         dialogUserDetails.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -437,7 +436,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         getContentPane().add(bottomPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 1000, 30));
 
-        jLayeredPane1.setLayout(new java.awt.CardLayout());
+        layerPanelAdmin.setLayout(new java.awt.CardLayout());
 
         overviewPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -535,7 +534,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jLayeredPane1.add(overviewPanel, "card2");
+        layerPanelAdmin.add(overviewPanel, "card2");
 
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -618,9 +617,9 @@ public class AdminMainFrame extends javax.swing.JFrame {
                 .addGap(50, 50, 50))
         );
 
-        jLayeredPane1.add(settingsPanel, "card3");
+        layerPanelAdmin.add(settingsPanel, "card3");
 
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 820, 530));
+        getContentPane().add(layerPanelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 820, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -799,10 +798,10 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnSubmitPass;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JDialog dialogUserDetails;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelOverview;
+    private javax.swing.JLayeredPane layerPanelAdmin;
     private javax.swing.JLabel lblCurrUser;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNewPassword;
