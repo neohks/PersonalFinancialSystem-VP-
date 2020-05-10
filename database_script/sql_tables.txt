@@ -25,7 +25,7 @@ catid varchar(5) not null, foreign key(catid) references category(catid)
 
 /* Create View */
 CREATE VIEW V_USERCATEGORY
-AS SELECT c.CATNAME, uc.PURPOSE, uc.COSTINCOME, uc."DATE", uc.USERID
+AS SELECT uc.USERCATID, c.CATNAME, uc.PURPOSE, uc.COSTINCOME, uc."DATE", uc.USERID
 FROM USER_CATEGORY uc, CATEGORY c
 WHERE uc.CATID=c.CATID;
 
