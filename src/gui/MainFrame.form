@@ -1351,7 +1351,7 @@
                                   <Component id="panelEditPass" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="269" max="32767" attributes="0"/>
+                          <EmptySpace pref="265" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1360,7 +1360,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Component id="panelEditPass" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="108" max="32767" attributes="0"/>
+                          <EmptySpace pref="88" max="32767" attributes="0"/>
                           <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
@@ -1394,10 +1394,10 @@
                                   <Component id="lblOldPassword" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblNewPassword" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="passFNewPass" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <Component id="passFOldPass" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="passFNewPass" max="32767" attributes="0"/>
+                                  <Component id="passFOldPass" pref="125" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
@@ -1413,13 +1413,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="passFOldPass" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblOldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passFOldPass" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="lblOldPassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNewPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="passFNewPass" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNewPassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="passFNewPass" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Component id="btnSubmitPass" min="-2" max="-2" attributes="0"/>
