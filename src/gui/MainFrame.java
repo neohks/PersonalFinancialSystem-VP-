@@ -1509,6 +1509,18 @@ public class MainFrame extends javax.swing.JFrame {
         double budget=0.00;
         Date date;
         source = txtFSource.getText();
+        
+        
+        if (txtFSource.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Source!");
+            return;
+        }
+        
+        if (txtFSumBudget.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Budget Sum!");
+            return;
+        }
+        
         try{
             budget = Double.parseDouble(txtFSumBudget.getText());
             try{
@@ -1519,9 +1531,9 @@ public class MainFrame extends javax.swing.JFrame {
                 
                 DBAccess.insertBudget(source, budget, dateStr);
 
-                DBAccess.fetchOverviewTable();
-                tableBudget.setModel(overviewTableModel);
+                refreshBudgetTable();
                 resetFields();
+                JOptionPane.showMessageDialog(new JFrame(), "Successfully submitted!");
                 
             }catch(Exception e){
                 e.printStackTrace();
@@ -1543,6 +1555,24 @@ public class MainFrame extends javax.swing.JFrame {
         Date date;
         
         purpose = txtFPurpose.getText();
+        
+        if (txtFPurpose.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Source!");
+            return;
+        }
+        
+        if (txtFSumExpenditure.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Budget Sum!");
+            return;
+        }
+        if (!radioBtnShopping.isSelected() && !radioBtnFD.isSelected() 
+                && !radioBtnFD.isSelected() && !radioBtnOthers.isSelected()) {
+            
+            JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Category!");
+            return;
+            
+        }
+        
         try{
             expenses = Double.parseDouble(txtFSumExpenditure.getText());
             try{
@@ -1555,7 +1585,7 @@ public class MainFrame extends javax.swing.JFrame {
                     category = "C0002";
                 }else if(radioBtnFD.isSelected()){
                     category = "C0003";
-                }else if(radioBtnBU.isSelected()){
+                }else if(radioBtnFD.isSelected()){
                     category = "C0004";
                 }else{
                     category = "C0005";
@@ -1564,9 +1594,9 @@ public class MainFrame extends javax.swing.JFrame {
                 DBAccess.insertExpenditure(purpose, expenses, dateStr, category);
                 
                 //Update Budget Table Row
-                DBAccess.fetchOverviewTable();
-                tableBudget.setModel(overviewTableModel);
+                refreshBudgetTable();
                 resetFields();
+                JOptionPane.showMessageDialog(new JFrame(), "Successfully submitted!");
                 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Invalid Date", JOptionPane.WARNING_MESSAGE);
