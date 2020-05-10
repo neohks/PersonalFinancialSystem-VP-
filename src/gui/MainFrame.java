@@ -1566,7 +1566,7 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         if (!radioBtnShopping.isSelected() && !radioBtnFD.isSelected() 
-                && !radioBtnFD.isSelected() && !radioBtnOthers.isSelected()) {
+                && !radioBtnBU.isSelected() && !radioBtnOthers.isSelected()) {
             
             JOptionPane.showMessageDialog(new JFrame(), "Please do not leave blank at Category!");
             return;
