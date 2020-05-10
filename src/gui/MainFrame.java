@@ -1608,20 +1608,20 @@ public class MainFrame extends javax.swing.JFrame {
         
         System.out.println(DBAccess.listUserCatID.get(row));
         
-        String dataV = tableBudget.getModel().getValueAt(row, 0).toString();
-        
-        System.out.println(dataV);
+//        String dataV = tableBudget.getModel().getValueAt(row, 0).toString();
+//        System.out.println(dataV);
+        String dataT = tableBudget.getValueAt(row, 0).toString();
+        System.out.println(dataT);
         
         String[] dataRow = new String[4];
         
         if (evt.getClickCount() == 2) {
             try {
-                //            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
                 
                 //get each column data/value
                 for(int x = 0; x < 4; x++) {
                     
-                    String value = tableBudget.getModel().getValueAt(row, x).toString();
+                    String value = tableBudget.getValueAt(row, x).toString();
                     dataRow[x] = value;
                 }
                 
