@@ -38,7 +38,8 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    int currStatus = 1; //1 - Overview, 2 - Budget, 3 - Chart, 4 - Settings
+    private int currStatus = 1; //1 - Overview, 2 - Budget, 3 - Chart, 4 - Settings
+    private static String currUserCatID;
     
     public MainFrame() {
         initComponents();
@@ -46,8 +47,7 @@ public class MainFrame extends javax.swing.JFrame {
         cboxMonth.setModel(ComBoBoxCustom.comboBox.getModel());
         
         //Update and Initialise Budget Table Row 
-        DBAccess.fetchOverviewTable();
-        tableBudget.setModel(overviewTableModel);
+        refreshBudgetTable();
         
         Date date = new Date();
         datePickerBudget.setDate(date);
@@ -104,7 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    void DisplayCharts(String btnText) {
+    void displayCharts(String btnText) {
         
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
@@ -140,6 +140,26 @@ public class MainFrame extends javax.swing.JFrame {
         buttonGrpCategory.clearSelection();
     }
 
+    void refreshBudgetTable() {
+        
+        DBAccess.fetchOverviewTable();
+        tableBudget.setModel(overviewTableModel);
+        
+    }
+    
+    void updateOverviewLabels() {
+        
+        labelBalanceCurrency.setText("RM"+getBalance());
+        
+        labelShoppingCurrency.setText("RM"+getExpensesCat("C0002"));
+        labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
+        labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
+        labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
+
+        labelTotalCostCurrency.setText("RM"+getExpenditure());
+        
+    }
+    
     void editTablePanel(String[] rowData, String userCatID) throws ParseException {
         
         JTextField txtFSourcePurpose = new JTextField();
@@ -220,6 +240,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGrpCategory = new javax.swing.ButtonGroup();
+        dialogEditBudgetTable = new javax.swing.JDialog();
+        btnCancel = new javax.swing.JButton();
+        btnDeleteUserCat = new javax.swing.JButton();
+        btnUpdateUserCat = new javax.swing.JButton();
+        txtFDiaSourP = new javax.swing.JTextField();
+        lblDiaCat = new javax.swing.JLabel();
+        lblDiaSourP = new javax.swing.JLabel();
+        txtFDiaCatName = new javax.swing.JTextField();
+        lblDiaIncCos = new javax.swing.JLabel();
+        lblDiaDate = new javax.swing.JLabel();
+        dtPickDia = new org.jdesktop.swingx.JXDatePicker();
+        spinIncCost = new javax.swing.JSpinner();
         mainPanel = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
         overviewSelect = new javax.swing.JPanel();
@@ -315,6 +347,124 @@ public class MainFrame extends javax.swing.JFrame {
         btnSubmitPass = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
+
+        dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 350));
+        dialogEditBudgetTable.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                dialogEditBudgetTableWindowLostFocus(evt);
+            }
+        });
+        dialogEditBudgetTable.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                dialogEditBudgetTableWindowClosing(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        btnDeleteUserCat.setText("Delete");
+        btnDeleteUserCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteUserCatActionPerformed(evt);
+            }
+        });
+
+        btnUpdateUserCat.setText("Update");
+        btnUpdateUserCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateUserCatActionPerformed(evt);
+            }
+        });
+
+        txtFDiaSourP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        lblDiaCat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblDiaCat.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDiaCat.setText("Category :");
+
+        lblDiaSourP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblDiaSourP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDiaSourP.setText("Source/Purpose : ");
+
+        txtFDiaCatName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFDiaCatName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFDiaCatName.setEnabled(false);
+
+        lblDiaIncCos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblDiaIncCos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDiaIncCos.setText("Income/Cost : ");
+
+        lblDiaDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblDiaDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDiaDate.setText("Date : ");
+
+        javax.swing.GroupLayout dialogEditBudgetTableLayout = new javax.swing.GroupLayout(dialogEditBudgetTable.getContentPane());
+        dialogEditBudgetTable.getContentPane().setLayout(dialogEditBudgetTableLayout);
+        dialogEditBudgetTableLayout.setHorizontalGroup(
+            dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditBudgetTableLayout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
+                            .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditBudgetTableLayout.createSequentialGroup()
+                            .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblDiaIncCos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDiaDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
+                        .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52))
+            .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(btnUpdateUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeleteUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dialogEditBudgetTableLayout.setVerticalGroup(
+            dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaIncCos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteUserCat)
+                    .addComponent(btnUpdateUserCat)
+                    .addComponent(btnCancel))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Personal Finanace System");
@@ -593,6 +743,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         scrollBudgetTable.setViewportView(tableBudget);
+        tableBudget.setAutoCreateRowSorter(true);
 
         overviewPanel.add(scrollBudgetTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 570, 340));
 
@@ -1259,15 +1410,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         switchNav(overviewSelect);
 
+        updateOverviewLabels();
+        
         overviewPanel.setVisible(true);
         currStatus = 1;
-        labelBalanceCurrency.setText("RM"+getBalance());
-        labelShoppingCurrency.setText("RM"+getExpensesCat("C0002"));
-        labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
-        labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
-        labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
-
-        labelTotalCostCurrency.setText("RM"+getExpenditure());
+        
         
     }//GEN-LAST:event_overviewSelectMousePressed
 
@@ -1468,21 +1615,33 @@ public class MainFrame extends javax.swing.JFrame {
         String[] dataRow = new String[4];
         
         if (evt.getClickCount() == 2) {
-//            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
-
-            //get each column data/value
-            for(int x = 0; x < 4; x++) {
-                
-                String value = tableBudget.getModel().getValueAt(row, x).toString();
-                dataRow[x] = value;
-            }
-            
             try {
-                editTablePanel(dataRow, DBAccess.listUserCatID.get(row));
+                //            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
+                
+                //get each column data/value
+                for(int x = 0; x < 4; x++) {
+                    
+                    String value = tableBudget.getModel().getValueAt(row, x).toString();
+                    dataRow[x] = value;
+                }
+                
+                txtFDiaCatName.setText(dataRow[1]);
+                txtFDiaSourP.setText(dataRow[0]);
+                spinIncCost.setValue(Double.parseDouble(dataRow[2]));
+                
+                Date dataDate = new SimpleDateFormat("yyyy-MM-dd").parse(dataRow[3]);
+                dtPickDia.setDate(dataDate);
+                
+                currUserCatID = DBAccess.listUserCatID.get(row);
+                
+                this.setEnabled(false);
+                dialogEditBudgetTable.setVisible(true);
+                dialogEditBudgetTable.setLocationRelativeTo(null);
                 
             } catch (ParseException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             
         }
             
@@ -1503,6 +1662,64 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("Closing database connections");
         
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+
+        this.setEnabled(true);
+        dialogEditBudgetTable.dispose();
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnDeleteUserCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserCatActionPerformed
+        // TODO add your handling code here:
+
+        DBAccess.deleteBudgetTableRowValue(currUserCatID);
+
+        this.setEnabled(true);
+        refreshBudgetTable();
+        updateOverviewLabels();
+        dialogEditBudgetTable.dispose();
+    }//GEN-LAST:event_btnDeleteUserCatActionPerformed
+
+    private void btnUpdateUserCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserCatActionPerformed
+        // TODO add your handling code here:
+
+        //Update data
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = sdf.format(dtPickDia.getDate());
+
+            
+        Double incCost = Double.parseDouble(spinIncCost.getValue().toString());    
+        
+        //Ensure that categories value are +iv and -ive accordingly
+        if (txtFDiaCatName.getText().equals("Others") || txtFDiaCatName.getText().equals("Shop") || 
+                txtFDiaCatName.getText().equals("Bills Utilities") || txtFDiaCatName.getText().equals("Food Drinks") )
+            if (incCost > 0)
+                incCost *= -1;
+        else
+            if (incCost < 0)
+                incCost *= -1;
+        
+        DBAccess.updateBudgetTableRowValue(txtFDiaCatName.getText(), txtFDiaSourP.getText(),
+                incCost, dateStr);
+
+        this.setEnabled(true);
+        refreshBudgetTable();
+        updateOverviewLabels();
+        dialogEditBudgetTable.dispose();
+    }//GEN-LAST:event_btnUpdateUserCatActionPerformed
+
+    private void dialogEditBudgetTableWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogEditBudgetTableWindowClosing
+        // TODO add your handling code here:
+        this.setEnabled(true);
+    }//GEN-LAST:event_dialogEditBudgetTableWindowClosing
+
+    private void dialogEditBudgetTableWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogEditBudgetTableWindowLostFocus
+        // TODO add your handling code here:
+        dialogEditBudgetTable.requestFocus();
+        
+    }//GEN-LAST:event_dialogEditBudgetTableWindowLostFocus
     
     
     
@@ -1547,11 +1764,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel addBudgetPanel;
     private javax.swing.JPanel addExpenditurePanel;
     private javax.swing.JPanel bottomPanel;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDeleteUserCat;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnShow;
     private javax.swing.JButton btnSubmitBudget;
     private javax.swing.JButton btnSubmitExpen;
     private javax.swing.JButton btnSubmitPass;
+    private javax.swing.JButton btnUpdateUserCat;
     private javax.swing.JPanel budgetPanel;
     private javax.swing.JPanel budgetSelect;
     private javax.swing.ButtonGroup buttonGrpCategory;
@@ -1561,6 +1781,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel chartSelect;
     private org.jdesktop.swingx.JXDatePicker datePickerBudget;
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
+    private javax.swing.JDialog dialogEditBudgetTable;
+    private org.jdesktop.swingx.JXDatePicker dtPickDia;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelBalance;
@@ -1582,6 +1804,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDateBudget;
     private javax.swing.JLabel lblDateExpenditure;
+    private javax.swing.JLabel lblDiaCat;
+    private javax.swing.JLabel lblDiaDate;
+    private javax.swing.JLabel lblDiaIncCos;
+    private javax.swing.JLabel lblDiaSourP;
     private javax.swing.JLabel lblMonth;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
@@ -1616,7 +1842,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel settingsSelect;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JSpinner spinIncCost;
     private javax.swing.JTable tableBudget;
+    private javax.swing.JTextField txtFDiaCatName;
+    private javax.swing.JTextField txtFDiaSourP;
     private javax.swing.JTextField txtFPurpose;
     private javax.swing.JTextField txtFSource;
     private javax.swing.JTextField txtFSumBudget;
