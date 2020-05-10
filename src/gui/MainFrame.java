@@ -159,77 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
         labelTotalCostCurrency.setText("RM"+getExpenditure());
         
     }
-    
-    void editTablePanel(String[] rowData, String userCatID) throws ParseException {
         
-        JTextField txtFSourcePurpose = new JTextField();
-        JTextField txtFCategory = new JTextField() {
-            @Override
-            public boolean isEditable() {
-                return false;
-            }
-        };
-        JSpinner spinIncomeCost = new JSpinner();
-        JXDatePicker datePicker = new JXDatePicker();
-                
-        JFrame editFrame = new JFrame();
-        editFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        JPanel editTablePanel = new JPanel(new GridLayout(5, 1));
-        
-        editTablePanel.add(new JLabel("Source/Purpose : "));
-        editTablePanel.add(txtFSourcePurpose);
-        txtFSourcePurpose.setText(rowData[0]);
-        
-        editTablePanel.add(new JLabel("Category : "));
-        editTablePanel.add(txtFCategory);
-        txtFCategory.setText(rowData[1]);
-        
-        editTablePanel.add(new JLabel("Income/Cost : "));
-        editTablePanel.add(spinIncomeCost);
-        spinIncomeCost.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
-        spinIncomeCost.setValue(Double.parseDouble(rowData[2]));
-        
-        editTablePanel.add(new JLabel("Date : "));
-        editTablePanel.add(datePicker);
-        Date dataDate = new SimpleDateFormat("yyyy-MM-dd").parse(rowData[3]);
-        datePicker.setDate(dataDate);
-        
-        Object[] options = {"Delete", "Update", "Cancel"};
-
-        int result = JOptionPane.showOptionDialog(
-            editFrame, // use your JFrame here
-            editTablePanel,
-            "Edit Your Value",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            options,
-            null
-        );
-
-        if (result == JOptionPane.YES_OPTION) {
-            //Delete
-            
-            DBAccess.deleteBudgetTableRowValue(userCatID);
-            
-        }
-        else if (result == JOptionPane.NO_OPTION) {
-            //Update data
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String dateStr = sdf.format(datePicker.getDate());
-            
-            DBAccess.updateBudgetTableRowValue(userCatID, txtFSourcePurpose.getText(),
-                    Double.parseDouble(spinIncomeCost.getValue().toString()), dateStr);
-            
-        }
-        
-        //Update JTable
-        DBAccess.fetchOverviewTable();
-        tableBudget.setModel(overviewTableModel);
-      
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -737,6 +667,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         tableBudget.setEnabled(false);
+        tableBudget.getTableHeader().setReorderingAllowed(false);
         tableBudget.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableBudgetMouseClicked(evt);
@@ -1585,7 +1516,7 @@ public class MainFrame extends javax.swing.JFrame {
                     category = "C0002";
                 }else if(radioBtnFD.isSelected()){
                     category = "C0003";
-                }else if(radioBtnFD.isSelected()){
+                }else if(radioBtnBU.isSelected()){
                     category = "C0004";
                 }else{
                     category = "C0005";
@@ -1636,12 +1567,11 @@ public class MainFrame extends javax.swing.JFrame {
        
         int row = tableBudget.rowAtPoint(evt.getPoint());
         
-        System.out.println(DBAccess.listUserCatID.get(row));
-        
+//        System.out.println(DBAccess.listUserCatID.get(row));
 //        String dataV = tableBudget.getModel().getValueAt(row, 0).toString();
 //        System.out.println(dataV);
-        String dataT = tableBudget.getValueAt(row, 0).toString();
-        System.out.println(dataT);
+//        String dataT = tableBudget.getValueAt(row, 0).toString();
+//        System.out.println(dataT);
         
         String[] dataRow = new String[4];
         
@@ -1723,15 +1653,16 @@ public class MainFrame extends javax.swing.JFrame {
         Double incCost = Double.parseDouble(spinIncCost.getValue().toString());    
         
         //Ensure that categories value are +iv and -ive accordingly
-        if (txtFDiaCatName.getText().equals("Others") || txtFDiaCatName.getText().equals("Shop") || 
-                txtFDiaCatName.getText().equals("Bills Utilities") || txtFDiaCatName.getText().equals("Food Drinks") )
-            if (incCost > 0)
+        if ("Others".equals(txtFDiaCatName.getText()) || "Shop".equals(txtFDiaCatName.getText()) || ("Bills Utilities").equals(txtFDiaCatName.getText()) || ("Food Drinks").equals(txtFDiaCatName.getText()) )
+            if (incCost > 0.0) {
                 incCost *= -1;
-        else
-            if (incCost < 0)
+            }
+        if ("Deposit".equals(txtFDiaCatName.getText()))
+            if (incCost < 0.0) {
                 incCost *= -1;
+            }
         
-        DBAccess.updateBudgetTableRowValue(txtFDiaCatName.getText(), txtFDiaSourP.getText(),
+        DBAccess.updateBudgetTableRowValue(currUserCatID, txtFDiaSourP.getText(),
                 incCost, dateStr);
 
         this.setEnabled(true);
