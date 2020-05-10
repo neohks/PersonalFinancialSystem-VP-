@@ -137,10 +137,10 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         dialogUserDetails.setMinimumSize(new java.awt.Dimension(410, 390));
         dialogUserDetails.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
                 dialogUserDetailsWindowLostFocus(evt);
-            }
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
         });
         dialogUserDetails.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -473,7 +473,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUserList);
 
-        lblSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSearch.setText("Username : ");
 
@@ -528,7 +528,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
                     .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -787,6 +787,9 @@ public class AdminMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         refreshUserTable();
+        
+        txtFSearch.setText("");
+        
     }//GEN-LAST:event_btnShowAllActionPerformed
 
 
