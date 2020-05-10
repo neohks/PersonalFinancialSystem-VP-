@@ -7,45 +7,30 @@ package gui;
 
 import custom.ComBoBoxCustom;
 import database.DBAccess;
-import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.*;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
 import database.DBConnection;
 import java.awt.GridLayout;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
-
 import javax.swing.JFrame;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.*;
 import org.jdesktop.swingx.JXDatePicker;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -70,7 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
         datePickerExpenditure.setDate(date);
         datePickerExpenditure.setFormats("yyyy-MM-dd");
         
-        this.setLocationRelativeTo(null); //Locate your app in the middle of screen
+        setLocationRelativeTo(null); //Locate your app in the middle of screen
     }
     
     //Switch color of side nav bar
@@ -959,7 +944,7 @@ public class MainFrame extends javax.swing.JFrame {
         addBudgetPanelLayout.setVerticalGroup(
             addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBudgetPanelLayout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSource, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFSource, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -971,9 +956,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDateBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePickerBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(29, 29, 29)
                 .addComponent(btnSubmitBudget)
-                .addGap(53, 53, 53))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout budgetPanelLayout = new javax.swing.GroupLayout(budgetPanel);
@@ -1310,10 +1295,10 @@ public class MainFrame extends javax.swing.JFrame {
         String month = (String)cboxMonth.getSelectedItem();
         String year = (String)cboxYear.getSelectedItem();
         
-        if(getExpensesCat("C0001",month,year)!=0)
-        {
-            pieDataset.setValue("Deposit", getExpensesCat("C0001",month,year));
-        }
+//        if(getExpensesCat("C0001",month,year)!=0)
+//        {
+//            pieDataset.setValue("Deposit", getExpensesCat("C0001",month,year));
+//        }
             
         if(getExpensesCat("C0002",month,year)!=0)  
         {
@@ -1350,7 +1335,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         
-        JFreeChart pieChart = ChartFactory.createPieChart("Overview", pieDataset, true, true, Locale.ENGLISH);
+        JFreeChart pieChart = ChartFactory.createPieChart("Monthly Expenses (RM)", pieDataset, true, true, Locale.ENGLISH);
         PiePlot plotPie = (PiePlot) pieChart.getPlot();
         plotPie.setStartAngle(0);
         plotPie.setDirection(Rotation.CLOCKWISE);

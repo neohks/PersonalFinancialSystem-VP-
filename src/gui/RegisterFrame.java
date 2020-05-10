@@ -21,7 +21,7 @@ public class RegisterFrame extends javax.swing.JFrame {
      */
     public RegisterFrame() {
         initComponents();
-        this.setLocationRelativeTo(null); //Locate you app in the middle of screen
+        setLocationRelativeTo(null); //Locate you app in the middle of screen
     }
 
     /**
@@ -44,6 +44,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         txtFUsername = new javax.swing.JTextField();
         pwFPass = new javax.swing.JPasswordField();
         pwFRePass = new javax.swing.JPasswordField();
+        imageLogo = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,58 +83,69 @@ public class RegisterFrame extends javax.swing.JFrame {
         lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEmail.setText("Email :");
 
+        imageLogo.setBackground(new java.awt.Color(0, 102, 204));
+        imageLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imageLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vectors/iconPFS.png"))); // NOI18N
+        imageLogo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout innerPanelLayout = new javax.swing.GroupLayout(innerPanel);
         innerPanel.setLayout(innerPanelLayout);
         innerPanelLayout.setHorizontalGroup(
             innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
+            .addGroup(innerPanelLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(innerPanelLayout.createSequentialGroup()
-                        .addContainerGap(102, Short.MAX_VALUE)
-                        .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(innerPanelLayout.createSequentialGroup()
-                                .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(innerPanelLayout.createSequentialGroup()
-                                .addComponent(lblPass, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pwFPass))
-                            .addGroup(innerPanelLayout.createSequentialGroup()
-                                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lblPass, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pwFPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(innerPanelLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(innerPanelLayout.createSequentialGroup()
+                        .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(innerPanelLayout.createSequentialGroup()
                         .addComponent(lblRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pwFRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(90, 90, 90))
+                        .addGap(18, 18, 18)
+                        .addComponent(pwFRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(207, 207, 207))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
+                        .addComponent(imageLogo)
+                        .addGap(195, 195, 195))))
         );
         innerPanelLayout.setVerticalGroup(
             innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(innerPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(imageLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwFPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwFRePass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(btnRegister)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         btnBack.setText("Back");
@@ -160,10 +172,10 @@ public class RegisterFrame extends javax.swing.JFrame {
             outerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, outerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(innerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(innerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBack)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getContentPane().add(outerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 410));
@@ -178,11 +190,38 @@ public class RegisterFrame extends javax.swing.JFrame {
         String pw2 = new String(pwFRePass.getPassword());
         String email = txtFEmail.getText();
         
+        //Check empty txtfield
+        if (txtFUsername.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please key in your username!");
+            return;
+        }
+        
+        if (pwFPass.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please key in your password!");
+            return;
+            
+        }
+        
+        if (pwFRePass.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please key in your re-type password!");
+            return;
+            
+        }
+        
+        if (txtFEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "Please key in your email!");
+            return;
+            
+        }
+        
+        //Check if password are equal
         if(!pw.equals(pw2)){
             JOptionPane.showMessageDialog(new JFrame(), "Password not same! Please check again!");
-        }else{
+        }
+        else{
             try {
                 DBAccess.checkAvailableUsername(username, pw, email);
+                
             } catch (Exception ex) {
                 Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -222,6 +261,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel imageLogo;
     private javax.swing.JPanel innerPanel;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblPass;

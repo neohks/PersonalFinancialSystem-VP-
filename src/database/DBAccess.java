@@ -5,10 +5,8 @@
  */
 package database;
 
-import gui.MainFrame;
 import java.sql.*;
 import java.util.*;
-import java.sql.Timestamp;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -67,7 +65,8 @@ public class DBAccess {
         }
         if(isAvailable){
             registerUser(uid,uname,pw,email);
-            JOptionPane.showMessageDialog(new JFrame(), "Registered Succesfully! Please return to Login Page.");
+            JOptionPane.showMessageDialog(new JFrame(), "Registered Succesfully! Please return to Login Page now.");
+            
         }
         
     }
