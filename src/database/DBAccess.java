@@ -372,12 +372,15 @@ public class DBAccess {
     public static void changePW(String newpw, String oldpw){
 //    String userid = getUserID(DBAccess.currentUser);
         try{
-            if(getUserPW().equals(oldpw))
+            if(getUserPW().equals(oldpw)) {
+                
                 stmt.executeUpdate("UPDATE ROOT.USERINFO SET PASSWORD='" + newpw + "' WHERE USERNAME='" + DBAccess.currentUser + "'");
+                JOptionPane.showMessageDialog(new JFrame(), "Changed Password Successfully! Please remember you new password.");
+            }
             else
 //                System.out.println("Wrong password");
-                JOptionPane.showMessageDialog(new JFrame(), "Password Incorrect! Please check your password field again.");
-
+                JOptionPane.showMessageDialog(new JFrame(), "Old Password Incorrect! Please check your password field again.");
+            
             conn.commit();
             } catch(Exception e){
             e.printStackTrace();

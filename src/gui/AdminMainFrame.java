@@ -10,6 +10,8 @@ import database.DBConnection;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -669,9 +671,12 @@ public class AdminMainFrame extends javax.swing.JFrame {
         String pwNew = new String (passFNewPass.getPassword());
 
         if(pwOld.equals(pwNew)){
-            System.out.println("New password cannot be same as old password!");
-        }else{
+//            System.out.println("New password cannot be same as old password!");
+            JOptionPane.showMessageDialog(new JFrame(), "Old Password and New Password are the same! \nPlease check your password fields again.");
+        }
+        else{
             DBAccess.changePW(pwNew, pwOld);
+            
         }
 
     }//GEN-LAST:event_btnSubmitPassActionPerformed
@@ -720,7 +725,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
             
             this.setEnabled(false);
             dialogUserDetails.setVisible(true);
-            
+            dialogUserDetails.setLocationRelativeTo(null);
             
         }
     }//GEN-LAST:event_tblUserListMouseClicked
