@@ -60,12 +60,14 @@ public class DBAccess {
         for(int i=0; i<usernameLists.size();i++){
             if(uname.equals(usernameLists.get(i))){
                 isAvailable=false;
+                JOptionPane.showMessageDialog(new JFrame(), "Username used by someone else! Please rename your username.");
                 System.out.println("Username is used");
                 break;
             }
         }
         if(isAvailable){
             registerUser(uid,uname,pw,email);
+            JOptionPane.showMessageDialog(new JFrame(), "Registered Succesfully! Please return to Login Page.");
         }
         
     }
