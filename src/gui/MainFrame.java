@@ -1548,10 +1548,11 @@ public class MainFrame extends javax.swing.JFrame {
         String pwNew = new String (passFNewPass.getPassword());
         
         if(pwOld.equals(pwNew)){
-            System.out.println("New password cannot be same as old password!");
+//            System.out.println("New password cannot be same as old password!");
+            JOptionPane.showMessageDialog(new JFrame(), "Old Password and New Password are the same! \nPlease check your password fields again.");
         }else{
             DBAccess.changePW(pwNew, pwOld);
-            //boop
+            //boop - hanyangxd
         }
         
     }//GEN-LAST:event_btnSubmitPassActionPerformed
