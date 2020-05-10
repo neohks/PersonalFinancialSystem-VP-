@@ -61,7 +61,7 @@ public class DBAccess {
             if(uname.equals(usernameLists.get(i))){
                 isAvailable=false;
                 JOptionPane.showMessageDialog(new JFrame(), "Username used by someone else! Please rename your username.");
-                System.out.println("Username is used");
+//                System.out.println("Username is used");
                 break;
             }
         }
@@ -128,7 +128,8 @@ public class DBAccess {
                 }
             }
             if(!loginSuccess){
-                System.out.println("invalid login");
+//                System.out.println("invalid login");
+                JOptionPane.showMessageDialog(new JFrame(), "Invalid Login! Please recheck your username and password.");
                 return false;
             }
         } catch(Exception e){
@@ -375,7 +376,8 @@ public class DBAccess {
             if(getUserPW().equals(oldpw))
                 stmt.executeUpdate("UPDATE ROOT.USERINFO SET PASSWORD='" + newpw + "' WHERE USERNAME='" + DBAccess.currentUser + "'");
             else
-                System.out.println("Wrong password");
+//                System.out.println("Wrong password");
+                JOptionPane.showMessageDialog(new JFrame(), "Password Incorrect! Please check your password field again.");
 
             conn.commit();
             } catch(Exception e){
