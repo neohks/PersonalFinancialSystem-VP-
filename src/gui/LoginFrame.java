@@ -93,7 +93,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         lblNewUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNewUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNewUser.setText("New user?");
+        lblNewUser.setText("New user ?");
 
         innerPanel.setBackground(new java.awt.Color(235, 255, 255));
         innerPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
