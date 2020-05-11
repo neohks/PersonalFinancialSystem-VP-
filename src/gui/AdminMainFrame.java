@@ -24,7 +24,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
     
     public AdminMainFrame() {
         initComponents();
-        lblCurrUser.setText("Welcome! \n" + DBAccess.currentUser);
+        lblCurrUser.setText(DBAccess.currentUser);
         
         refreshUserTable();
         textFieldFocus();
