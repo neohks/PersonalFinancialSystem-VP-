@@ -26,10 +26,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.RowSorter;
-import javax.swing.RowSorter.SortKey;
 import javax.swing.SortOrder;
+import javax.swing.SwingConstants;
 import javax.swing.table.*;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -44,11 +43,11 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
-        lblUsername.setText("Welcome! \n" + DBAccess.currentUser);
+        lblCurrUser.setText(DBAccess.currentUser);
+            
         cboxMonth.setModel(ComBoBoxCustom.comboBox.getModel());
         
         //Update and Initialise Budget Table Row 
-        
         refreshBudgetTable();
         
         Date date = new Date();
@@ -69,21 +68,25 @@ public class MainFrame extends javax.swing.JFrame {
                 overviewPanel.setVisible(false);
                 overviewSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System - Overview");
                 break;
             case 2:
                 budgetPanel.setVisible(false);
                 budgetSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System - Budget");
                 break;
             case 3:
                 chartPanel.setVisible(false);
                 chartSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System - Chart");
                 break;
             case 4:
                 settingsPanel.setVisible(false);
                 settingsSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System - Settings");
                 break;
             default:
               // code block
@@ -176,36 +179,6 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    void sortDescDateBudgetTable() {
-
-
-        TableModel model = new DefaultTableModel() {
-        public Class getColumnClass(int column) {
-          Class returnValue;
-          if ((column >= 0) && (column < getColumnCount())) {
-            returnValue = getValueAt(0, column).getClass();
-          } else {
-            returnValue = Object.class;
-          }
-          return returnValue;
-        }
-      };
-
-      RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
-      tableBudget.setRowSorter(sorter);
-
-//      List<SortKey> sortKeys = new ArrayList<>(1);
-//
-//      int columnIndexToSort = 3; //just sort date in desc by default
-//      sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-//
-//      sorter.setSortKeys(sortKeys);
-      
-      
-      
-        
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,6 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         buttonGrpCategory = new javax.swing.ButtonGroup();
         dialogEditBudgetTable = new javax.swing.JDialog();
+        panelDialog = new javax.swing.JPanel();
         btnCancel = new javax.swing.JButton();
         btnDeleteUserCat = new javax.swing.JButton();
         btnUpdateUserCat = new javax.swing.JButton();
@@ -244,7 +218,9 @@ public class MainFrame extends javax.swing.JFrame {
         settingsLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         userPanel = new javax.swing.JPanel();
-        lblUsername = new javax.swing.JLabel();
+        lblUserIcon = new javax.swing.JLabel();
+        lblWelcome = new javax.swing.JLabel();
+        lblCurrUser = new javax.swing.JLabel();
         layeredPanel = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
         scrollBudgetTable = new javax.swing.JScrollPane();
@@ -308,7 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
         datePickerBudget = new org.jdesktop.swingx.JXDatePicker();
         chartPanel = new javax.swing.JPanel();
         panelChart = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        panelSelection = new javax.swing.JPanel();
         btnShow = new javax.swing.JButton();
         cboxMonth = new javax.swing.JComboBox<>();
         lblMonth = new javax.swing.JLabel();
@@ -324,7 +300,10 @@ public class MainFrame extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
-        dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 350));
+        dialogEditBudgetTable.setTitle("Edit Table");
+        dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 390));
+        dialogEditBudgetTable.setPreferredSize(new java.awt.Dimension(410, 392));
+        dialogEditBudgetTable.setResizable(false);
         dialogEditBudgetTable.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -337,6 +316,9 @@ public class MainFrame extends javax.swing.JFrame {
                 dialogEditBudgetTableWindowClosing(evt);
             }
         });
+
+        panelDialog.setBackground(new java.awt.Color(136, 239, 222));
+        panelDialog.setPreferredSize(new java.awt.Dimension(410, 395));
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -369,6 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblDiaSourP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDiaSourP.setText("Source/Purpose : ");
 
+        txtFDiaCatName.setBackground(new java.awt.Color(204, 204, 204));
         txtFDiaCatName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtFDiaCatName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFDiaCatName.setEnabled(false);
@@ -381,69 +364,88 @@ public class MainFrame extends javax.swing.JFrame {
         lblDiaDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDiaDate.setText("Date : ");
 
+        javax.swing.GroupLayout panelDialogLayout = new javax.swing.GroupLayout(panelDialog);
+        panelDialog.setLayout(panelDialogLayout);
+        panelDialogLayout.setHorizontalGroup(
+            panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelDialogLayout.createSequentialGroup()
+                            .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
+                            .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblDiaIncCos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDiaDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelDialogLayout.createSequentialGroup()
+                        .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdateUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDeleteUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)))
+                .addGap(66, 66, 66))
+        );
+        panelDialogLayout.setVerticalGroup(
+            panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDialogLayout.createSequentialGroup()
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaIncCos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDiaDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteUserCat)
+                    .addComponent(btnUpdateUserCat)
+                    .addComponent(btnCancel))
+                .addGap(61, 61, 61))
+        );
+
+        txtFDiaCatName.setDisabledTextColor(Color.DARK_GRAY);
+
         javax.swing.GroupLayout dialogEditBudgetTableLayout = new javax.swing.GroupLayout(dialogEditBudgetTable.getContentPane());
         dialogEditBudgetTable.getContentPane().setLayout(dialogEditBudgetTableLayout);
         dialogEditBudgetTableLayout.setHorizontalGroup(
             dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditBudgetTableLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
-                            .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditBudgetTableLayout.createSequentialGroup()
-                            .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblDiaIncCos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblDiaDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
-                        .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
             .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(btnUpdateUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDeleteUserCat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         dialogEditBudgetTableLayout.setVerticalGroup(
             dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogEditBudgetTableLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDiaCat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFDiaCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFDiaSourP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDiaIncCos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinIncCost, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDiaDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dtPickDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(dialogEditBudgetTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteUserCat)
-                    .addComponent(btnUpdateUserCat)
-                    .addComponent(btnCancel))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Personal Finanace System");
+        setTitle("Personal Finanace System - Overview");
         setName("mainFrame"); // NOI18N
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -629,26 +631,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        userPanel.setBackground(new java.awt.Color(0, 204, 204));
         userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vectors/account.png"))); // NOI18N
+        userPanel.add(lblUserIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 156, -1));
 
-        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
-        userPanel.setLayout(userPanelLayout);
-        userPanelLayout.setHorizontalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        userPanelLayout.setVerticalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWelcome.setText("Welcome");
+        userPanel.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 136, 22));
+
+        lblCurrUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userPanel.add(lblCurrUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 136, 22));
 
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
@@ -672,7 +668,7 @@ public class MainFrame extends javax.swing.JFrame {
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -683,7 +679,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(chartSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(settingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         mainPanel.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
@@ -720,6 +716,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         scrollBudgetTable.setViewportView(tableBudget);
+        //Allow column sort
         tableBudget.setAutoCreateRowSorter(true);
 
         overviewPanel.add(scrollBudgetTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 570, 340));
@@ -1023,7 +1020,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         addBudgetPanel.setBackground(new java.awt.Color(233, 251, 255));
-        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Budget", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
+        addBudgetPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Deposit", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(30, 33, 122))); // NOI18N
 
         lblSource.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSource.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1115,11 +1112,13 @@ public class MainFrame extends javax.swing.JFrame {
         chartPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         panelChart.setBackground(new java.awt.Color(204, 255, 255));
-        panelChart.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelChart.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelChart.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(136, 239, 222));
+        panelSelection.setBackground(new java.awt.Color(136, 239, 222));
+        panelSelection.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        btnShow.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnShow.setText("Show");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1127,6 +1126,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        cboxMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April" }));
         cboxMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1134,12 +1134,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        lblMonth.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblMonth.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMonth.setText("Month : ");
 
+        lblYear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblYear.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblYear.setText("Year : ");
 
+        cboxYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022" }));
         cboxYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1147,35 +1150,35 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSelectionLayout = new javax.swing.GroupLayout(panelSelection);
+        panelSelection.setLayout(panelSelectionLayout);
+        panelSelectionLayout.setHorizontalGroup(
+            panelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(panelSelectionLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
-                .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addComponent(btnShow)
-                .addGap(98, 98, 98))
+                .addComponent(cboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelSelectionLayout.setVerticalGroup(
+            panelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSelectionLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(cboxYear)
-                        .addComponent(lblYear)
-                        .addComponent(btnShow))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addComponent(cboxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -1183,10 +1186,10 @@ public class MainFrame extends javax.swing.JFrame {
         chartPanel.setLayout(chartPanelLayout);
         chartPanelLayout.setHorizontalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chartPanelLayout.createSequentialGroup()
+            .addGroup(chartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelSelection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1194,20 +1197,23 @@ public class MainFrame extends javax.swing.JFrame {
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(chartPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(panelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelChart, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         layeredPanel.add(chartPanel, "card2");
 
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        panelEditPass.setBackground(new java.awt.Color(204, 255, 255));
+        panelEditPass.setBackground(new java.awt.Color(233, 251, 255));
         panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        panelEditPass.setPreferredSize(new java.awt.Dimension(355, 280));
 
-        lblOldPassword.setText("Old Password :");
+        lblOldPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOldPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblOldPassword.setText("Old Password : ");
 
         passFNewPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1215,7 +1221,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        lblNewPassword.setText("New Password :");
+        lblNewPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblNewPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNewPassword.setText("New Password : ");
 
         btnSubmitPass.setText("Submit");
         btnSubmitPass.addActionListener(new java.awt.event.ActionListener() {
@@ -1228,20 +1236,21 @@ public class MainFrame extends javax.swing.JFrame {
         panelEditPass.setLayout(panelEditPassLayout);
         panelEditPassLayout.setHorizontalGroup(
             panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditPassLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblOldPassword)
-                    .addComponent(lblNewPassword))
-                .addGap(18, 18, 18)
-                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(passFNewPass)
-                    .addComponent(passFOldPass, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
             .addGroup(panelEditPassLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(btnSubmitPass)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditPassLayout.createSequentialGroup()
+                        .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditPassLayout.createSequentialGroup()
+                        .addComponent(btnSubmitPass)
+                        .addGap(138, 138, 138))))
         );
         panelEditPassLayout.setVerticalGroup(
             panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1254,9 +1263,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(btnSubmitPass)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         btnLogout.setText("Logout");
@@ -1273,21 +1282,21 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(btnLogout))
+                        .addGap(220, 220, 220)
+                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(265, Short.MAX_VALUE))
+                        .addGap(366, 366, 366)
+                        .addComponent(btnLogout)))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addContainerGap(120, Short.MAX_VALUE)
                 .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(btnLogout)
-                .addGap(22, 22, 22))
+                .addGap(54, 54, 54))
         );
 
         layeredPanel.add(settingsPanel, "card5");
@@ -1644,6 +1653,7 @@ public class MainFrame extends javax.swing.JFrame {
                 this.setEnabled(false);
                 dialogEditBudgetTable.setVisible(true);
                 dialogEditBudgetTable.setLocationRelativeTo(null);
+                dialogEditBudgetTable.setTitle("Manage " + txtFDiaCatName.getText() + " Table");
                 
             } catch (ParseException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -1791,7 +1801,6 @@ public class MainFrame extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker datePickerExpenditure;
     private javax.swing.JDialog dialogEditBudgetTable;
     private org.jdesktop.swingx.JXDatePicker dtPickDia;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelBalance;
     private javax.swing.JLabel labelBalanceCurrency;
@@ -1810,6 +1819,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotalCostCurrency;
     private javax.swing.JLayeredPane layeredPanel;
     private javax.swing.JLabel lblCategory;
+    private javax.swing.JLabel lblCurrUser;
     private javax.swing.JLabel lblDateBudget;
     private javax.swing.JLabel lblDateExpenditure;
     private javax.swing.JLabel lblDiaCat;
@@ -1823,7 +1833,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblSource;
     private javax.swing.JLabel lblSumBudget;
     private javax.swing.JLabel lblSumExpenditure;
-    private javax.swing.JLabel lblUsername;
+    private javax.swing.JLabel lblUserIcon;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JLabel lblYear;
     private javax.swing.JLabel logoBudget;
     private javax.swing.JLabel logoChart;
@@ -1835,9 +1846,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelBalance;
     private javax.swing.JPanel panelBillsUtilities;
     private javax.swing.JPanel panelChart;
+    private javax.swing.JPanel panelDialog;
     private javax.swing.JPanel panelEditPass;
     private javax.swing.JPanel panelFoodDrinks;
     private javax.swing.JPanel panelOthers;
+    private javax.swing.JPanel panelSelection;
     private javax.swing.JPanel panelShopping;
     private javax.swing.JPasswordField passFNewPass;
     private javax.swing.JPasswordField passFOldPass;
