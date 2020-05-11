@@ -26,13 +26,13 @@ public class AdminMainFrame extends javax.swing.JFrame {
         initComponents();
         lblCurrUser.setText("Welcome! \n" + DBAccess.currentUser);
         
-        textFieldFocus();
-        
         refreshUserTable();
+        textFieldFocus();
         
         this.setLocationRelativeTo(null); //Locate your app in the middle of screen
     }
     
+    //Update table
     void refreshUserTable() {
         
         DBAccess.fetchUserOverviewTable();
@@ -59,7 +59,8 @@ public class AdminMainFrame extends javax.swing.JFrame {
           }   
             
     }
-
+    
+    //Enable placeholder
     private void textFieldFocus(){
         
         txtFSearch.addFocusListener(new FocusListener() {
@@ -121,6 +122,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         overviewPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUserList = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         txtFSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
@@ -135,7 +137,9 @@ public class AdminMainFrame extends javax.swing.JFrame {
         btnSubmitPass = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
+        dialogUserDetails.setTitle("Edit User Table");
         dialogUserDetails.setMinimumSize(new java.awt.Dimension(410, 390));
+        dialogUserDetails.setResizable(false);
         dialogUserDetails.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -149,10 +153,13 @@ public class AdminMainFrame extends javax.swing.JFrame {
             }
         });
 
+        panelDialog.setBackground(new java.awt.Color(136, 239, 222));
+
         lblUserID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblUserID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserID.setText("User ID :");
 
+        txtFUserID.setBackground(new java.awt.Color(204, 204, 204));
         txtFUserID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtFUserID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFUserID.setEnabled(false);
@@ -232,7 +239,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         panelDialogLayout.setVerticalGroup(
             panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDialogLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(panelDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -255,6 +262,8 @@ public class AdminMainFrame extends javax.swing.JFrame {
                     .addComponent(btnCancel))
                 .addGap(61, 61, 61))
         );
+
+        txtFUserID.setDisabledTextColor(Color.DARK_GRAY);
 
         javax.swing.GroupLayout dialogUserDetailsLayout = new javax.swing.GroupLayout(dialogUserDetails.getContentPane());
         dialogUserDetails.getContentPane().setLayout(dialogUserDetailsLayout);
@@ -466,17 +475,23 @@ public class AdminMainFrame extends javax.swing.JFrame {
             }
         });
         tblUserList.setEnabled(false);
+        tblUserList.getTableHeader().setReorderingAllowed(false);
         tblUserList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserListMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblUserList);
+        //Allow colomn sort
+        tblUserList.setAutoCreateRowSorter(true);
+
+        jPanel1.setBackground(new java.awt.Color(233, 251, 255));
 
         lblSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSearch.setText("Username : ");
 
+        btnSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,10 +499,12 @@ public class AdminMainFrame extends javax.swing.JFrame {
             }
         });
 
-        lblUserInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblUserInfo.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblUserInfo.setForeground(new java.awt.Color(30, 33, 122));
         lblUserInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUserInfo.setText("Users Info");
 
+        btnShowAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnShowAll.setText("Show All");
         btnShowAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,42 +512,59 @@ public class AdminMainFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnShowAll))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(105, 105, 105))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 29, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout overviewPanelLayout = new javax.swing.GroupLayout(overviewPanel);
         overviewPanel.setLayout(overviewPanelLayout);
         overviewPanelLayout.setHorizontalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, overviewPanelLayout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
-            .addGroup(overviewPanelLayout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(overviewPanelLayout.createSequentialGroup()
-                        .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnShowAll)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         overviewPanelLayout.setVerticalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, overviewPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         layerPanelAdmin.add(overviewPanel, "card2");
@@ -625,7 +659,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void overviewSelectMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_overviewSelectMousePressed
         // TODO add your handling code here:
-
         switchNav(overviewSelect);
         overviewPanel.setVisible(true);
         currStatus = 1;
@@ -671,7 +704,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         String pwNew = new String (passFNewPass.getPassword());
 
         if(pwOld.equals(pwNew)){
-//            System.out.println("New password cannot be same as old password!");
             JOptionPane.showMessageDialog(new JFrame(), "Old Password and New Password are the same! \nPlease check your password fields again.");
         }
         else{
@@ -701,38 +733,31 @@ public class AdminMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int row = tblUserList.rowAtPoint(evt.getPoint());
-        
-        String dataV = tblUserList.getModel().getValueAt(row, 0).toString();
-        
-        System.out.println(dataV);
-        
+
         String[] dataRow = new String[4];
         
         if (evt.getClickCount() == 2) {
-//            int row = tableBudget.rowAtPoint(evt.getPoint()); //https://coderanch.com/t/343164/java/jTable-selectedRowIndex-mouse-click
-
             //get each column data/value
             for(int x = 0; x < 4; x++) {
                 
-                String value = tblUserList.getModel().getValueAt(row, x).toString();
+                String value = tblUserList.getValueAt(row, x).toString();
                 dataRow[x] = value;
             }
             
             txtFUserID.setText(dataRow[0]);
             txtFUsername.setText(dataRow[1]);
-            txtFEmail.setText(dataRow[3]);
-            txtFPassword.setText(dataRow[2]);
+            txtFEmail.setText(dataRow[2]);
+            txtFPassword.setText(dataRow[3]);
             
             this.setEnabled(false);
             dialogUserDetails.setVisible(true);
             dialogUserDetails.setLocationRelativeTo(null);
-            
+            dialogUserDetails.setTitle("Manage " + txtFUserID.getText() + " Table");
         }
     }//GEN-LAST:event_tblUserListMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        
         DBAccess.updateUserListTableRowValue(
                 txtFUserID.getText(), 
                 txtFUsername.getText(), 
@@ -747,7 +772,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
         DBAccess.deleteUserListTableRowValue(txtFUserID.getText());
         
         this.setEnabled(true);
@@ -757,7 +781,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        
         this.setEnabled(true);
         dialogUserDetails.dispose();
         
@@ -765,8 +788,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void dialogUserDetailsWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogUserDetailsWindowLostFocus
         // TODO add your handling code here:
-        
-        System.out.println("*******oiLOST FOCUS");
+        System.out.println("*******LOST FOCUS");
         dialogUserDetails.requestFocus();
         
         
@@ -785,7 +807,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
     private void btnShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAllActionPerformed
         // TODO add your handling code here:
-        
         refreshUserTable();
         
         txtFSearch.setText("");
@@ -803,6 +824,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnSubmitPass;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JDialog dialogUserDetails;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelOverview;
