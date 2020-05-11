@@ -13,7 +13,6 @@ import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.jfree.chart.*;
@@ -21,15 +20,17 @@ import org.jfree.chart.plot.*;
 import org.jfree.util.Rotation;
 import static database.DBAccess.*;
 import database.DBConnection;
-import java.awt.GridLayout;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 import javax.swing.table.*;
-import org.jdesktop.swingx.JXDatePicker;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
@@ -47,6 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         cboxMonth.setModel(ComBoBoxCustom.comboBox.getModel());
         
         //Update and Initialise Budget Table Row 
+        
         refreshBudgetTable();
         
         Date date = new Date();
@@ -58,6 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null); //Locate your app in the middle of screen
     }
     
+    /*Own Methods*/
     //Switch color of side nav bar
     void switchNav(JPanel nextSelect) {
         
@@ -143,7 +146,20 @@ public class MainFrame extends javax.swing.JFrame {
     void refreshBudgetTable() {
         
         DBAccess.fetchOverviewTable();
+        
         tableBudget.setModel(overviewTableModel);
+        
+        //Let Double sort accordingly
+        RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(overviewTableModel);
+        tableBudget.setRowSorter(sorter);
+        
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+    
+        int columnIndexToSort = 3; //Default Sort Desc Date
+        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+
+        sorter.setSortKeys(sortKeys);
+        
         
     }
     
@@ -159,7 +175,37 @@ public class MainFrame extends javax.swing.JFrame {
         labelTotalCostCurrency.setText("RM"+getExpenditure());
         
     }
+    
+    void sortDescDateBudgetTable() {
+
+
+        TableModel model = new DefaultTableModel() {
+        public Class getColumnClass(int column) {
+          Class returnValue;
+          if ((column >= 0) && (column < getColumnCount())) {
+            returnValue = getValueAt(0, column).getClass();
+          } else {
+            returnValue = Object.class;
+          }
+          return returnValue;
+        }
+      };
+
+      RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+      tableBudget.setRowSorter(sorter);
+
+//      List<SortKey> sortKeys = new ArrayList<>(1);
+//
+//      int columnIndexToSort = 3; //just sort date in desc by default
+//      sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+//
+//      sorter.setSortKeys(sortKeys);
+      
+      
+      
         
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

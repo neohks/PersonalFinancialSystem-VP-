@@ -300,7 +300,20 @@ public class DBAccess {
         double costincome;
         final Object[][] rowData = {};
         final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
-        overviewTableModel = new DefaultTableModel(rowData, columnNames);
+        overviewTableModel = new DefaultTableModel(rowData, columnNames) {
+            
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if ((column >= 0) && (column < getColumnCount())) {
+                  returnValue = getValueAt(0, column).getClass();
+                } else {
+                  returnValue = Object.class;
+                }
+                return returnValue;
+              }
+        };
+
+        
         try{
             rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATNAME, COSTINCOME, DATE FROM ROOT.V_USERCATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
             while(rs.next()){
