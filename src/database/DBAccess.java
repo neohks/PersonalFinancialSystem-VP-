@@ -302,17 +302,23 @@ public class DBAccess {
         final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
         overviewTableModel = new DefaultTableModel(rowData, columnNames) {
             
+            @Override
             public Class getColumnClass(int column) {
-                Class returnValue;
-                if ((column >= 0) && (column < getColumnCount())) {
-                  returnValue = getValueAt(0, column).getClass();
-                } else {
-                  returnValue = Object.class;
+                
+                //Allow numbers to sort accordingly
+                for (int row = 0; row < getRowCount(); row++)
+                {
+                    Object o = getValueAt(row, column);
+
+                    if (o != null)
+                    {
+                        return o.getClass();
+                    }
                 }
-                return returnValue;
+
+                return Object.class;
               }
         };
-
         
         try{
             rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATNAME, COSTINCOME, DATE FROM ROOT.V_USERCATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
