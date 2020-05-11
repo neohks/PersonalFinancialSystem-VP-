@@ -108,6 +108,10 @@ public class AdminMainFrame extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         sidePanel = new javax.swing.JPanel();
+        userPanel = new javax.swing.JPanel();
+        lblUserIcon = new javax.swing.JLabel();
+        lblWelcome = new javax.swing.JLabel();
+        lblCurrUser = new javax.swing.JLabel();
         overviewSelect = new javax.swing.JPanel();
         logoOverview = new javax.swing.JLabel();
         labelOverview = new javax.swing.JLabel();
@@ -115,8 +119,6 @@ public class AdminMainFrame extends javax.swing.JFrame {
         logoSettings = new javax.swing.JLabel();
         settingsLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        userPanel = new javax.swing.JPanel();
-        lblCurrUser = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         layerPanelAdmin = new javax.swing.JLayeredPane();
         overviewPanel = new javax.swing.JPanel();
@@ -290,6 +292,21 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         sidePanel.setBackground(new java.awt.Color(83, 154, 231));
 
+        userPanel.setBackground(new java.awt.Color(0, 204, 204));
+        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUserIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vectors/account.png"))); // NOI18N
+        userPanel.add(lblUserIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 156, -1));
+
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWelcome.setText("Welcome");
+        userPanel.add(lblWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 136, 22));
+
+        lblCurrUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userPanel.add(lblCurrUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 136, 22));
+
         overviewSelect.setBackground(new java.awt.Color(0, 242, 252));
         overviewSelect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -376,55 +393,31 @@ public class AdminMainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        userPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblCurrUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
-        userPanel.setLayout(userPanelLayout);
-        userPanelLayout.setHorizontalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCurrUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        userPanelLayout.setVerticalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCurrUser, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(overviewSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(overviewSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(settingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
+                    .addComponent(jSeparator1)
+                    .addComponent(userPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(overviewSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(settingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(187, 187, 187))
         );
 
         getContentPane().add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
@@ -836,8 +829,10 @@ public class AdminMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblUserID;
+    private javax.swing.JLabel lblUserIcon;
     private javax.swing.JLabel lblUserInfo;
     private javax.swing.JLabel lblUsername;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JLabel logoOverview;
     private javax.swing.JLabel logoSettings;
     private javax.swing.JPanel overviewPanel;
