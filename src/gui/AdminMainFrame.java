@@ -564,12 +564,17 @@ public class AdminMainFrame extends javax.swing.JFrame {
 
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        panelEditPass.setBackground(new java.awt.Color(204, 255, 255));
+        panelEditPass.setBackground(new java.awt.Color(233, 251, 255));
         panelEditPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Change Password", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        panelEditPass.setPreferredSize(new java.awt.Dimension(355, 280));
 
-        lblOldPassword.setText("Old Password :");
+        lblOldPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOldPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblOldPassword.setText("Old Password : ");
 
-        lblNewPassword.setText("New Password :");
+        lblNewPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblNewPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNewPassword.setText("New Password : ");
 
         btnSubmitPass.setText("Submit");
         btnSubmitPass.addActionListener(new java.awt.event.ActionListener() {
@@ -584,16 +589,16 @@ public class AdminMainFrame extends javax.swing.JFrame {
             panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditPassLayout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
-                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblOldPassword)
-                    .addComponent(lblNewPassword))
-                .addGap(29, 29, 29)
                 .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                    .addComponent(lblOldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
             .addGroup(panelEditPassLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(137, 137, 137)
                 .addComponent(btnSubmitPass)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -602,15 +607,15 @@ public class AdminMainFrame extends javax.swing.JFrame {
             .addGroup(panelEditPassLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblOldPassword))
+                    .addComponent(passFOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(panelEditPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewPassword)
-                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                    .addComponent(lblNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passFNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnSubmitPass)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         btnLogout.setText("Logout");
@@ -625,20 +630,21 @@ public class AdminMainFrame extends javax.swing.JFrame {
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(239, 239, 239)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(364, 364, 364)
                         .addComponent(btnLogout))
-                    .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(271, Short.MAX_VALUE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(222, 222, 222)
+                        .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addContainerGap(118, Short.MAX_VALUE)
                 .addComponent(panelEditPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addComponent(btnLogout)
                 .addGap(50, 50, 50))
         );
