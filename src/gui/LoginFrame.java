@@ -91,6 +91,8 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        lblNewUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblNewUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNewUser.setText("New user?");
 
         innerPanel.setBackground(new java.awt.Color(235, 255, 255));
@@ -119,7 +121,7 @@ public class LoginFrame extends javax.swing.JFrame {
         innerPanelLayout.setHorizontalGroup(
             innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, innerPanelLayout.createSequentialGroup()
                         .addGroup(innerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,15 +165,16 @@ public class LoginFrame extends javax.swing.JFrame {
         outerPanelLayout.setHorizontalGroup(
             outerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(outerPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lblNewUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegister)
-                .addGap(0, 353, Short.MAX_VALUE))
-            .addGroup(outerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(innerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(outerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(outerPanelLayout.createSequentialGroup()
+                        .addComponent(lblNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegister)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(outerPanelLayout.createSequentialGroup()
+                        .addComponent(innerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         outerPanelLayout.setVerticalGroup(
             outerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
