@@ -47,11 +47,13 @@ public class AdminMainFrame extends javax.swing.JFrame {
                 overviewPanel.setVisible(false);
                 overviewSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System (Admin) - Overview");
                 break;
             case 2:
                 settingsPanel.setVisible(false);
                 settingsSelect.setBackground(new Color(0,190,240));
                 nextSelect.setBackground(new Color(0,242,252));
+                setTitle("Personal Finanace System (Admin) - Settings");
                 break;
             default:
               // code block
@@ -283,6 +285,7 @@ public class AdminMainFrame extends javax.swing.JFrame {
         dialogUserDetails.setLocationRelativeTo(null); //Locate your app in the middle of screen
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Personal Finanace System (Admin) - Overview");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
