@@ -6,7 +6,6 @@
 package database;
 
 import java.sql.*;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,7 +18,7 @@ public class DBConnection {
 	public DBConnection () {}
 	
 	public DBConnection (String username, String password) {
-		 
+            //Connection string
             String url = "jdbc:derby://localhost:1527/personalFinanceDB";
 
             try {
@@ -32,8 +31,6 @@ public class DBConnection {
             }
 
             try {
-                  
-                 System.out.println("*****haha!");
                 conn = DriverManager.getConnection(url, username, password );
                 conn.setAutoCommit(false);
                 statement  = conn.createStatement();  
