@@ -37,11 +37,11 @@ Insert into category values ('C0004', 'Bills Utilities');
 Insert into category values ('C0005', 'Others');
 
 /* Insert UserInfo */
-Insert into userinfo values ('U0001','XinZhao','xin','xinzhao@mail.com'',false);
-Insert into userinfo values ('U0002','Lulu','lulu','lulu@mail.com'',false);
-Insert into userinfo values ('U0003','Sivir','sivir','sivir@mail.com'',false);
-Insert into userinfo values ('U0004','HongYip','hyip','hyip@mail.com'',false);
-Insert into userinfo values ('U0005','HanYang','hyang','user@mail.com'',false);
+Insert into userinfo values ('U0001','XinZhao','xin','xinzhao@mail.com',false);
+Insert into userinfo values ('U0002','Lulu','lulu','lulu@mail.com',false);
+Insert into userinfo values ('U0003','Sivir','sivir','sivir@mail.com',false);
+Insert into userinfo values ('U0004','HongYip','hyip','hyip@mail.com',false);
+Insert into userinfo values ('U0005','HanYang','hyang','user@mail.com',false);
 Insert into userinfo values ('A0001','admin','admin','admin@fmail.com',true);
 
 /* Insert User Category */
