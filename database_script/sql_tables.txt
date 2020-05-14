@@ -42,7 +42,7 @@ Insert into userinfo values ('U0002','Lulu','lulu','lulu@mail.com',false);
 Insert into userinfo values ('U0003','Sivir','sivir','sivir@mail.com',false);
 Insert into userinfo values ('U0004','HongYip','hyip','hyip@mail.com',false);
 Insert into userinfo values ('U0005','HanYang','hyang','user@mail.com',false);
-Insert into userinfo values ('A0001','admin','admin','admin@fmail.com',true);
+Insert into userinfo values ('U0006','admin','admin','admin@fmail.com',true);
 
 /* Insert User Category */
 Insert into user_category values ('UC0001','Salary', 1200.00, '2020-05-10', 'U0001', 'C0001');
