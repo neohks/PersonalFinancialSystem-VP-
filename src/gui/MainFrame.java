@@ -22,6 +22,7 @@ import static database.DBAccess.*;
 import database.DBConnection;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,8 @@ import javax.swing.JFrame;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingConstants;
+import javax.swing.event.RowSorterEvent;
+import javax.swing.event.RowSorterListener;
 import javax.swing.table.*;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -153,15 +156,25 @@ public class MainFrame extends javax.swing.JFrame {
         tableBudget.setModel(overviewTableModel);
         
         //Let Double sort accordingly
-        RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(overviewTableModel);
-        tableBudget.setRowSorter(sorter);
-        
-        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-    
-        int columnIndexToSort = 3; //Default Sort Desc Date
-        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-
-        sorter.setSortKeys(sortKeys);
+//        RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(overviewTableModel);
+////        {
+////            @Override
+////            public boolean isSortable(int column) {
+////                if(column < 3)
+////                    return false;
+////                else 
+////                    return true;
+////            }
+////        
+////        };
+//        tableBudget.setRowSorter(sorter);
+//        
+//        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+//    
+//        int columnIndexToSort = 3; //Default Sort Desc Date
+//        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+//
+//        sorter.setSortKeys(sortKeys);
         
         
     }
@@ -174,7 +187,6 @@ public class MainFrame extends javax.swing.JFrame {
         labelFoodDrinksCurrency.setText("RM"+getExpensesCat("C0003"));
         labelBillsUtitlitiesCurrency.setText("RM"+getExpensesCat("C0004"));
         labelOthersCurrency.setText("RM"+getExpensesCat("C0005"));
-
         labelTotalCostCurrency.setText("RM"+getExpenditure());
         
     }
@@ -302,7 +314,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         dialogEditBudgetTable.setTitle("Edit Table");
         dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 390));
-        dialogEditBudgetTable.setPreferredSize(new java.awt.Dimension(410, 392));
         dialogEditBudgetTable.setResizable(false);
         dialogEditBudgetTable.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -717,7 +728,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         scrollBudgetTable.setViewportView(tableBudget);
         //Allow column sort
-        tableBudget.setAutoCreateRowSorter(true);
+        //tableBudget.setAutoCreateRowSorter(true);
 
         overviewPanel.add(scrollBudgetTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, 570, 340));
 
@@ -1622,13 +1633,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void tableBudgetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBudgetMouseClicked
        
         int row = tableBudget.rowAtPoint(evt.getPoint());
-        
-//        System.out.println(DBAccess.listUserCatID.get(row));
-//        String dataV = tableBudget.getModel().getValueAt(row, 0).toString();
-//        System.out.println(dataV);
-//        String dataT = tableBudget.getValueAt(row, 0).toString();
-//        System.out.println(dataT);
-        
+       
         String[] dataRow = new String[4];
         
         if (evt.getClickCount() == 2) {
@@ -1649,6 +1654,9 @@ public class MainFrame extends javax.swing.JFrame {
                 dtPickDia.setDate(dataDate);
                 
                 currUserCatID = DBAccess.listUserCatID.get(row);
+                
+                System.out.println(row);
+                
                 
                 this.setEnabled(false);
                 dialogEditBudgetTable.setVisible(true);

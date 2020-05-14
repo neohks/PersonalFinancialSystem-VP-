@@ -25,7 +25,7 @@ public class DBAccess {
     public static String currentUser;
     public static DefaultTableModel overviewTableModel;
     public static DefaultTableModel overviewUserTableModel;
-    public static ArrayList<String> listUserCatID = new ArrayList<>();
+    public static ArrayList<String> listUserCatID = new ArrayList<String>();
     
     private static int executeUpdate(String insert_into_userinfouseridusernamepasswor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -300,25 +300,26 @@ public class DBAccess {
         double costincome;
         final Object[][] rowData = {};
         final Object[] columnNames = { "Source/Purpose", "Category", "Income/Cost", "Date" };
-        overviewTableModel = new DefaultTableModel(rowData, columnNames) {
-            
-            @Override
-            public Class getColumnClass(int column) {
-                
-                //Allow numbers to sort accordingly
-                for (int row = 0; row < getRowCount(); row++)
-                {
-                    Object o = getValueAt(row, column);
-
-                    if (o != null)
-                    {
-                        return o.getClass();
-                    }
-                }
-
-                return Object.class;
-              }
-        };
+        overviewTableModel = new DefaultTableModel(rowData, columnNames);
+//        {
+//            
+//            @Override
+//            public Class getColumnClass(int column) {
+//                
+//                //Allow numbers to sort accordingly
+//                for (int row = 0; row < getRowCount(); row++)
+//                {
+//                    Object o = getValueAt(row, column);
+//
+//                    if (o != null)
+//                    {
+//                        return o.getClass();
+//                    }
+//                }
+//
+//                return Object.class;
+//              }
+//        };
         
         try{
             rs = stmt.executeQuery("SELECT USERCATID, PURPOSE, CATNAME, COSTINCOME, DATE FROM ROOT.V_USERCATEGORY WHERE USERID='" + getUserID(DBAccess.currentUser) + "'");
