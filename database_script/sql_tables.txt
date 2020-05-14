@@ -37,15 +37,16 @@ Insert into category values ('C0004', 'Bills Utilities');
 Insert into category values ('C0005', 'Others');
 
 /* Insert UserInfo */
-Insert into userinfo values ('U0001','XinZhao','xin','xinzhao@mail.com',false);
-Insert into userinfo values ('U0002','Lulu','lulu','lulu@mail.com',false);
-Insert into userinfo values ('U0003','Sivir','sivir','sivir@mail.com',false);
-Insert into userinfo values ('U0004','HongYip','hyip','hyip@mail.com',false);
-Insert into userinfo values ('U0005','HanYang','hyang','user@mail.com',false);
-Insert into userinfo values ('U0006','admin','admin','admin@fmail.com',true);
+Insert into userinfo values ('U0001','admin','admin','admin@fmail.com',true);
+Insert into userinfo values ('U0002','XinZhao','xin','xinzhao@mail.com',false);
+Insert into userinfo values ('U0003','Lulu','lulu','lulu@mail.com',false);
+Insert into userinfo values ('U0004','Sivir','sivir','sivir@mail.com',false);
+Insert into userinfo values ('U0005','HongYip','hyip','hyip@mail.com',false);
+Insert into userinfo values ('U0006','HanYang','hyang','user@mail.com',false);
+
 
 /* Insert User Category */
-Insert into user_category values ('UC0001','Salary', 1200.00, '2020-05-10', 'U0001', 'C0001');
-Insert into user_category values ('UC0002','Nike Shirt', -300, '2020-05-12', 'U0001', 'C0002');
-Insert into user_category values ('UC0003','Nasi Lemak', -15, '2020-05-12', 'U0001', 'C0003');
+Insert into user_category values ('UC0001','Salary', 1200.00, '2020-05-10', 'U0002', 'C0001');
+Insert into user_category values ('UC0002','Nike Shirt', -300, '2020-05-12', 'U0002', 'C0002');
+Insert into user_category values ('UC0003','Nasi Lemak', -15, '2020-05-12', 'U0002', 'C0003');
 
