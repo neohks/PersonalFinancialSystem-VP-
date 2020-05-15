@@ -314,7 +314,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         dialogEditBudgetTable.setTitle("Edit Table");
         dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 390));
-        dialogEditBudgetTable.setResizable(false);
         dialogEditBudgetTable.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
