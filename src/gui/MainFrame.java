@@ -313,7 +313,9 @@ public class MainFrame extends javax.swing.JFrame {
         bottomPanel = new javax.swing.JPanel();
 
         dialogEditBudgetTable.setTitle("Edit Table");
-        dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(410, 390));
+        dialogEditBudgetTable.setMinimumSize(new java.awt.Dimension(610, 590));
+        dialogEditBudgetTable.setPreferredSize(new java.awt.Dimension(610, 595));
+        dialogEditBudgetTable.setResizable(false);
         dialogEditBudgetTable.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -328,7 +330,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         panelDialog.setBackground(new java.awt.Color(136, 239, 222));
-        panelDialog.setPreferredSize(new java.awt.Dimension(410, 395));
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
