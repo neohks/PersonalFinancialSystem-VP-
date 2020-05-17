@@ -20,6 +20,10 @@ Using Git in Netbeans:
 https://netbeans.org/kb/docs/ide/git.html
 
 
+# Before starting a .jar file
+- Please start the JavaDB connection in netbeans.
+![Image of Database Connection](https://github.com/neohks/PersonalFinancialSystem-VP-/blob/master/images/DatabaseConnection.PNG)
+
 # Groupmates:
 - https://github.com/HanYangXD
 - https://github.com/hongyiptang
